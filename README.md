@@ -1,27 +1,29 @@
-# Arduino Uno + HW-262 Multifunction Shield Enclosure (v4.5 Final)
+# Arduino Uno + HW-262 Multifunction Shield Enclosure (v4.6 Final)
 
 [![Bambu Lab A1 Mini](https://img.shields.io/badge/3D_Printer-Bambu_Lab_A1_Mini-orange?logo=bambulab)](https://bambulab.com)
 [![OpenSCAD](https://img.shields.io/badge/CAD-OpenSCAD_2021.01-blue.svg)](https://openscad.org)
-[![Version](https://img.shields.io/badge/Release-v4.5_Production-brightgreen.svg)]()
+[![Version](https://img.shields.io/badge/Release-v4.6_Production-brightgreen.svg)]()
 [![License: CC BY-NC-SA 4.0](https://img.shields.io/badge/License-CC_BY--NC--SA_4.0-lightgrey.svg)](LICENSE)
 
 A compact, fully integrated, FDM-optimized two-piece enclosure housing an **Arduino Uno R3**, standard **HW-262 Multifunction Shield (MFS)**, and an **onboard battery pack**, engineered specifically for the 180 × 180 × 180 mm build plate of the **Bambu Lab A1 Mini** with **WOL3D Gold Textured PEI Plate**.
 
-![Top Plan v4.5](docs/top_plan_v4_5_final.png)
+![Top Plan](docs/top_plan_v4_5_final.png)
+
+![Rear Panel Service Cutouts v4.6](docs/rear_panel_v4_6.png)
 
 ---
 
 ## 1. Specifications & Comparison
 
-### v4.5 Final Enhancements (Calibrated to HW-262 PCB)
-- **D1–D4 Status LED Window**: Recalibrated to X = 39.20 mm, Y = 31.00 mm (5.20 × 11.50 mm) directly below the 7-segment display right edge.
-- **W103 Trimpot Aperture**: Recalibrated to X = 10.50 mm, Y = 21.50 mm (Ø 6.20 mm) centered over the blue potentiometer.
-- **Piezo Buzzer Vents**: Shifted to Y = 33.50 mm (Ø 12.00 mm cluster) aligned over the LS1-3 buzzer center.
-- **Tactile Button Layout**: Preserved verified 9.20 mm button spacing (S1–S3) and RST at Y = 58.50 mm.
+### v4.6 Final Enhancements (Clean Solid Rear Wall)
+- **Clean Rear Wall Profile**: Removed unnecessary Ø 8.2 mm DC barrel jack hole. Right-hand rear service wall is now a solid, seamless continuous shell.
+- **Retained Rear Service Cutouts**: Preserved standard 13.6 × 12.2 mm Arduino USB Type-B programming port cutout and 19.4 × 13.2 mm snap-in SPST rocker switch bezel.
+- **Calibrated UI Apertures**: Retained verified v4.6 positions for D1–D4 status LEDs (39.20, 31.00 mm), W103 trimpot (10.50, 21.50 mm, Ø 6.20 mm), and 3×3 piezo buzzer acoustic vent grid.
+- **Tactile Button Layout**: 9.20 mm button spacing (S1–S3) with RST at Y = 58.50 mm.
 - **Reinforced 0.80 mm Living Hinges**: 4-layer flexures (0.80 mm) with 0.40 mm breakaway ties for zero jam risk.
-- **3D Printed M3 Fasteners**: Included in stl/fasteners/ (M3×12 mm countersunk, M3×8 mm socket cap, and M3 hex nuts).
+- **3D Printed M3 Fasteners**: Complete parametric fastener set in stl/fasteners/.
 
-| Specification | Sept 9 Design (v2) | v4.5 Final (Current) | Engineering Advantage |
+| Specification | Sept 9 Design (v2) | v4.6 Final (Current) | Engineering Advantage |
 |---|---|---|---|
 | **Outer Dimensions (L × W × H)** | 117.60 × 98.40 × 46.60 mm | **105.10 × 97.65 × 42.00 mm** | **12.5 mm shorter, 4.6 mm lower** (~20% volume & filament savings) |
 | **Buttons / Tactile Interface** | 3 separate loose plungers (S1–S3) | **4 integrated living-hinge flexures** (S1, S2, S3, RST) | Single-piece lid print. Zero drop/jam risk; adds direct Reset switch access |
@@ -84,16 +86,16 @@ Both STL models in `stl/` are pre-oriented for immediate drop-and-print on the B
 
 ```
 .
-├── config.scad             # Central parametric configuration and geometric assertions (v4.5)
-├── main.scad               # Top-level assembly and STL export entrypoint (v4.5)
+├── config.scad             # Central parametric configuration and geometric assertions (v4.6)
+├── main.scad               # Top-level assembly and STL export entrypoint (v4.6)
 ├── internals.scad          # Uno standoffs, battery divider, and cantilever snap-arm
 ├── buttons.scad            # Stadium-flexure living hinge integrated button plungers
 ├── cutouts.scad            # Rear panel I/O (USB, SPST, DC jack) and top display windows
 ├── utilities.scad          # Geometric helper modules
 ├── stl/
-│   ├── bottom_housing.stl                  # v4.5 base enclosure STL (manifold, pre-oriented)
-│   ├── front_plate_integrated_buttons.stl  # v4.5 lid STL with living-hinge buttons (pre-oriented)
-│   ├── complete_assembly.stl               # v4.5 full mated assembly preview STL
+│   ├── bottom_housing.stl                  # v4.6 base enclosure STL (manifold, pre-oriented)
+│   ├── front_plate_integrated_buttons.stl  # v4.6 lid STL with living-hinge buttons (pre-oriented)
+│   ├── complete_assembly.stl               # v4.6 full mated assembly preview STL
 │   └── fasteners/
 │       ├── M3_12mm_Countersunk_Corner_Screw.stl
 │       ├── M3_8mm_Socket_Cap_Uno_Mount_Screw.stl
@@ -122,7 +124,7 @@ Both STL models in `stl/` are pre-oriented for immediate drop-and-print on the B
 | **Shield** | HW-262 / MFS Multifunction Shield | 4-digit 7-segment display, S1–S3 + RST buttons, pot, buzzer |
 | **Battery** | 9V Battery Pack | Maximum envelope: 43.6 × 58.6 × 29.9 mm |
 | **Power Switch** | SPST Rocker Switch | Snap-in bezel: 19.4 × 13.2 mm |
-| **DC Connector**| 5.5 × 2.1 mm DC Barrel Jack | Threaded panel mount: 8.2 mm hole |
+| **DC Connector**| Internal DC Barrel Jack | Wired internally; external hole removed in v4.6 |
 | **Fasteners (PCB)** | 4× M2.5 or M3 × 6–8 mm screws | Self-tapping into 2.75 mm standoff pilot holes |
 | **Fasteners (Case)**| 4× M3 × 12–16 mm countersunk screws| Fastens lid into corner screw bosses |
 

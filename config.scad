@@ -109,6 +109,12 @@ mfs_pot_x             = 11.50;  // Blue trimpot center
 mfs_pot_y             = 25.00;
 mfs_pot_d             = 10.00;
 
+// 4-LED Status Strip (D1, D2, D3, D4) Viewing Window
+mfs_leds_x            = 40.50;  // Left edge of D1-D4 window relative to Uno X=0
+mfs_leds_y            = 27.00;  // Bottom edge of D1-D4 window relative to Uno Y=0
+mfs_leds_w            = 5.00;   // Window width across LED strip
+mfs_leds_h            = 13.50;  // Window height spanning D1 through D4
+
 // Verified 9.2 mm Button Pitch for S1, S2, S3 along front edge + RESET shifted +3.0 mm up!
 btn_pitch             = 9.20;   // VERIFIED by user measurement
 s1_x                  = 13.00;  // [CONFIGURABLE] S1 center X from left PCB edge
@@ -130,7 +136,7 @@ btn_cap_h             = 1.40;
 btn_plunger_d         = 4.20;   // Internal plunger stem diameter
 btn_travel            = 0.65;   // Free air gap between plunger tip and switch actuator
 btn_radial_clear      = 0.45;   // Annular slot clearance around cap & flexure
-btn_flexure_t         = 0.60;   // 3 layers @ 0.2 mm — living hinge printed flush on bed
+btn_flexure_t         = 0.80;   // 4 layers @ 0.2 mm — living hinge printed flush on bed
 btn_flexure_w         = 1.10;   // Width of dual serpentine flexure arms
 btn_sacrificial_tie   = 0.40;   // Single-extrusion breakaway stabilizer tie
 btn_use_sacrificial   = true;

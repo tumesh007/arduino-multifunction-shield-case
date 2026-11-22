@@ -24,6 +24,10 @@ module top_plate_windows() {
     translate([uno_x0 + mfs_disp_x - 0.4, uno_y0 + mfs_disp_y - 0.4, -EPS])
         cube([mfs_disp_w + 0.8, mfs_disp_h + 0.8, top_plate_t + 2*EPS]);
 
+    // D1-D4 Status LEDs viewing window
+    translate([uno_x0 + mfs_leds_x, uno_y0 + mfs_leds_y, -EPS])
+        cube([mfs_leds_w, mfs_leds_h, top_plate_t + 2*EPS]);
+
     for (dx = [-3.0, 0, 3.0], dy = [-3.0, 0, 3.0]) {
         translate([uno_x0 + mfs_buzzer_x + dx, uno_y0 + mfs_buzzer_y + dy, -EPS])
             cylinder(d = 1.6, h = top_plate_t + 2*EPS);

@@ -1,19 +1,24 @@
-# Arduino Uno + HW-262 Multifunction Shield Enclosure (v4.2 Production)
+# Arduino Uno + HW-262 Multifunction Shield Enclosure (v4.4 Final)
 
 [![Bambu Lab A1 Mini](https://img.shields.io/badge/3D_Printer-Bambu_Lab_A1_Mini-orange?logo=bambulab)](https://bambulab.com)
 [![OpenSCAD](https://img.shields.io/badge/CAD-OpenSCAD_2021.01-blue.svg)](https://openscad.org)
-[![Version](https://img.shields.io/badge/Release-v4.2_Production-brightgreen.svg)]()
+[![Version](https://img.shields.io/badge/Release-v4.4_Production-brightgreen.svg)]()
 [![License: CC BY-NC-SA 4.0](https://img.shields.io/badge/License-CC_BY--NC--SA_4.0-lightgrey.svg)](LICENSE)
 
 A compact, fully integrated, FDM-optimized two-piece enclosure housing an **Arduino Uno R3**, standard **HW-262 Multifunction Shield (MFS)**, and an **onboard battery pack**, engineered specifically for the 180 × 180 × 180 mm build plate of the **Bambu Lab A1 Mini** with **WOL3D Gold Textured PEI Plate**.
 
-![Top Plan v4.2](docs/top_plan_v4_2.png)
+![Top Plan v4.4](docs/top_plan_v4_4_final.png)
 
 ---
 
 ## 1. Specifications & Comparison
 
-| Specification | Sept 9 Design (v2) | v4.2 Production (Current) | Engineering Advantage |
+### v4.4 Final Enhancements
+- **D1–D4 Status LED Window**: Dedicated 5.0 × 13.5 mm aperture above D1–D4 status LEDs.
+- **Reinforced 0.80 mm Living Hinges**: Flexure arm thickness increased to 0.80 mm (4 layers @ 0.2 mm) for snappier tactile tactile feedback and extended fatigue life.
+- **Printed M3 Fasteners**: Includes parametric M3 × 12 mm countersunk screws and M3 × 8 mm socket cap screws generated with Metric Fastener Workbench.
+
+| Specification | Sept 9 Design (v2) | v4.4 Final (Current) | Engineering Advantage |
 |---|---|---|---|
 | **Outer Dimensions (L × W × H)** | 117.60 × 98.40 × 46.60 mm | **105.10 × 97.65 × 42.00 mm** | **12.5 mm shorter, 4.6 mm lower** (~20% volume & filament savings) |
 | **Buttons / Tactile Interface** | 3 separate loose plungers (S1–S3) | **4 integrated living-hinge flexures** (S1, S2, S3, RST) | Single-piece lid print. Zero drop/jam risk; adds direct Reset switch access |
@@ -34,7 +39,7 @@ Both STL models in `stl/` are pre-oriented for immediate drop-and-print on the B
 | **Build Plate** | WOL3D Gold Textured PEI Plate | Excellent first-layer adhesion; clean bottom texture |
 | **Filament (Lid / Cover)** | **PETG** (Recommended) or Tough PLA | Living-hinge flexures undergo cyclic bending; PETG elongation prevents fatigue snap |
 | **Filament (Base Housing)** | **PETG** or **PLA / PLA+** | High structural rigidity for screw bosses and snap latch |
-| **Layer Height** | **0.20 mm Standard** | **MANDATORY.** Flexures are exactly 0.60 mm (3 layers); breakaway ties are 0.40 mm (2 layers) |
+| **Layer Height** | **0.20 mm Standard** | **MANDATORY.** Flexures are exactly 0.80 mm (4 layers); breakaway ties are 0.40 mm (2 layers) |
 | **Initial Layer Height** | 0.20 mm | Matches flexure layer slicing multiples |
 | **Wall Loops** | **6** | Produces 100% solid 2.4 mm shell walls and solid screw posts |
 | **Top Shell Layers** | 5 (1.0 mm) | Prevents pillowing over sparse infill |
@@ -76,19 +81,19 @@ Both STL models in `stl/` are pre-oriented for immediate drop-and-print on the B
 
 ```
 .
-├── config.scad             # Central parametric configuration and geometric assertions (v4.2)
-├── main.scad               # Top-level assembly and STL export entrypoint (v4.2)
+├── config.scad             # Central parametric configuration and geometric assertions (v4.4)
+├── main.scad               # Top-level assembly and STL export entrypoint (v4.4)
 ├── internals.scad          # Uno standoffs, battery divider, and cantilever snap-arm
 ├── buttons.scad            # Stadium-flexure living hinge integrated button plungers
 ├── cutouts.scad            # Rear panel I/O (USB, SPST, DC jack) and top display windows
 ├── utilities.scad          # Geometric helper modules
 ├── stl/
-│   ├── bottom_housing.stl                  # v4.2 base enclosure STL (manifold, pre-oriented)
-│   ├── front_plate_integrated_buttons.stl  # v4.2 lid STL with living-hinge buttons (pre-oriented)
-│   └── complete_assembly.stl               # v4.2 full mated assembly preview STL
+│   ├── bottom_housing.stl                  # v4.4 base enclosure STL (manifold, pre-oriented)
+│   ├── front_plate_integrated_buttons.stl  # v4.4 lid STL with living-hinge buttons (pre-oriented)
+│   └── complete_assembly.stl               # v4.4 full mated assembly preview STL
 ├── docs/
 │   ├── BAMBU_A1_MINI_PRINT_GUIDE.md        # Comprehensive slicing profile and post-processing guide
-│   ├── top_plan_v4_2.png                   # Dimensioned plan view diagram
+│   ├── top_plan_v4_4_final.png                   # Dimensioned plan view diagram
 │   ├── MASTER_PROMPT_REV_5.md              # Engineering constraint log
 │   └── HANDOFF.txt                         # Hardware dimension verification records
 ├── legacy_v2_sept09/       # September 9 version (loose plunger plungers, 117.6 x 98.4 mm)

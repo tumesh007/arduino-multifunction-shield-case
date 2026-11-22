@@ -1,4 +1,4 @@
-# Bambu Lab A1 Mini Slicing & Print Guide (v4.2 Enclosure)
+# Bambu Lab A1 Mini Slicing & Print Guide (v4.4 Enclosure)
 
 Target Machine: **Bambu Lab A1 Mini**  
 Build Volume: **180 × 180 × 180 mm**  

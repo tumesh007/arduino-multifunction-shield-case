@@ -1,229 +1,173 @@
-// config.scad — Single Source of Truth
-// Arduino Multifunction Shield Enclosure
+// ============================================================================
+// ARDUINO UNO R3 + HW-262 MULTIFUNCTION SHIELD — INTEGRATED BATTERY ENCLOSURE (v4.2)
+// File: config.scad (Central Parametric Configuration & Geometric Assertions)
+// Target Printer: Bambu Lab A1 Mini (180 x 180 x 180 mm, 0.4 mm nozzle, 0.2 mm layer)
+// ============================================================================
 
-// ─── Build Volume (Bambu Lab A1 Mini) ───
-build_max_x = 180;
-build_max_y = 180;
-build_max_z = 180;
+$fn = 64;
+EPS = 0.02;
 
-// ─── General Enclosure ───
-wall         = 3.0;
-bottom_t     = 3.0;
-top_t        = 3.0;
-corner_r     = 5.0;
-general_clr  = 0.3;
-press_clr    = 0.15;
+// --- FDM MANUFACTURING & TOLERANCE PARAMETERS ---
+nozzle_d              = 0.40;
+layer_h               = 0.20;
+fit_clearance         = 0.25;   // Mating & PCB clearance
+loose_clearance       = 0.40;   // Battery & wiring clearance
+wall_t                = 2.40;   // 6 perimeters @ 0.4 mm nozzle
+floor_t               = 2.00;   // 10 layers @ 0.2 mm
+top_plate_t           = 2.20;   // Front/Top plate nominal thickness
+corner_r              = 4.00;   // Outer enclosure corner radius
 
-// ─── Arduino Uno ───
-arduino_l    = 83.4;
-arduino_w    = 62.0;
-arduino_h    = 19.4;
-arduino_clr  = 1.0;
-rail_h       = 3.0;
-rail_w       = 2.0;
+// --- VERIFIED HARDWARE DIMENSIONS ---
+// 1. Arduino Uno R3 PCB (Oriented with USB/DC edge at Y = max, Front UI edge at Y = 0)
+uno_len               = 53.40;  // X-axis width in upright reading orientation
+uno_wid               = 68.60;  // Y-axis length (USB/DC jacks at Y = uno_wid)
+uno_pcb_t             = 1.60;
+uno_usb_w             = 12.20;  // USB Type-B width
+uno_usb_h             = 11.00;  // USB Type-B height above PCB
+uno_usb_x             = 38.10;  // USB centerline from left X=0 edge (verified Uno R3)
+uno_dc_d              = 9.20;   // Onboard Uno DC jack width
+uno_dc_h              = 11.00;
+uno_dc_x              = 7.60;   // Onboard DC jack centerline from left X=0 edge
 
-// ─── Multifunction Shield ───
-shield_h     = 12.2;
+// Standard Arduino Uno R3 Mounting Holes (mapped to upright X=[0..53.4], Y=[0..68.6])
+uno_mount_holes = [
+    [ 2.5, 14.0],
+    [50.7, 15.3],
+    [ 7.6, 66.1],
+    [35.5, 66.1]
+];
+standoff_h            = 5.00;   // Bottom clearance under Uno PCB
+standoff_od           = 6.40;
+standoff_id           = 2.75;   // Self-tapping M3 / M2.5 pilot hole
 
-// ─── Battery ───
-batt_l       = 58.6;
-batt_w       = 43.6;
-batt_h       = 29.9;
-batt_clr     = 1.0;
-batt_wall    = 1.5;
+// 2. HW-262 Multifunction Shield Stack Geometry
+mfs_stack_pitch       = 11.20;  // [CONFIGURABLE] Top of Uno PCB to bottom of MFS PCB
+mfs_pcb_t             = 1.60;
 
-// ─── Divider ───
-divider_t    = 2.0;
-cable_pass_w = 12.0;
-cable_pass_h = 10.0;
+// 3. Battery Pack (VERIFIED from User's Previous Design Discussion)
+bat_wid               = 43.60;  // X-axis width
+bat_len               = 58.60;  // Y-axis length
+bat_h                 = 29.90;  // Z-axis height
+bat_bay_x             = bat_wid + 2 * loose_clearance; // 44.40 mm
+bat_bay_y             = bat_len + 2 * loose_clearance; // 59.40 mm
 
-// ─── SPST Rocker Switch ───
-spst_cutout_w = 19.9;
-spst_cutout_h = 12.0;
-spst_rear_depth = 22.0;
-spst_body_w  = 21.0;
-spst_body_h  = 15.0;
-spst_clr     = 0.3;
+// 4. Panel-Mount SPST Switch (VERIFIED Body Dimensions)
+spst_body_l           = 21.00;  // Along rear panel X
+spst_body_w           = 15.00;  // Along rear panel Z
+spst_body_d           = 15.00;  // Depth into rear service bay
+spst_cutout_l         = 19.40;  // [CONFIGURABLE] Snap-in bezel cutout length
+spst_cutout_w         = 13.20;  // [CONFIGURABLE] Snap-in bezel cutout width
 
-// ─── DC Power Connector ───
-dc_dia       = 5.0;
-dc_body_len  = 33.0;
-dc_mount_dia = 8.0;
-dc_clr       = 0.3;
-dc_nut_flat  = 10.0;
+// 5. Panel-Mount DC Barrel Jack 5.5 x 2.1 mm (VERIFIED Body Length, Wired Internally)
+dc_panel_body_l       = 33.00;  // Recorded body length (~33 mm)
+dc_panel_hole_d       = 8.20;   // [CONFIGURABLE] Panel mounting thread hole
+dc_panel_nut_d        = 13.00;  // Clearance zone for internal retaining nut & solder lugs
 
-// ─── Buttons (relative to shield top-left) ───
-btn_dia      = 5.0;
-btn_h        = 4.8;
-btn_travel   = 1.0;
-btn_clr      = 0.3;
+// --- ENCLOSURE LAYOUT & INTERNAL DATUM COORDINATES ---
+// Origin [0, 0, 0] = Bottom-Left-Outer corner of Bottom Housing
+// X-axis: Left (Arduino + HW-262 Shield) -> Structural Divider -> Right (Battery Bay)
+// Y-axis: Front (S1-S3 Buttons at Y=0 edge) -> Rear (USB, SPST Switch & Internal DC Jack Cavity)
+// Z-axis: Bottom outer face (Z=0) -> Internal Top Plate Datum (Z=39.80) -> Outer Face (Z=42.00)
 
-btn1_x       = 14.7;
-btn1_y       = 14.0;
-btn2_x       = 24.1;
-btn2_y       = 14.0;
-btn3_x       = 33.4;
-btn3_y       = 14.1;
+service_bay_y         = 24.00;  // Rear cavity depth (>= 22 mm to clear internal DC barrel plug + 33mm jack)
+divider_t             = 2.00;   // Internal structural wall separating Arduino and Battery
 
-// ─── Display ───
-disp_w       = 30.2;
-disp_h       = 14.3;
-disp_tl_x    = 18.3;
-disp_tl_y    = 58.9;
-disp_clr     = 0.5;
-bezel_depth  = 1.0;
-bezel_width  = 1.5;
+uno_x0                = wall_t + fit_clearance;                    // 2.65 mm
+uno_y0                = wall_t + fit_clearance;                    // 2.65 mm
+uno_z_bottom          = floor_t + standoff_h;                      // 7.00 mm
+uno_z_top             = uno_z_bottom + uno_pcb_t;                  // 8.60 mm
+mfs_z_bottom          = uno_z_top + mfs_stack_pitch;               // 19.80 mm
+mfs_z_top             = mfs_z_bottom + mfs_pcb_t;                  // 21.40 mm
 
-// ─── Buzzer ───
-buzz_dia     = 15.0;
-buzz_cx      = 23.8;
-buzz_cy      = 37.5;
-buzz_h       = 9.0;
-grille_slot_w = 1.2;
-grille_spoke_w = 1.5;
-grille_rings = 3;
+bat_x0                = uno_x0 + uno_len + fit_clearance + divider_t; // 58.30 mm
+bat_y0                = wall_t;                                       // 2.40 mm
 
-// ─── Screws (M3) ───
-screw_dia    = 3.0;
-screw_clr_dia = 3.3;
-screw_boss_od = 8.0;
-screw_boss_id = 2.5;
-screw_cb_dia = 6.0;
-screw_cb_depth = 2.0;
-screw_len    = 12.0;
+encl_x                = bat_x0 + bat_bay_x + wall_t;               // 105.10 mm
+encl_y                = max(uno_y0 + uno_wid + service_bay_y, bat_y0 + bat_bay_y) + wall_t; // 97.65 mm
 
-// ─── Rubber Feet ───
-foot_dia     = 8.0;
-foot_h       = 1.5;
-foot_inset   = 8.0;
+encl_total_h          = 42.00;
+base_wall_h           = encl_total_h - top_plate_t;                // 39.80 mm
+lip_h                 = 2.40;
+lip_t                 = 1.10;
 
-// ─── Ventilation ───
-vent_slot_w  = 1.5;
-vent_slot_h  = 8.0;
-vent_gap     = 2.5;
-vent_count   = 6;
-vent_z_offset = 8.0;
+z_plate_inner         = encl_total_h - top_plate_t;                // 39.80 mm (Mechanical Datum)
+z_plate_outer         = encl_total_h;                              // 42.00 mm
 
-// ─── Cable Management ───
-cable_ch_w   = 6.0;
-cable_ch_d   = 3.0;
-wire_route_r = 2.0;
+// --- VERIFIED HW-262 MULTIFUNCTION SHIELD UI & BUTTON COORDINATES ---
+// Relative to Uno origin [0, 0] in upright orientation (53.4 mm wide x 68.6 mm tall)
+mfs_disp_x            = 12.00;  // 4-Digit 7-Segment Display left edge
+mfs_disp_y            = 48.50;  // 4-Digit 7-Segment Display bottom edge
+mfs_disp_w            = 30.40;
+mfs_disp_h            = 14.20;
+mfs_disp_top_h        = 7.20;   // Height above MFS PCB top
 
-// ─── Lip/overlap ───
-lip_h        = 2.0;
-lip_inset    = 1.5;
+mfs_buzzer_x          = 22.50;  // Piezo buzzer center (LS1)
+mfs_buzzer_y          = 30.50;
+mfs_buzzer_d          = 12.00;
 
-// ═══════════════════════════════════════════
-// DERIVED DIMENSIONS
-// ═══════════════════════════════════════════
+mfs_pot_x             = 11.50;  // Blue trimpot center
+mfs_pot_y             = 25.00;
+mfs_pot_d             = 10.00;
 
-arduino_x    = wall + arduino_clr;
-arduino_y    = wall + arduino_clr;
-arduino_z    = bottom_t;
+// Verified 9.2 mm Button Pitch for S1, S2, S3 along front edge + RESET shifted +3.0 mm up!
+btn_pitch             = 9.20;   // VERIFIED by user measurement
+s1_x                  = 13.00;  // [CONFIGURABLE] S1 center X from left PCB edge
+s1_y                  = 7.00;   // [CONFIGURABLE] S1-S3 row Y from front PCB edge
+rst_x                 = 47.20;  // [CONFIGURABLE] RESET center X (right of 7-segment display)
+rst_y                 = 58.50;  // UPDATED (+3.00 mm above previous 55.50 mm position)
 
-batt_x       = wall + arduino_clr + arduino_w + arduino_clr + divider_t + batt_clr;
-batt_y       = wall + batt_clr;
-batt_z       = bottom_t;
-
-internal_w   = arduino_clr + arduino_w + arduino_clr + divider_t
-             + batt_clr + batt_w + batt_clr;
-internal_d   = arduino_clr + arduino_l + arduino_clr + 7.0;
-
-stack_h      = arduino_h + shield_h;
-top_clr      = 9.0;  // clearance above shield — also gives room for DC connector above battery
-internal_h   = max(stack_h + top_clr, batt_h + 2.0);
-
-enc_w        = wall + internal_w + wall;
-enc_d        = wall + internal_d + wall;
-enc_h        = bottom_t + internal_h + top_t;
-
-base_h_val   = enc_h - top_t;
-
-shield_top_z = arduino_z + stack_h;
-
-function shield_to_enc_x(sx) = arduino_x + sx;
-function shield_to_enc_y(sy) = arduino_y + sy;
-
-// ─── Screw boss positions ───
-boss_inset   = wall + screw_boss_od/2 + 0.5;
-screw_positions = [
-    [boss_inset,           boss_inset,           0],
-    [enc_w - boss_inset,   boss_inset,           0],
-    [boss_inset,           enc_d - boss_inset,   0],
-    [enc_w - boss_inset,   enc_d - boss_inset,   0]
+// Button Array: [Name, Rel_X_on_Uno, Rel_Y_on_Uno, Tactile_Switch_Height_above_MFS_PCB]
+mfs_buttons = [
+    ["S1_A1", s1_x,                 s1_y,  5.00],
+    ["S2_A2", s1_x + btn_pitch,     s1_y,  5.00],
+    ["S3_A3", s1_x + 2 * btn_pitch, s1_y,  5.00],
+    ["RST",   rst_x,                rst_y, 5.00]
 ];
 
-// ─── SPST on right side wall ───
-// Positioned in the free zone behind the battery (Y > batt_y + batt_l + batt_clr)
-spst_free_y_start = batt_y + batt_l + batt_clr + 2;
-spst_free_y_end   = enc_d - wall - 2;
-// Push SPST as far forward as possible to maximize distance from rear screw boss
-spst_panel_cy     = spst_free_y_start + spst_body_w/2;
-spst_panel_cz     = bottom_t + internal_h / 2;
+// --- CRITICAL INTEGRATED BUTTON PARAMETERS (Tuned for 9.2 mm Pitch) ---
+btn_cap_d             = 6.40;   // Sized cleanly so adjacent 9.2 mm pitch bores never overlap
+btn_cap_h             = 1.40;
+btn_plunger_d         = 4.20;   // Internal plunger stem diameter
+btn_travel            = 0.65;   // Free air gap between plunger tip and switch actuator
+btn_radial_clear      = 0.45;   // Annular slot clearance around cap & flexure
+btn_flexure_t         = 0.60;   // 3 layers @ 0.2 mm — living hinge printed flush on bed
+btn_flexure_w         = 1.10;   // Width of dual serpentine flexure arms
+btn_sacrificial_tie   = 0.40;   // Single-extrusion breakaway stabilizer tie
+btn_use_sacrificial   = true;
 
-// ─── DC connector on rear wall ───
-// Positioned in battery-side X range, raised above battery
-dc_panel_cx   = batt_x + batt_w / 2;
-dc_panel_cz   = base_h_val - dc_mount_dia/2 - 1;  // near top of base
+btn_bore_rx           = 4.05;   // 2 * 4.05 = 8.10 mm < 9.20 mm pitch -> 1.10 mm solid rib between buttons
+btn_bore_ry           = 5.10;   // Elliptical/stadium flexure pocket along Y gives full flexure compliance
 
-// ═══════════════════════════════════════════
-// ASSERTIONS
-// ═══════════════════════════════════════════
-assert(enc_w <= build_max_x, str("Width ", enc_w, " > build!"));
-assert(enc_d <= build_max_y, str("Depth ", enc_d, " > build!"));
-assert(enc_h <= build_max_z, str("Height ", enc_h, " > build!"));
-assert(wall >= 1.2);
-assert(bottom_t >= 1.2);
-assert(top_t >= 1.2);
-assert(internal_h >= stack_h + 1.0, "Shield headroom!");
-assert(internal_h >= batt_h + 1.0, "Battery headroom!");
-assert(spst_rear_depth >= 20, "SPST rear depth < 20!");
+function calc_plunger_length(sw_h) =
+    (z_plate_inner - (mfs_z_top + sw_h)) - btn_travel;
 
-// Buttons within shield
-assert(btn1_x >= 0 && btn1_x <= arduino_w);
-assert(btn2_x >= 0 && btn2_x <= arduino_w);
-assert(btn3_x >= 0 && btn3_x <= arduino_w);
-assert(btn1_y >= 0 && btn1_y <= arduino_l);
-assert(btn2_y >= 0 && btn2_y <= arduino_l);
-assert(btn3_y >= 0 && btn3_y <= arduino_l);
+// --- CORNER SCREW BOSSES ---
+boss_d                = 7.20;
+boss_hole_d           = 2.75;
+boss_clear_d          = 3.40;
+boss_head_d           = 6.00;
+boss_head_depth       = 1.20;
+corner_boss_coords = [
+    [wall_t + boss_d/2 + 0.4,          wall_t + boss_d/2 + 0.4],
+    [encl_x - wall_t - boss_d/2 - 0.4, wall_t + boss_d/2 + 0.4],
+    [wall_t + boss_d/2 + 0.4,          encl_y - wall_t - boss_d/2 - 0.4],
+    [encl_x - wall_t - boss_d/2 - 0.4, encl_y - wall_t - boss_d/2 - 0.4]
+];
 
-// Display within shield
-assert(disp_tl_x >= 0 && disp_tl_x + disp_w <= arduino_w);
-assert(disp_tl_y >= 0 && disp_tl_y + disp_h <= arduino_l);
+// --- BATTERY CANTILEVER SNAP-ARM ---
+snap_arm_t            = 1.60;
+snap_arm_w            = 10.00;
+snap_hook_overhang    = 1.40;
+snap_z_top            = floor_t + bat_h + loose_clearance; // 32.30 mm
 
-// Buzzer within shield
-assert(buzz_cx - buzz_dia/2 >= 0);
-assert(buzz_cx + buzz_dia/2 <= arduino_w);
-assert(buzz_cy - buzz_dia/2 >= 0);
-assert(buzz_cy + buzz_dia/2 <= arduino_l);
-
-// SPST within right wall bounds
-assert(spst_panel_cy - spst_cutout_w/2 > wall, "SPST Y beyond front wall!");
-assert(spst_panel_cy + spst_cutout_w/2 < enc_d - wall, "SPST Y beyond rear wall!");
-assert(spst_panel_cz - spst_cutout_h/2 > bottom_t, "SPST Z below floor!");
-assert(spst_panel_cz + spst_cutout_h/2 < base_h_val, "SPST Z above top!");
-
-// SPST body must not overlap battery (Y check)
-assert(spst_panel_cy - spst_body_w/2 > batt_y + batt_l + batt_clr,
-       str("SPST body overlaps battery! SPST Y start: ", spst_panel_cy - spst_body_w/2,
-           " Battery Y end: ", batt_y + batt_l + batt_clr));
-
-// DC connector within rear wall bounds
-assert(dc_panel_cx - dc_mount_dia/2 > wall, "DC X too small!");
-assert(dc_panel_cx + dc_mount_dia/2 < enc_w - wall, "DC X too large!");
-assert(dc_panel_cz - dc_mount_dia/2 > bottom_t, "DC Z below floor!");
-assert(dc_panel_cz + dc_mount_dia/2 < base_h_val, "DC Z above top!");
-
-// DC body must not hit battery (vertical check)
-assert(dc_panel_cz - (dc_dia + 2)/2 > batt_z + batt_h,
-       str("DC body intersects battery! DC bottom: ", dc_panel_cz - (dc_dia+2)/2,
-           " Battery top: ", batt_z + batt_h));
-
-// DC body length fits inside enclosure depth
-assert(dc_body_len < internal_d, str("DC body ", dc_body_len, " > internal depth ", internal_d));
-
-echo(str("Enclosure: ", enc_w, " x ", enc_d, " x ", enc_h, " mm"));
-echo(str("Internal:  ", internal_w, " x ", internal_d, " x ", internal_h, " mm"));
-echo(str("Stack: ", stack_h, " mm  Headroom: ", internal_h - stack_h, " mm"));
-echo(str("SPST panel: Y=", spst_panel_cy, " Z=", spst_panel_cz));
-echo(str("DC panel: X=", dc_panel_cx, " Z=", dc_panel_cz));
+// --- BULLETPROOF GEOMETRIC ASSERTIONS ---
+assert(encl_x <= 180 && encl_y <= 180 && encl_total_h <= 180, "ERROR: Exceeds Bambu A1 Mini 180mm build volume!");
+assert(2 * btn_bore_rx + 0.80 <= btn_pitch, "ERROR: Adjacent button flexure bores overlap at 9.2mm pitch!");
+assert(snap_z_top < z_plate_inner - 1.0, "ERROR: Battery interferes with Top Plate!");
+assert(mfs_z_top + mfs_disp_top_h < z_plate_inner, "ERROR: 7-Segment Display collides with Top Plate!");
+assert(service_bay_y >= 22.0, "ERROR: Rear service bay < 22mm; insufficient room for internal DC plug + 33mm jack!");
+for (b = mfs_buttons) {
+    let(plen = calc_plunger_length(b[3])) {
+        assert(plen > 2.0, str("ERROR: Plunger ", b[0], " length invalid (", plen, " mm)!"));
+    }
+}

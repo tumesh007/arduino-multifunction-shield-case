@@ -1,138 +1,98 @@
-// main.scad — Complete assembly preview
-// NOT a printable part.
-use <config.scad>
+// ============================================================================
+// File: main.scad (Top-Level Assembly & STL Export Entrypoint — v4.2)
+// ============================================================================
 include <config.scad>
-use <base.scad>
-use <top_plate.scad>
+use <utilities.scad>
+use <internals.scad>
+use <cutouts.scad>
+use <buttons.scad>
 
-$fn = 60;
+part = "assembly"; // "assembly" | "base" | "cover_print" | "section_buttons"
 
-base_h = enc_h - top_t;
-tp_ox  = lip_inset + general_clr;
-tp_oy  = lip_inset + general_clr;
-
-// ═══════════════════════════════════════════
-// COMPONENT MOCKUPS
-// ═══════════════════════════════════════════
-
-module arduino_mockup() {
-    color("ForestGreen", 0.8)
-        translate([arduino_x, arduino_y, arduino_z])
-            cube([arduino_w, arduino_l, arduino_h]);
-}
-
-module shield_mockup() {
-    color("RoyalBlue", 0.7)
-        translate([arduino_x, arduino_y, arduino_z + arduino_h])
-            cube([arduino_w, arduino_l, shield_h]);
-}
-
-module battery_mockup() {
-    color("DimGray", 0.85)
-        translate([batt_x, batt_y, batt_z])
-            cube([batt_w, batt_l, batt_h]);
-}
-
-// SPST on right side wall
-module spst_mockup() {
-    color("DarkRed", 0.9) {
-        // Toggle protruding outside right wall
-        translate([enc_w,
-                   spst_panel_cy - spst_cutout_w/2,
-                   spst_panel_cz - spst_cutout_h/2])
-            cube([2, spst_cutout_w, spst_cutout_h]);
-
-        // Rear body inside enclosure (extends -X from right wall)
-        translate([enc_w - wall - spst_rear_depth,
-                   spst_panel_cy - spst_body_w/2,
-                   spst_panel_cz - spst_body_h/2])
-            cube([spst_rear_depth, spst_body_w, spst_body_h]);
-
-        // Terminal pins
-        pw = 1.0; pd = 5.0;
-        for (zo = [-4, 0, 4])
-            translate([enc_w - wall - spst_rear_depth - pd,
-                       spst_panel_cy - 1,
-                       spst_panel_cz + zo - pw/2])
-                cube([pd, 2, pw]);
+module bottom_housing() {
+    difference() {
+        rounded_box(encl_x, encl_y, base_wall_h, corner_r);
+        translate([wall_t, wall_t, floor_t])
+            rounded_box(encl_x - 2*wall_t, encl_y - 2*wall_t, base_wall_h, max(1.0, corner_r - wall_t));
+        translate([wall_t - lip_t, wall_t - lip_t, base_wall_h - lip_h])
+            rounded_box(encl_x - 2*(wall_t - lip_t), encl_y - 2*(wall_t - lip_t), lip_h + EPS, max(1.5, corner_r - wall_t + lip_t));
+        bottom_housing_cutouts();
     }
+    uno_standoffs();
+    internal_divider_and_battery_bay();
+    corner_screw_bosses();
 }
 
-// DC on rear wall
-module dc_mockup() {
-    color("Silver", 0.9) {
-        // Flange on outer rear wall
-        translate([dc_panel_cx, enc_d, dc_panel_cz])
-            rotate([-90, 0, 0])
-                cylinder(d = dc_mount_dia, h = 3);
-
-        // Body extending into enclosure from rear wall
-        translate([dc_panel_cx, enc_d - wall, dc_panel_cz])
-            rotate([90, 0, 0])
-                cylinder(d = dc_dia + 2, h = dc_body_len);
-
-        // Connector tip outside
-        translate([dc_panel_cx, enc_d, dc_panel_cz])
-            rotate([-90, 0, 0])
-                cylinder(d = dc_dia, h = 8);
-    }
-}
-
-module button_plungers() {
-    color("White", 0.95)
-        for (bpos = [[btn1_x, btn1_y],
-                     [btn2_x, btn2_y],
-                     [btn3_x, btn3_y]]) {
-            bx = shield_to_enc_x(bpos[0]);
-            by = shield_to_enc_y(bpos[1]);
-            pz = shield_top_z;
-            translate([bx, by, pz]) {
-                cylinder(d = btn_dia, h = btn_h);
-                translate([0, 0, btn_h])
-                    sphere(d = btn_dia);
-            }
+module top_plate_local() {
+    difference() {
+        union() {
+            rounded_box(encl_x, encl_y, top_plate_t, corner_r);
+            translate([wall_t - lip_t + fit_clearance/2, wall_t - lip_t + fit_clearance/2, -lip_h + EPS])
+                difference() {
+                    rounded_box(
+                        encl_x - 2*(wall_t - lip_t + fit_clearance/2),
+                        encl_y - 2*(wall_t - lip_t + fit_clearance/2),
+                        lip_h,
+                        max(1.5, corner_r - wall_t + lip_t)
+                    );
+                    translate([lip_t, lip_t, -EPS])
+                        rounded_box(
+                            encl_x - 2*(wall_t + fit_clearance/2),
+                            encl_y - 2*(wall_t + fit_clearance/2),
+                            lip_h + 2*EPS,
+                            max(1.0, corner_r - wall_t)
+                        );
+                }
         }
+        top_plate_windows();
+        for (b = mfs_buttons) {
+            integrated_button_cutout(uno_x0 + b[1], uno_y0 + b[2]);
+        }
+    }
+    for (b = mfs_buttons) {
+        integrated_button_solid(uno_x0 + b[1], uno_y0 + b[2], b[3]);
+    }
 }
 
-module display_mockup() {
-    color("DarkSlateGray", 0.9)
-        translate([shield_to_enc_x(disp_tl_x),
-                   shield_to_enc_y(disp_tl_y),
-                   shield_top_z])
-            cube([disp_w, disp_h, 2]);
-    color("LimeGreen", 0.8)
-        translate([shield_to_enc_x(disp_tl_x) + 1,
-                   shield_to_enc_y(disp_tl_y) + 1,
-                   shield_top_z + 2.01])
-            cube([disp_w - 2, disp_h - 2, 0.5]);
+module hardware_mockup() {
+    color("SteelBlue", 0.7)
+        translate([bat_x0 + loose_clearance, bat_y0 + loose_clearance, floor_t])
+            cube([bat_wid, bat_len, bat_h]);
+    color("DarkGreen", 0.85)
+        translate([uno_x0, uno_y0, uno_z_bottom])
+            cube([uno_len, uno_wid, uno_pcb_t]);
+    color("Crimson", 0.85)
+        translate([uno_x0, uno_y0, mfs_z_bottom])
+            cube([uno_len, uno_wid, mfs_pcb_t]);
+    color("DimGray")
+        translate([uno_x0 + mfs_disp_x, uno_y0 + mfs_disp_y, mfs_z_top])
+            cube([mfs_disp_w, mfs_disp_h, mfs_disp_top_h]);
+    for (b = mfs_buttons) {
+        translate([uno_x0 + b[1], uno_y0 + b[2], mfs_z_top]) {
+            color("Silver") translate([-3, -3, 0]) cube([6, 6, 3.5]);
+            color("Black") cylinder(d = 3.5, h = b[3]);
+        }
+    }
 }
 
-module buzzer_mockup() {
-    color("Black", 0.85)
-        translate([shield_to_enc_x(buzz_cx),
-                   shield_to_enc_y(buzz_cy),
-                   shield_top_z - buzz_h])
-            cylinder(d = buzz_dia, h = buzz_h);
+if (part == "base") {
+    bottom_housing();
+} else if (part == "cover_print") {
+    translate([0, encl_y, top_plate_t])
+        rotate([180, 0, 0])
+            top_plate_local();
+} else if (part == "section_buttons") {
+    difference() {
+        union() {
+            bottom_housing();
+            translate([0, 0, z_plate_inner]) top_plate_local();
+            hardware_mockup();
+        }
+        translate([-5, -5, -5])
+            cube([encl_x + 10, uno_y0 + s1_y + 5, encl_total_h + 15]);
+    }
+} else {
+    color("SlateGray") bottom_housing();
+    color("LightSteelBlue", 0.92) translate([0, 0, z_plate_inner]) top_plate_local();
+    hardware_mockup();
 }
-
-// ═══════════════════════════════════════════
-// ASSEMBLY
-// ═══════════════════════════════════════════
-
-color("WhiteSmoke", 0.35)
-    base_part();
-
-z_shift = 3.0 - (lip_h - 0.3);
-z_offset = z_shift > 0 ? z_shift : 0;
-color("LightSteelBlue", 0.45)
-    translate([tp_ox, tp_oy, base_h - z_offset])
-        top_plate_part();
-
-arduino_mockup();
-shield_mockup();
-battery_mockup();
-spst_mockup();
-dc_mockup();
-button_plungers();
-display_mockup();
-buzzer_mockup();

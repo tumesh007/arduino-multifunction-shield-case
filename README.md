@@ -1,50 +1,74 @@
-# Arduino Multifunction Shield Enclosure with Integrated Battery
+# Arduino Uno + HW-262 Multifunction Shield Enclosure (v4.2 Production)
 
 [![Bambu Lab A1 Mini](https://img.shields.io/badge/3D_Printer-Bambu_Lab_A1_Mini-orange?logo=bambulab)](https://bambulab.com)
-[![OpenSCAD](https://img.shields.io/badge/CAD-OpenSCAD-blue.svg)](https://openscad.org)
-[![FreeCAD Audit](https://img.shields.io/badge/FreeCAD_Audit-28%2F28_PASS-brightgreen.svg)](https://freecad.org)
+[![OpenSCAD](https://img.shields.io/badge/CAD-OpenSCAD_2021.01-blue.svg)](https://openscad.org)
+[![Version](https://img.shields.io/badge/Release-v4.2_Production-brightgreen.svg)]()
 [![License: CC BY-NC-SA 4.0](https://img.shields.io/badge/License-CC_BY--NC--SA_4.0-lightgrey.svg)](LICENSE)
 
-A production-quality, FDM-printable two-piece enclosure designed to house an **Arduino Uno R3**, a standard **Arduino Multifunction Shield**, and an **onboard battery pack**, engineered specifically for the 180 × 180 × 180 mm build plate of the Bambu Lab A1 Mini.
+A compact, fully integrated, FDM-optimized two-piece enclosure housing an **Arduino Uno R3**, standard **HW-262 Multifunction Shield (MFS)**, and an **onboard battery pack**, engineered specifically for the 180 × 180 × 180 mm build plate of the **Bambu Lab A1 Mini** with **WOL3D Gold Textured PEI Plate**.
 
-Verified and validated via OpenSCAD CGAL mesh audits and FreeCAD 1.1.3 manifold integrity checks (28/28 constraints passed).
+![Top Plan v4.2](docs/top_plan_v4_2.png)
 
 ---
 
-## 1. Specifications & Geometry
+## 1. Specifications & Comparison
 
-| Component | Dimensions (L × W × H) | Notes |
+| Specification | Sept 9 Design (v2) | v4.2 Production (Current) | Engineering Advantage |
+|---|---|---|---|
+| **Outer Dimensions (L × W × H)** | 117.60 × 98.40 × 46.60 mm | **105.10 × 97.65 × 42.00 mm** | **12.5 mm shorter, 4.6 mm lower** (~20% volume & filament savings) |
+| **Buttons / Tactile Interface** | 3 separate loose plungers (S1–S3) | **4 integrated living-hinge flexures** (S1, S2, S3, RST) | Single-piece lid print. Zero drop/jam risk; adds direct Reset switch access |
+| **Battery Retention** | Passive cavity wall | **Active cantilever snap-arm** (10 mm wide beam, 1.4 mm ramped hook) | Locks 9V battery securely; prevents rattling and dislodgement |
+| **Microcontroller Mount** | Friction side rails | **4× Uno R3 PCB screw standoffs** (M2.5/M3 pilot holes) | Rigid mechanical fastening; eliminates PCB movement during button presses |
+| **Rear Service Bay** | +7 mm manual offset patch | **Parametric 24 mm bay** (USB-B, 19.4×13.2 mm SPST switch, 8.2 mm DC jack) | Clean wire routing zone; clears 33 mm internal DC barrel jack body |
+| **Wall Thickness** | 2.40 mm | **2.40 mm** (6 perimeter loops @ 0.4 mm nozzle) | High rigidity |
+
+---
+
+## 2. Bambu Lab A1 Mini Slicing & Print Profile
+
+Both STL models in `stl/` are pre-oriented for immediate drop-and-print on the Bambu Lab A1 Mini. **Zero rotation and zero supports required.**
+
+| Parameter | Setting | Rationale / Engineering Constraint |
 |---|---|---|
-| **Base Enclosure** | 117.60 × 98.40 × 43.60 mm | Independently printable; bottom-face down |
-| **Top Plate (Lid)** | 114.00 × 94.80 × 6.00 mm | Anchored at Z = 0.00 mm for flat bed adhesion |
-| **Total Assembled** | 117.60 × 98.40 × 46.60 mm | Fits comfortably within 180 × 180 mm bed |
-| **Wall Thickness** | 2.4 mm nominal | Robust FDM shell with stepped mating lip |
+| **Printer** | Bambu Lab A1 Mini (0.4 mm Nozzle) | Verified fit within 180 × 180 mm bed (Model: 105.1 × 97.7 mm) |
+| **Build Plate** | WOL3D Gold Textured PEI Plate | Excellent first-layer adhesion; clean bottom texture |
+| **Filament (Lid / Cover)** | **PETG** (Recommended) or Tough PLA | Living-hinge flexures undergo cyclic bending; PETG elongation prevents fatigue snap |
+| **Filament (Base Housing)** | **PETG** or **PLA / PLA+** | High structural rigidity for screw bosses and snap latch |
+| **Layer Height** | **0.20 mm Standard** | **MANDATORY.** Flexures are exactly 0.60 mm (3 layers); breakaway ties are 0.40 mm (2 layers) |
+| **Initial Layer Height** | 0.20 mm | Matches flexure layer slicing multiples |
+| **Wall Loops** | **6** | Produces 100% solid 2.4 mm shell walls and solid screw posts |
+| **Top Shell Layers** | 5 (1.0 mm) | Prevents pillowing over sparse infill |
+| **Bottom Shell Layers** | 5 (1.0 mm) | Rigid solid floor |
+| **Sparse Infill Density** | 20% | Optimal stiffness-to-weight ratio |
+| **Sparse Infill Pattern** | Gyroid | Isotropic shear and compressive strength |
+| **Supports** | **DISABLED (None)** | Designed 100% self-supporting (chamfered plungers, bridged cutouts) |
+| **Brim** | Base: 4–5 mm outer brim; Lid: None | Prevents corner lifting of deep base box on textured PEI |
+| **First Layer Speed** | 30 mm/s | Ensures precise extrusion around living-hinge perimeter micro-slots |
+
+### Print Orientations
+
+- **Base Housing (`stl/bottom_housing.stl`):** Place floor flat on bed (open top facing +Z).
+- **Front Plate (`stl/front_plate_integrated_buttons.stl`):** Pre-oriented face-down on bed (outer cosmetic face at Z = 0; plunger stems point vertically upward into +Z).
 
 ---
 
-## 2. Integrated Hardware & Interfaces
+## 3. Post-Print Processing & Assembly Instructions
 
-- **Microcontroller:** Arduino Uno R3 mounted on floor locating rails with 1.0 mm service margin.
-- **Multifunction Shield:** Full UI integration:
-  - Window aperture for 4-digit 7-segment LED display.
-  - Three integrated guide tubes and plungers for tactile switches (S1, S2, S3).
-  - Acoustic port for onboard piezo buzzer (widenable to 15 mm).
-  - Analog trim potentiometer and header clearance.
-- **Battery Compartment:** Dedicated positive retention pocket measuring **58.6 × 43.6 × 29.9 mm** located alongside the Arduino stack.
-- **Power Switch:** Cutout for standard 22 mm rectangular SPST rocker switch (**19.9 × 12.0 mm**), with 7.0 mm added depth clearance avoiding rear-right screw boss collision and providing ≥20 mm terminal wiring service depth.
-- **DC Input:** Panel-mount 5.5×2.1 mm DC barrel jack (33 mm body clearance) positioned in the battery partition zone above the battery top.
-
----
-
-## 3. Slicing & 3D Printing Recommendations
-
-- **Target Machine:** Bambu Lab A1 Mini (WOL3D Gold Textured PEI Plate).
-- **Material:** PLA or PETG.
-- **Nozzle:** 0.4 mm.
-- **Layer Height:** 0.20 mm Standard.
-- **Infill:** 15–20% (Gyroid or Grid).
-- **Supports:** **None required.** Bridge spans and wall draft angles are designed to be self-supporting.
-- **Adhesion:** Clean textured PEI sheet with dish soap and warm water; brim optional.
+1. **Freeing the Integrated Living-Hinge Buttons:**
+   - Each button cap on the front plate includes two 0.40 mm sacrificial breakaway stabilizer ties (`btn_sacrificial_tie`) along the X-axis.
+   - Use a sharp craft blade (X-Acto or scalpel) to slice through the two breakaway ties flanking each button.
+   - Depress each button 2–3 times with your thumb to seat the dual serpentine flexures. Tactile button travel is 0.65 mm.
+2. **Mounting the Hardware:**
+   - Fasten the Arduino Uno R3 onto the 4 lower standoffs using 4× M2.5 or M3 thread-forming screws (6–8 mm length).
+   - Seat the HW-262 Multifunction Shield onto the Uno R3 header pins.
+   - Insert the panel-mount SPST rocker switch (19.4 × 13.2 mm cutout) and 5.5×2.1 mm DC barrel jack (8.2 mm hole) in the rear service panel.
+   - Connect battery and power switch leads in the rear service bay.
+3. **Inserting Battery:**
+   - Slide the battery pack into the battery compartment.
+   - The cantilever snap arm flexes backward and clicks over the top shoulder of the battery at Z = 32.3 mm.
+4. **Lid Closure:**
+   - Lower the front plate onto the base housing. The 1.1 mm stepped mating lip aligns the perimeter.
+   - Fasten with 4× M3 countersunk screws (12–16 mm length) into the corner screw bosses.
 
 ---
 
@@ -52,38 +76,43 @@ Verified and validated via OpenSCAD CGAL mesh audits and FreeCAD 1.1.3 manifold 
 
 ```
 .
-├── config.scad            # Single source of truth for all parametric dimensions
-├── base.scad              # Lower enclosure body with internal partition and mounts
-├── top_plate.scad         # Upper bezel lid with button guides and display aperture
-├── main.scad              # Complete assembly preview including hardware mockups
+├── config.scad             # Central parametric configuration and geometric assertions (v4.2)
+├── main.scad               # Top-level assembly and STL export entrypoint (v4.2)
+├── internals.scad          # Uno standoffs, battery divider, and cantilever snap-arm
+├── buttons.scad            # Stadium-flexure living hinge integrated button plungers
+├── cutouts.scad            # Rear panel I/O (USB, SPST, DC jack) and top display windows
+├── utilities.scad          # Geometric helper modules
 ├── stl/
-│   ├── base.stl           # Exported clean STL for lower enclosure (manifold)
-│   ├── top_plate.stl      # Exported clean STL for top plate (manifold)
-│   └── base.3mf           # Bambu Studio / OrcaSlicer project file
-├── tools/                 # Validation and auditing test suite
-│   ├── build_enclosure.py
-│   ├── check_collision.py
-│   ├── freecad_independent_audit.py
-│   ├── full_engineering_audit.py
-│   ├── validation_report.txt
-│   └── patches_and_tests/ # Historical geometric clearance test scripts
+│   ├── bottom_housing.stl                  # v4.2 base enclosure STL (manifold, pre-oriented)
+│   ├── front_plate_integrated_buttons.stl  # v4.2 lid STL with living-hinge buttons (pre-oriented)
+│   └── complete_assembly.stl               # v4.2 full mated assembly preview STL
 ├── docs/
-│   ├── MASTER_PROMPT_REV_5.md # Full design engineering constraint specification
-│   └── HANDOFF.txt            # Engineering handoff notes & dimension log
+│   ├── BAMBU_A1_MINI_PRINT_GUIDE.md        # Comprehensive slicing profile and post-processing guide
+│   ├── top_plan_v4_2.png                   # Dimensioned plan view diagram
+│   ├── MASTER_PROMPT_REV_5.md              # Engineering constraint log
+│   └── HANDOFF.txt                         # Hardware dimension verification records
+├── legacy_v2_sept09/       # September 9 version (loose plunger plungers, 117.6 x 98.4 mm)
+├── legacy_v1_modular/      # July 2026 15-module precursor architecture
 ├── blender/
-│   └── project.blend      # 3D mockup assembly in Blender
-└── legacy_v1_modular/     # Earlier 15-file modular SCAD architecture (July 2026)
+│   └── project.blend       # 3D visualization mockups
+├── tools/                  # FreeCAD and Python geometric audit suite
+├── LICENSE                 # CC BY-NC-SA 4.0
+└── .gitignore
 ```
 
 ---
 
-## 5. Verification & Audit Results
+## 5. Bill of Materials (BOM)
 
-Validation confirmed through independent FreeCAD mesh analysis:
-- **Base Manifoldness:** 0 non-manifold edges; `Mesh.isSolid() == True`.
-- **Top Plate Manifoldness:** 0 non-manifold edges; clean CGAL single solid.
-- **SPST Clearance:** Switch body front Y 65.60 mm vs battery rear Y 63.60 mm (>2.0 mm physical gap + unobstructed wiring region).
-- **DC Jack Clearance:** Jack bottom Z 33.30 mm vs battery top Z 32.90 mm (positive clearance).
+| Item | Component | Notes |
+|---|---|---|
+| **MCU** | Arduino Uno R3 | Standard footprint (53.4 × 68.6 mm) |
+| **Shield** | HW-262 / MFS Multifunction Shield | 4-digit 7-segment display, S1–S3 + RST buttons, pot, buzzer |
+| **Battery** | 9V Battery Pack | Maximum envelope: 43.6 × 58.6 × 29.9 mm |
+| **Power Switch** | SPST Rocker Switch | Snap-in bezel: 19.4 × 13.2 mm |
+| **DC Connector**| 5.5 × 2.1 mm DC Barrel Jack | Threaded panel mount: 8.2 mm hole |
+| **Fasteners (PCB)** | 4× M2.5 or M3 × 6–8 mm screws | Self-tapping into 2.75 mm standoff pilot holes |
+| **Fasteners (Case)**| 4× M3 × 12–16 mm countersunk screws| Fastens lid into corner screw bosses |
 
 ---
 

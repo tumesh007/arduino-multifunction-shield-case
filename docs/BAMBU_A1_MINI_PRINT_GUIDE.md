@@ -1,4 +1,4 @@
-# Bambu Lab A1 Mini Slicing & Print Guide (v4.4 Enclosure)
+# Bambu Lab A1 Mini Slicing & Print Guide (v4.5 Enclosure)
 
 Target Machine: **Bambu Lab A1 Mini**  
 Build Volume: **180 × 180 × 180 mm**  
@@ -11,7 +11,7 @@ Slicer: **Bambu Studio** or **OrcaSlicer**
 
 | Slicer Parameter | Value | Critical Notes |
 |---|---|---|
-| **Layer Height** | **0.20 mm** | **MANDATORY.** Living hinge = 0.60 mm (exactly 3 layers). Breakaway tie = 0.40 mm (2 layers). Slicing at 0.16 or 0.24 mm breaks hinge compliance. |
+| **Layer Height** | **0.20 mm** | **MANDATORY.** Living hinge = 0.80 mm (exactly 4 layers). Breakaway tie = 0.40 mm (2 layers). Slicing at 0.16 or 0.24 mm breaks hinge compliance. |
 | **First Layer Height** | **0.20 mm** | Ensures clean layer boundary on PEI plate. |
 | **Wall Loops** | **6** | 6 × 0.40 mm = 2.40 mm solid walls. Eliminates weak infill voids in outer shell. |
 | **Top Shell Layers** | **5** (1.0 mm) | Solid ceiling over battery compartment and service bay. |

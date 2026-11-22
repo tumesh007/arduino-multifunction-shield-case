@@ -102,18 +102,18 @@ mfs_disp_h            = 14.20;
 mfs_disp_top_h        = 7.20;   // Height above MFS PCB top
 
 mfs_buzzer_x          = 22.50;  // Piezo buzzer center (LS1)
-mfs_buzzer_y          = 30.50;
+mfs_buzzer_y          = 33.50;
 mfs_buzzer_d          = 12.00;
 
-mfs_pot_x             = 11.50;  // Blue trimpot center
-mfs_pot_y             = 25.00;
-mfs_pot_d             = 10.00;
+mfs_pot_x             = 10.50;  // Blue trimpot center
+mfs_pot_y             = 21.50;
+mfs_pot_d             = 6.20;
 
 // 4-LED Status Strip (D1, D2, D3, D4) Viewing Window
-mfs_leds_x            = 40.50;  // Left edge of D1-D4 window relative to Uno X=0
-mfs_leds_y            = 27.00;  // Bottom edge of D1-D4 window relative to Uno Y=0
-mfs_leds_w            = 5.00;   // Window width across LED strip
-mfs_leds_h            = 13.50;  // Window height spanning D1 through D4
+mfs_leds_x            = 39.20;  // Left edge of D1-D4 window relative to Uno X=0
+mfs_leds_y            = 31.00;  // Bottom edge of D1-D4 window relative to Uno Y=0
+mfs_leds_w            = 5.20;   // Window width across LED strip
+mfs_leds_h            = 11.50;  // Window height spanning D1 through D4
 
 // Verified 9.2 mm Button Pitch for S1, S2, S3 along front edge + RESET shifted +3.0 mm up!
 btn_pitch             = 9.20;   // VERIFIED by user measurement

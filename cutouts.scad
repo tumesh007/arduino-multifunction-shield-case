@@ -34,7 +34,7 @@ module top_plate_windows() {
     }
 
     translate([uno_x0 + mfs_pot_x, uno_y0 + mfs_pot_y, -EPS])
-        cylinder(d = 6.0, h = top_plate_t + 2*EPS);
+        cylinder(d = mfs_pot_d, h = top_plate_t + 2*EPS);
 
     for (c = corner_boss_coords) {
         translate([c[0], c[1], -EPS])

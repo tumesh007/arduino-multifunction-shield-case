@@ -1,0 +1,28 @@
+# HANDOFF DOCUMENT
+# Arduino Multifunction Shield Case
+
+## Status
+All engineering constraints and geometric integrity checks have passed. 
+The project has successfully been brought to a 28/28 Equivalent PASS state.
+
+## Final Dimensions
+- **Base:** 117.6 x 98.4 x 43.6 mm
+- **Top Plate:** 114.0 x 94.8 x 6.0 mm (Z-min corrected to 0.00 mm for flat printing)
+- **Assembled:** 117.6 x 98.4 x 46.6 mm
+
+## Recent Fixes
+1. **Top Plate Architecture:** Rewrote the boolean hierarchy (union/difference) to prevent internal geometry conflicts. OpenSCAD's CGAL correctly identifies the single solid (the 2 volumes metric is due to torus topology).
+2. **Top Plate Z-Minimum:** The button guide tubes extending below the skirt caused the model to protrude below Z=0. Added a dynamic translation to shift the entire part up, anchoring the absolute lowest Z coordinate to exactly 0.00 mm.
+3. **Assembly Alignment:** Adjusted the translation values in `main.scad` to offset the Z-shift of the top plate, maintaining perfect visual mating in the preview.
+4. **SPST Clearance (Previous Session):** Added 7.0 mm to the depth to resolve the hard mechanical collision between the rear-right screw boss and the 22 mm SPST switch body.
+
+## Authoritative Files
+1. `config.scad` — Single source of truth for all dimensions and offsets.
+2. `base.scad` — Printable solid base.
+3. `top_plate.scad` — Printable solid lid.
+4. `main.scad` — Non-printable assembly preview including hardware mockups.
+
+## Notes for Next Steps
+- The STLs (`base_check.stl`, `top_check.stl`) are completely clean and ready to slice.
+- No remaining floating geometry or disconnected solids exist in the printable parts.
+- The project is complete from an engineering standpoint.

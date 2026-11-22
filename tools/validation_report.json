@@ -1,0 +1,246 @@
+{
+  "parameters": {
+    "enc_w": 117.6,
+    "enc_d": 98.4,
+    "enc_h": 46.6,
+    "wall": 3.0,
+    "bottom": 3.0,
+    "top": 3.0,
+    "corner_r": 5.0,
+    "clr": 0.3,
+    "press_clr": 0.15,
+    "lip_inset": 1.5,
+    "lip_h": 2.0,
+    "arduino_l": 83.4,
+    "arduino_w": 62.0,
+    "arduino_h": 19.4,
+    "arduino_clr": 1.0,
+    "shield_h": 12.2,
+    "battery_l": 58.6,
+    "battery_w": 43.6,
+    "battery_h": 29.9,
+    "battery_clr": 1.0,
+    "battery_wall": 1.5,
+    "divider_t": 2.0,
+    "cable_pass_w": 12.0,
+    "cable_pass_h": 10.0,
+    "spst_cutout_w": 19.9,
+    "spst_cutout_h": 12.0,
+    "spst_l": 21.0,
+    "spst_w": 15.0,
+    "spst_h": 15.0,
+    "spst_service": 20.0,
+    "spst_wire_depth": 28.0,
+    "dc_body_len": 33.0,
+    "dc_body_d": 10.0,
+    "dc_mount_d": 8.6,
+    "btn_d": 5.0,
+    "btn_top_offset": 7.4,
+    "btn_travel": 1.0,
+    "btns": [
+      [
+        14.7,
+        14.0
+      ],
+      [
+        24.1,
+        14.0
+      ],
+      [
+        33.4,
+        14.1
+      ]
+    ],
+    "disp_w": 30.2,
+    "disp_d": 14.3,
+    "disp_tl": [
+      18.3,
+      58.9
+    ],
+    "buzz_d": 15.0,
+    "buzz": [
+      23.8,
+      37.5
+    ],
+    "screw_clear": 3.3,
+    "screw_cb": 6.0,
+    "boss_od": 8.0,
+    "boss_id": 2.5,
+    "boss_inset": 7.5,
+    "plunger_shaft_d": 4.6,
+    "plunger_hole_d": 5.6,
+    "plunger_guide_d": 7.2,
+    "plunger_collar_d": 6.4,
+    "plunger_cap_d": 9.0,
+    "plunger_cap_h": 2.0,
+    "plunger_tip_r": 1.5,
+    "arduino_x": 4.0,
+    "arduino_y": 4.0,
+    "arduino_z": 3.0,
+    "shield_z": 22.4,
+    "shield_top_z": 34.599999999999994,
+    "battery_x": 70.0,
+    "battery_y": 4.0,
+    "battery_z": 3.0,
+    "divider_x": 67.0,
+    "base_h": 43.6,
+    "top_bottom_z": 43.6,
+    "top_r": 3.2,
+    "top_w": 114.0,
+    "top_d": 94.80000000000001,
+    "top_x": 1.8,
+    "top_y": 1.8,
+    "spst_y": 73.1,
+    "spst_z": 23.3,
+    "dc_panel_x": 68.0,
+    "dc_y": 33.3,
+    "dc_z": 38.300000000000004
+  },
+  "checks": [
+    {
+      "name": "Base dimensions",
+      "pass": true,
+      "detail": "117.60 x 98.40 x 43.60"
+    },
+    {
+      "name": "Top plate build volume",
+      "pass": true,
+      "detail": "114.60 x 95.40 x 6.00"
+    },
+    {
+      "name": "Arduino within base",
+      "pass": true,
+      "detail": "1 mm locating clearance"
+    },
+    {
+      "name": "Battery on floor",
+      "pass": true,
+      "detail": "battery Z equals floor"
+    },
+    {
+      "name": "Shield/top clearance",
+      "pass": true,
+      "detail": "9.00 mm"
+    },
+    {
+      "name": "SPST service depth",
+      "pass": true,
+      "detail": "20.0 mm nominal minimum"
+    },
+    {
+      "name": "SPST body clears battery",
+      "pass": true,
+      "detail": "switch front Y 65.60, battery rear Y 63.60"
+    },
+    {
+      "name": "DC body fits",
+      "pass": true,
+      "detail": "33 mm body in battery-side partition zone"
+    },
+    {
+      "name": "DC body above battery",
+      "pass": true,
+      "detail": "body bottom 33.30, battery top 32.90"
+    },
+    {
+      "name": "Buttons use single datum",
+      "pass": true,
+      "detail": "three shield-relative coordinates"
+    },
+    {
+      "name": "BUTTON 1",
+      "pass": true,
+      "detail": "global=(18.70,18.00), top=29.80, reach=13.80"
+    },
+    {
+      "name": "BUTTON 2",
+      "pass": true,
+      "detail": "global=(28.10,18.00), top=29.80, reach=13.80"
+    },
+    {
+      "name": "BUTTON 3",
+      "pass": true,
+      "detail": "global=(37.40,18.10), top=29.80, reach=13.80"
+    },
+    {
+      "name": "SPST terminal envelope represented",
+      "pass": true,
+      "detail": "body, terminals, wiring envelope modeled"
+    },
+    {
+      "name": "SPST wiring vs battery",
+      "pass": true,
+      "detail": "unobstructed wiring region"
+    },
+    {
+      "name": "No hardware floating",
+      "pass": true,
+      "detail": "floor-mounted hardware"
+    },
+    {
+      "name": "BASE manifold",
+      "pass": true,
+      "detail": "non-manifold edges=0"
+    },
+    {
+      "name": "TOP_PLATE manifold",
+      "pass": true,
+      "detail": "non-manifold edges=0"
+    }
+  ],
+  "failure_count": 0,
+  "validation_failures_encountered": 2,
+  "correction_cycles": 3,
+  "freecad_audit": "PASS: FreeCAD 1.1.3 independent mesh audit",
+  "dc_mount_hole_note": "8.6 mm divider hole is a configurable starting value requiring physical verification against the purchased connector",
+  "dc_mount_location": "Arduino/battery partition, axis along +X into battery compartment",
+  "final_result": "READY FOR PROTOTYPE PRINT",
+  "button_global_coordinates": [
+    [
+      18.7,
+      18.0
+    ],
+    [
+      28.1,
+      18.0
+    ],
+    [
+      37.4,
+      18.1
+    ]
+  ],
+  "button_plunger_reach": 13.800000000000004,
+  "spst_opening": [
+    19.9,
+    12.0
+  ],
+  "spst_body": [
+    21.0,
+    15.0,
+    15.0
+  ],
+  "spst_service_depth": 20.0,
+  "dc_envelope": [
+    10.0,
+    33.0
+  ],
+  "battery_clearance_to_spst_y": 1.999999999999993,
+  "shield_top_clearance": 9.000000000000007,
+  "base_dimensions": [
+    117.6,
+    98.4,
+    43.6
+  ],
+  "top_plate_dimensions": [
+    114.0,
+    94.80000000000001,
+    6.0
+  ],
+  "overall_assembled_dimensions": [
+    117.6,
+    98.4,
+    46.6
+  ],
+  "stl_connectivity": "PASS: independent edge-count audit found exactly two incident facets per edge",
+  "freecad_audit_report": "freecad_audit_report.json"
+}

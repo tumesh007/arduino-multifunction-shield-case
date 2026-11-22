@@ -1,0 +1,25 @@
+PASS: Base dimensions — 117.60 x 98.40 x 43.60
+PASS: Top plate build volume — 114.60 x 95.40 x 6.00
+PASS: Arduino within base — 1 mm locating clearance
+PASS: Battery on floor — battery Z equals floor
+PASS: Shield/top clearance — 9.00 mm
+PASS: SPST service depth — 20.0 mm nominal minimum
+PASS: SPST body clears battery — switch front Y 65.60, battery rear Y 63.60
+PASS: DC body fits — 33 mm body in battery-side partition zone
+PASS: DC body above battery — body bottom 33.30, battery top 32.90
+PASS: Buttons use single datum — three shield-relative coordinates
+PASS: BUTTON 1 — global=(18.70,18.00), top=29.80, reach=13.80
+PASS: BUTTON 2 — global=(28.10,18.00), top=29.80, reach=13.80
+PASS: BUTTON 3 — global=(37.40,18.10), top=29.80, reach=13.80
+PASS: SPST terminal envelope represented — body, terminals, wiring envelope modeled
+PASS: SPST wiring vs battery — unobstructed wiring region
+PASS: No hardware floating — floor-mounted hardware
+PASS: BASE manifold — non-manifold edges=0
+PASS: TOP_PLATE manifold — non-manifold edges=0
+
+Validation failures encountered and corrected: 2
+Correction cycles: 3
+
+FreeCAD audit: PASS: FreeCAD 1.1.3 independent mesh audit
+STL connectivity: PASS: independent edge-count audit found exactly two incident facets per edge
+FINAL RESULT: READY FOR PROTOTYPE PRINT

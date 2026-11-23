@@ -109,6 +109,10 @@ Both STL models in `stl/` are pre-oriented for immediate drop-and-print on the B
 ├── legacy_v1_modular/      # July 2026 15-module precursor architecture
 ├── blender/
 │   └── project.blend       # 3D visualization mockups
+├── firmware/
+│   └── ShivanshTimer_v9/
+│       ├── ShivanshTimer_v9.ino            # Shivansh Timer v9.0 Arduino Uno + MFS firmware (24 modes)
+│       └── README.md                       # Comprehensive firmware user manual & control reference
 ├── tools/                  # FreeCAD and Python geometric audit suite
 ├── LICENSE                 # CC BY-NC-SA 4.0
 └── .gitignore
@@ -130,6 +134,18 @@ Both STL models in `stl/` are pre-oriented for immediate drop-and-print on the B
 
 ---
 
-## 6. License
+## 6. Firmware: Shivansh Timer v9.0
+
+The enclosure houses an Arduino Uno running the **Shivansh Timer v9.0** sketch located in [`firmware/ShivanshTimer_v9/`](firmware/ShivanshTimer_v9/):
+
+- **24 Operating Modes:** Clock (RTC / uptime fallback), 17 Countdown Presets (1 min to 3 hr), Stopwatch with lap averaging, Tally Counter, Reaction Timer, Interval Training Timer, Simon Says memory game, and Configurable 2-Player Chess Clock.
+- **Hardware Integration:** Direct mapping to the HW-262 shield's 4-digit 7-segment display, S1–S3 living-hinge buttons, Reset button, piezo buzzer acoustic alerts (with silent mode toggle), and D1–D4 status LEDs.
+- **EEPROM State Retention:** Saves brightness, silent mode, last chess preset, alarm configuration, and session restore across power cycles.
+
+See [`firmware/ShivanshTimer_v9/README.md`](firmware/ShivanshTimer_v9/README.md) for the complete user manual and controls guide.
+
+---
+
+## 7. License
 
 Licensed under [Creative Commons Attribution-NonCommercial-ShareAlike 4.0 International (CC BY-NC-SA 4.0)](LICENSE).

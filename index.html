@@ -4,106 +4,97 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Shivansh Timer v9.0 — Arduino Multi-Function Shield Interactive Web Simulator</title>
-  <meta name="description" content="Interactive web simulator of the Arduino Uno + HW-262 Multi-Function Shield running Shivansh Timer v9.0 firmware with 24 modes, games, and Web Audio." />
+  <meta name="description" content="Interactive hardware & games simulator for Arduino Uno + HW-262 Multi-Function Shield running Shivansh Timer v9.0 firmware with 24 modes, games, and Web Audio." />
 
-  <!-- Tailwind CSS & Lucide Icons -->
-  <script src="https://cdn.tailwindcss.com"></script>
+  <!-- Lucide Icons -->
   <script src="https://unpkg.com/lucide@latest"></script>
 
-  <!-- Custom Styles -->
+  <!-- Custom Styles (Pure CSS, 100% Self-Contained) -->
   <link rel="stylesheet" href="css/styles.css" />
 </head>
-<body class="bg-slate-900 text-slate-100 min-h-screen flex flex-col justify-between">
+<body>
 
-  <!-- ═══════════════════════════════════════════════════════════
-       Top Navigation Header
-  ════════════════════════════════════════════════════════════ -->
-  <header class="bg-slate-950/90 backdrop-blur-md border-b border-slate-800/80 px-6 py-3 flex items-center justify-between shadow-xl flex-shrink-0">
-    <div class="flex items-center space-x-3">
-      <!-- Glowing amber logo pill -->
-      <div class="logo-pill w-10 h-10 bg-gradient-to-br from-amber-400 to-amber-600 rounded-xl flex items-center justify-center text-slate-950 font-black text-xl shadow-md">
+  <!-- Top Navigation Header -->
+  <header class="app-header">
+    <div class="header-brand">
+      <div class="header-logo-badge">
         ⚡
       </div>
-      <div>
-        <h1 class="text-base font-bold leading-tight flex items-center gap-2 text-white">
-          Shivansh Timer v9.0 Simulator
-          <!-- Running status badge -->
-          <span class="running-badge">
-            <span class="dot"></span>
+      <div class="header-text-wrap">
+        <div class="header-title-row">
+          <span class="header-title">Shivansh Timer v9.0 Simulator</span>
+          <span class="running-pill">
+            <span class="running-dot"></span>
             RUNNING
           </span>
-          <span class="text-xs font-medium bg-amber-400/20 text-amber-300 border border-amber-400/30 px-2 py-0.5 rounded-full hidden sm:inline">
-            Arduino Uno + HW-262
+          <span class="hardware-pill">
+            Arduino Uno + HW-262 Shield
           </span>
-        </h1>
-        <p class="text-xs text-slate-400">Interactive hardware &amp; games simulator for kids, students &amp; makers</p>
+        </div>
+        <p class="header-subtitle">Interactive hardware &amp; games simulator for kids, students &amp; makers</p>
       </div>
     </div>
 
-    <!-- Quick Audio & Help Buttons -->
-    <div class="flex items-center space-x-3">
-      <button id="btn-mute-toggle" class="bg-slate-800 hover:bg-slate-700 text-slate-200 border border-slate-700 hover:border-slate-600 px-3.5 py-1.5 rounded-lg text-xs font-semibold flex items-center gap-2 transition-all shadow-sm">
+    <!-- Quick Audio & GitHub Buttons -->
+    <div class="header-actions">
+      <button id="btn-mute-toggle" class="btn-audio">
         🔊 Sound ON
       </button>
-      <a href="https://github.com/tumesh007/arduino-multifunction-shield-case" target="_blank"
-         class="bg-blue-600 hover:bg-blue-500 text-white font-semibold px-3.5 py-1.5 rounded-lg text-xs flex items-center gap-1.5 shadow-sm transition-colors">
-        <i data-lucide="github" class="w-3.5 h-3.5"></i>
+      <a href="https://github.com/tumesh007/arduino-multifunction-shield-case" target="_blank" class="btn-github">
+        <i data-lucide="github" style="width:14px; height:14px;"></i>
         <span>GitHub Repo</span>
       </a>
     </div>
   </header>
 
-  <!-- ═══════════════════════════════════════════════════════════
-       Main Simulator Area
-  ════════════════════════════════════════════════════════════ -->
-  <main class="flex-1 max-w-7xl w-full mx-auto p-6 grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
+  <!-- Main Simulator Layout Grid -->
+  <main class="simulator-layout">
 
-    <!-- ─── Left / Center: Interactive HW-262 Shield PCB Board ─── -->
-    <div class="lg:col-span-7 flex flex-col items-center justify-center">
+    <!-- ─── Left Column: The Hardware Device ─── -->
+    <div class="hardware-column">
 
-      <!-- PCB Enclosure Frame -->
-      <div class="pcb-board rounded-3xl p-6 w-full max-w-lg shadow-2xl relative">
+      <!-- Physical PCB Board Enclosure -->
+      <div class="pcb-board">
 
-        <!-- Four Gold Mount Holes -->
-        <div class="mount-hole absolute top-4 left-4"></div>
-        <div class="mount-hole absolute top-4 right-4"></div>
-        <div class="mount-hole absolute bottom-4 left-4"></div>
-        <div class="mount-hole absolute bottom-4 right-4"></div>
+        <!-- 4 Gold Mounting Screw Holes -->
+        <div class="mount-hole tl"></div>
+        <div class="mount-hole tr"></div>
+        <div class="mount-hole bl"></div>
+        <div class="mount-hole br"></div>
 
-        <!-- GPIO Header Strip (decorative golden pins) -->
-        <div class="gpio-header">
-          <!-- 20 decorative golden header pins -->
-          <div class="gpio-pin"></div><div class="gpio-pin"></div><div class="gpio-pin"></div>
-          <div class="gpio-pin"></div><div class="gpio-pin"></div><div class="gpio-pin"></div>
-          <div class="gpio-pin"></div><div class="gpio-pin"></div><div class="gpio-pin"></div>
-          <div class="gpio-pin"></div><div class="gpio-pin"></div><div class="gpio-pin"></div>
-          <div class="gpio-pin"></div><div class="gpio-pin"></div><div class="gpio-pin"></div>
-          <div class="gpio-pin"></div><div class="gpio-pin"></div><div class="gpio-pin"></div>
-          <div class="gpio-pin"></div><div class="gpio-pin"></div>
+        <!-- Top Header Gold Pins -->
+        <div class="header-pins-row">
+          <div class="pin-socket"></div><div class="pin-socket"></div><div class="pin-socket"></div>
+          <div class="pin-socket"></div><div class="pin-socket"></div><div class="pin-socket"></div>
+          <div class="pin-socket"></div><div class="pin-socket"></div><div class="pin-socket"></div>
+          <div class="pin-socket"></div><div class="pin-socket"></div><div class="pin-socket"></div>
+          <div class="pin-socket"></div><div class="pin-socket"></div><div class="pin-socket"></div>
+          <div class="pin-socket"></div><div class="pin-socket"></div><div class="pin-socket"></div>
+          <div class="pin-socket"></div><div class="pin-socket"></div>
         </div>
 
-        <!-- PCB Silk-Screen Header -->
-        <div class="text-center mb-5">
-          <p class="text-[10px] tracking-widest font-mono font-bold uppercase" style="color: rgba(226,245,232,0.55);">
-            HW-262 Multi-Function Shield • Arduino Uno R3
-          </p>
-          <div class="pcb-silk-line w-48 mx-auto mt-1"></div>
-          <!-- Extra silk-screen labels row -->
-          <div class="flex justify-between px-6 mt-1.5">
-            <span class="text-[8px] font-mono" style="color:rgba(226,245,232,0.3);">VCC</span>
-            <span class="text-[8px] font-mono" style="color:rgba(226,245,232,0.3);">SIG</span>
-            <span class="text-[8px] font-mono" style="color:rgba(226,245,232,0.3);">GND</span>
-            <span class="text-[8px] font-mono" style="color:rgba(226,245,232,0.3);">SDA</span>
-            <span class="text-[8px] font-mono" style="color:rgba(226,245,232,0.3);">SCL</span>
-            <span class="text-[8px] font-mono" style="color:rgba(226,245,232,0.3);">PWM</span>
+        <!-- Board Silkscreen Header -->
+        <div class="board-silkscreen">
+          <p class="board-silk-title">HW-262 MULTI-FUNCTION SHIELD • ARDUINO UNO R3</p>
+          <div class="board-silk-divider"></div>
+          <div class="board-pin-labels">
+            <span>POT A0</span>
+            <span>BUZZER</span>
+            <span>D13</span>
+            <span>D12</span>
+            <span>D11</span>
+            <span>D10</span>
+            <span>D9</span>
+            <span>5V</span>
+            <span>GND</span>
           </div>
         </div>
 
-        <!-- ── 4-Digit 7-Segment Display Glass Bezel ── -->
-        <div class="seven-seg-bezel rounded-2xl p-5 mb-6 mx-auto flex items-center justify-center gap-2 shadow-inner border border-slate-700/40 max-w-sm">
+        <!-- 4-Digit 7-Segment LED Display Module -->
+        <div class="seven-seg-bezel">
 
           <!-- Digit 0 -->
-          <svg id="digit-0" class="seven-seg-digit" width="56" height="80" viewBox="0 0 57 80" style="width:56px; height:80px; flex-shrink:0;">
+          <svg id="digit-0" class="seven-seg-digit" width="58" height="84" viewBox="0 0 57 80">
             <!-- a --> <polygon class="segment seg-a" points="10,6 47,6 42,12 15,12" />
             <!-- b --> <polygon class="segment seg-b" points="48,7 48,39 42,35 42,13" />
             <!-- c --> <polygon class="segment seg-c" points="48,42 48,73 42,67 42,45" />
@@ -114,7 +105,7 @@
           </svg>
 
           <!-- Digit 1 -->
-          <svg id="digit-1" class="seven-seg-digit" width="56" height="80" viewBox="0 0 57 80" style="width:56px; height:80px; flex-shrink:0;">
+          <svg id="digit-1" class="seven-seg-digit" width="58" height="84" viewBox="0 0 57 80">
             <!-- a --> <polygon class="segment seg-a" points="10,6 47,6 42,12 15,12" />
             <!-- b --> <polygon class="segment seg-b" points="48,7 48,39 42,35 42,13" />
             <!-- c --> <polygon class="segment seg-c" points="48,42 48,73 42,67 42,45" />
@@ -125,13 +116,13 @@
           </svg>
 
           <!-- Blinking Colon -->
-          <div class="colon-container flex flex-col justify-around h-16 py-3 px-1" style="display:flex; flex-direction:column; justify-content:space-around; height:52px; padding:6px 2px; flex-shrink:0;">
-            <span id="colon-dots" class="colon-dot w-2.5 h-2.5 rounded-full mb-3" style="width:8px; height:8px; border-radius:9999px; margin-bottom:12px; display:block;"></span>
-            <span class="colon-dot w-2.5 h-2.5 rounded-full" style="width:8px; height:8px; border-radius:9999px; display:block;"></span>
+          <div class="colon-container">
+            <span id="colon-dots" class="colon-dot" style="margin-bottom:12px;"></span>
+            <span class="colon-dot"></span>
           </div>
 
           <!-- Digit 2 -->
-          <svg id="digit-2" class="seven-seg-digit" width="56" height="80" viewBox="0 0 57 80" style="width:56px; height:80px; flex-shrink:0;">
+          <svg id="digit-2" class="seven-seg-digit" width="58" height="84" viewBox="0 0 57 80">
             <!-- a --> <polygon class="segment seg-a" points="10,6 47,6 42,12 15,12" />
             <!-- b --> <polygon class="segment seg-b" points="48,7 48,39 42,35 42,13" />
             <!-- c --> <polygon class="segment seg-c" points="48,42 48,73 42,67 42,45" />
@@ -142,7 +133,7 @@
           </svg>
 
           <!-- Digit 3 -->
-          <svg id="digit-3" class="seven-seg-digit" width="56" height="80" viewBox="0 0 57 80" style="width:56px; height:80px; flex-shrink:0;">
+          <svg id="digit-3" class="seven-seg-digit" width="58" height="84" viewBox="0 0 57 80">
             <!-- a --> <polygon class="segment seg-a" points="10,6 47,6 42,12 15,12" />
             <!-- b --> <polygon class="segment seg-b" points="48,7 48,39 42,35 42,13" />
             <!-- c --> <polygon class="segment seg-c" points="48,42 48,73 42,67 42,45" />
@@ -154,215 +145,206 @@
 
         </div>
 
-        <!-- ── 4 SMD Status LEDs (D1..D4) ── -->
-        <div class="flex items-center justify-around px-8 mb-6 py-3 rounded-xl border border-slate-700/30" style="background:rgba(5,15,10,0.7);">
-          <div class="flex flex-col items-center gap-1">
+        <!-- 4 SMD Status LEDs (D1..D4) -->
+        <div class="smd-led-dock">
+          <div class="led-slot">
             <div id="led-d1" class="smd-led"></div>
-            <span class="text-[10px] font-mono font-bold text-slate-400">D1</span>
+            <span class="led-label">D1 (Red)</span>
           </div>
-          <div class="flex flex-col items-center gap-1">
+          <div class="led-slot">
             <div id="led-d2" class="smd-led"></div>
-            <span class="text-[10px] font-mono font-bold text-slate-400">D2</span>
+            <span class="led-label">D2 (Yellow)</span>
           </div>
-          <div class="flex flex-col items-center gap-1">
+          <div class="led-slot">
             <div id="led-d3" class="smd-led"></div>
-            <span class="text-[10px] font-mono font-bold text-slate-400">D3</span>
+            <span class="led-label">D3 (Green)</span>
           </div>
-          <div class="flex flex-col items-center gap-1">
+          <div class="led-slot">
             <div id="led-d4" class="smd-led"></div>
-            <span class="text-[10px] font-mono font-bold text-slate-400">D4</span>
+            <span class="led-label">D4 (Blue)</span>
           </div>
         </div>
 
-        <!-- Silk-screen divider -->
-        <div class="pcb-silk-line mx-6 mb-4"></div>
-
-        <!-- ── 3 Tactile Buttons + Reset Button ── -->
-        <div class="flex items-center justify-around px-4 pt-2">
+        <!-- 3 Tactile Pushbuttons + Reset -->
+        <div class="tactile-buttons-dock">
 
           <!-- B1 Button -->
-          <div class="flex flex-col items-center">
-            <div class="relative flex items-center justify-center">
-              <div class="btn-pad"></div>
-              <button id="btn-b1" class="tactile-btn btn-b1" title="Left Button (B1 / S1)">
+          <div class="button-unit">
+            <div class="btn-bracket">
+              <div class="btn-solder-pad"></div>
+              <button id="btn-b1" class="tactile-btn btn-b1" title="Left Button (B1 / S1) • Key [1]">
                 <div class="cap"></div>
-                <svg class="hold-ring" width="66" height="66" viewBox="0 0 66 66">
-                  <circle cx="33" cy="33" r="30" stroke="#3b82f6" stroke-width="3" fill="none" stroke-dasharray="188" stroke-dashoffset="50" />
+                <svg class="hold-ring" width="68" height="68" viewBox="0 0 66 66">
+                  <circle cx="33" cy="33" r="30" stroke="#3b82f6" stroke-width="3.5" fill="none" stroke-dasharray="188" stroke-dashoffset="50" />
                 </svg>
               </button>
             </div>
-            <span class="text-xs font-mono font-bold text-slate-300 mt-2">B1 (S1)</span>
-            <span class="text-[10px] text-slate-500 font-mono">Key '1'</span>
+            <span class="btn-name">B1 (S1)</span>
+            <span class="btn-key-badge">Key '1'</span>
           </div>
 
           <!-- B2 Button -->
-          <div class="flex flex-col items-center">
-            <div class="relative flex items-center justify-center">
-              <div class="btn-pad"></div>
-              <button id="btn-b2" class="tactile-btn btn-b2" title="Middle Button (B2 / S2)">
+          <div class="button-unit">
+            <div class="btn-bracket">
+              <div class="btn-solder-pad"></div>
+              <button id="btn-b2" class="tactile-btn btn-b2" title="Middle Button (B2 / S2) • Key [Space]">
                 <div class="cap"></div>
-                <svg class="hold-ring" width="66" height="66" viewBox="0 0 66 66">
-                  <circle cx="33" cy="33" r="30" stroke="#22c55e" stroke-width="3" fill="none" stroke-dasharray="188" stroke-dashoffset="50" />
+                <svg class="hold-ring" width="68" height="68" viewBox="0 0 66 66">
+                  <circle cx="33" cy="33" r="30" stroke="#22c55e" stroke-width="3.5" fill="none" stroke-dasharray="188" stroke-dashoffset="50" />
                 </svg>
               </button>
             </div>
-            <span class="text-xs font-mono font-bold text-slate-300 mt-2">B2 (S2)</span>
-            <span class="text-[10px] text-slate-500 font-mono">Space / '2'</span>
+            <span class="btn-name">B2 (S2)</span>
+            <span class="btn-key-badge">Space / '2'</span>
           </div>
 
           <!-- B3 Button -->
-          <div class="flex flex-col items-center">
-            <div class="relative flex items-center justify-center">
-              <div class="btn-pad"></div>
-              <button id="btn-b3" class="tactile-btn btn-b3" title="Right Button (B3 / S3)">
+          <div class="button-unit">
+            <div class="btn-bracket">
+              <div class="btn-solder-pad"></div>
+              <button id="btn-b3" class="tactile-btn btn-b3" title="Right Button (B3 / S3) • Key [3]">
                 <div class="cap"></div>
-                <svg class="hold-ring" width="66" height="66" viewBox="0 0 66 66">
-                  <circle cx="33" cy="33" r="30" stroke="#ef4444" stroke-width="3" fill="none" stroke-dasharray="188" stroke-dashoffset="50" />
+                <svg class="hold-ring" width="68" height="68" viewBox="0 0 66 66">
+                  <circle cx="33" cy="33" r="30" stroke="#ef4444" stroke-width="3.5" fill="none" stroke-dasharray="188" stroke-dashoffset="50" />
                 </svg>
               </button>
             </div>
-            <span class="text-xs font-mono font-bold text-slate-300 mt-2">B3 (S3)</span>
-            <span class="text-[10px] text-slate-500 font-mono">Key '3'</span>
+            <span class="btn-name">B3 (S3)</span>
+            <span class="btn-key-badge">Key '3'</span>
           </div>
 
-          <!-- RST Button -->
-          <div class="flex flex-col items-center">
-            <div class="relative flex items-center justify-center">
-              <div class="btn-pad"></div>
-              <button id="btn-rst" class="tactile-btn btn-rst" title="Reset Button">
+          <!-- Reset Button -->
+          <div class="button-unit">
+            <div class="btn-bracket">
+              <div class="btn-solder-pad"></div>
+              <button id="btn-rst" class="tactile-btn btn-rst" title="Reset Button • Key [R]">
                 <div class="cap"></div>
               </button>
             </div>
-            <span class="text-xs font-mono font-bold text-slate-400 mt-2">RESET</span>
-            <span class="text-[10px] text-slate-500 font-mono">Key 'R'</span>
+            <span class="btn-name" style="color:#94a3b8;">RESET</span>
+            <span class="btn-key-badge">Key 'R'</span>
           </div>
 
         </div>
 
-        <p class="text-[11px] text-center mt-5 font-mono" style="color:rgba(226,245,232,0.3);">
+        <p class="press-hint">
           * Click for Short Press • Click &amp; Hold (750ms) for Long Press
         </p>
 
       </div><!-- /pcb-board -->
 
-      <!-- ── Current Mode Guide Card ── -->
-      <div class="bg-slate-800/80 border border-slate-700 rounded-2xl p-5 mt-6 w-full max-w-lg shadow-md backdrop-blur-sm">
-        <div class="flex items-center justify-between mb-2">
-          <h2 id="current-mode-title" class="text-sm font-bold text-amber-400 flex items-center gap-2 active-mode-title-glow">
-            Mode 1: Clock
-          </h2>
-          <span class="text-[11px] bg-slate-700/80 text-slate-300 px-2.5 py-0.5 rounded font-mono flex items-center">
-            <span class="active-badge-dot"></span>Active Mode
-          </span>
+      <!-- Interactive Mode HUD Card (Underneath Board) -->
+      <div class="mode-hud-card">
+        <div class="mode-hud-header">
+          <h2 id="current-mode-title">Mode 1: Clock</h2>
+          <span class="active-mode-badge">Active Mode</span>
         </div>
-        <p id="current-mode-desc" class="text-xs text-slate-300 mb-4">Digital Clock &amp; Alarm (12H / 24H)</p>
+        <p id="current-mode-desc">Digital Clock &amp; Alarm (12H / 24H)</p>
 
         <!-- Current Button Actions -->
-        <div class="grid grid-cols-3 gap-2 text-[11px]">
-          <div class="hint-b1-card p-2.5 rounded-lg border">
-            <span class="text-blue-400 font-bold block mb-0.5 font-mono">B1 Action:</span>
-            <span id="hint-b1" class="text-slate-300">Next Mode</span>
+        <div class="hud-actions-grid">
+          <div class="hud-action-box b1">
+            <span class="hud-box-label b1">B1 Action:</span>
+            <span id="hint-b1" class="hud-box-val">Next Mode</span>
           </div>
-          <div class="hint-b2-card p-2.5 rounded-lg border">
-            <span class="text-emerald-400 font-bold block mb-0.5 font-mono">B2 Action:</span>
-            <span id="hint-b2" class="text-slate-300">Toggle 12/24H</span>
+          <div class="hud-action-box b2">
+            <span class="hud-box-label b2">B2 Action:</span>
+            <span id="hint-b2" class="hud-box-val">Toggle 12/24H</span>
           </div>
-          <div class="hint-b3-card p-2.5 rounded-lg border">
-            <span class="text-rose-400 font-bold block mb-0.5 font-mono">B3 Action:</span>
-            <span id="hint-b3" class="text-slate-300">Hold: Home</span>
+          <div class="hud-action-box b3">
+            <span class="hud-box-label b3">B3 Action:</span>
+            <span id="hint-b3" class="hud-box-val">Hold: Home</span>
           </div>
         </div>
       </div>
 
-    </div><!-- /left column -->
+    </div><!-- /hardware-column -->
 
-    <!-- ─── Right: Kids Games & Mode Switcher ─── -->
-    <div class="lg:col-span-5 space-y-6">
+    <!-- ─── Right Column: Arcade & Library ─── -->
+    <div class="controls-column">
 
-      <!-- Kids Learning & Games Showcase Card -->
-      <div class="kids-section-wrapper">
-        <div class="bg-gradient-to-br from-indigo-950/60 via-purple-950/40 to-slate-900 rounded-[14px] p-5 shadow-xl">
-          <h3 class="text-sm font-bold text-white flex items-center gap-2 mb-1">
-            <span class="text-xl">🎮</span>
-            <span>Kids Learning &amp; Games</span>
-            <span class="ml-auto text-lg">✨</span>
-          </h3>
-          <p class="text-xs text-indigo-200/70 mb-4">Click any game to launch directly in the shield simulator:</p>
+      <!-- 🎮 Kids Learning & Games Arcade Station -->
+      <section class="arcade-section">
+        <div class="arcade-header">
+          <span style="font-size:22px;">🎮</span>
+          <h3 class="arcade-title">Kids Learning &amp; Games Arcade</h3>
+        </div>
+        <p class="arcade-subtitle">Instant-launch built-in hardware games on the simulator:</p>
 
-          <div class="grid grid-cols-2 gap-3">
+        <div class="arcade-cards-grid">
 
-            <!-- Game 1: Simon Says -->
-            <button onclick="window.shieldApp.setMode(23)"
-              class="game-card-simon p-4 rounded-xl text-left group">
-              <div class="text-3xl mb-2">🧠</div>
-              <div class="font-bold text-sm text-white group-hover:text-purple-200 transition-colors">Simon Says</div>
-              <p class="text-[11px] text-purple-200/70 leading-snug mt-0.5">Repeat the musical tones and LED sequence</p>
-            </button>
-
-            <!-- Game 2: Reaction Timer -->
-            <button onclick="window.shieldApp.setMode(21)"
-              class="game-card-reaction p-4 rounded-xl text-left group">
-              <div class="text-3xl mb-2">⚡</div>
-              <div class="font-bold text-sm text-white group-hover:text-orange-200 transition-colors">Reaction Reflex</div>
-              <p class="text-[11px] text-orange-200/70 leading-snug mt-0.5">Test how fast you can hit B2 on GO (in ms)</p>
-            </button>
-
-            <!-- Game 3: Chess Clock -->
-            <button onclick="window.shieldApp.setMode(24)"
-              class="game-card-chess p-4 rounded-xl text-left group">
-              <div class="text-3xl mb-2">♟️</div>
-              <div class="font-bold text-sm text-white group-hover:text-indigo-200 transition-colors">Chess Clock</div>
-              <p class="text-[11px] text-indigo-200/70 leading-snug mt-0.5">2-Player chess clock with delays &amp; increments</p>
-            </button>
-
-            <!-- Tool 4: Stopwatch & Laps -->
-            <button onclick="window.shieldApp.setMode(19)"
-              class="game-card-stopwatch p-4 rounded-xl text-left group">
-              <div class="text-3xl mb-2">⏱️</div>
-              <div class="font-bold text-sm text-white group-hover:text-teal-200 transition-colors">Stopwatch</div>
-              <p class="text-[11px] text-teal-200/70 leading-snug mt-0.5">Record lap times with Best &amp; Average stats</p>
-            </button>
-
+          <!-- Simon Says -->
+          <div onclick="window.shieldApp.setMode(23)" class="game-card card-simon">
+            <div>
+              <div class="game-card-icon">🧠</div>
+              <h4 class="game-card-title">Simon Says</h4>
+              <p class="game-card-desc">Repeat musical tone &amp; LED flash sequences with increasing difficulty</p>
+            </div>
+            <span class="game-play-tag">Mode 23 • Play →</span>
           </div>
-        </div>
-      </div><!-- /kids-section-wrapper -->
 
-      <!-- Complete 24-Mode Selector -->
-      <div class="bg-slate-800/60 border border-slate-700/60 rounded-2xl p-5 shadow-sm">
-        <!-- Category label -->
-        <div class="flex items-center gap-2 mb-3">
-          <div class="h-px flex-1 bg-slate-700/50"></div>
-          <h3 class="text-xs font-bold text-slate-400 uppercase tracking-wider whitespace-nowrap">
-            All 24 Firmware Operating Modes
-          </h3>
-          <div class="h-px flex-1 bg-slate-700/50"></div>
+          <!-- Reaction Timer -->
+          <div onclick="window.shieldApp.setMode(21)" class="game-card card-reaction">
+            <div>
+              <div class="game-card-icon">⚡</div>
+              <h4 class="game-card-title">Reaction Reflex</h4>
+              <p class="game-card-desc">Measure response time in ms from the instant GO is signaled</p>
+            </div>
+            <span class="game-play-tag">Mode 21 • Play →</span>
+          </div>
+
+          <!-- Chess Clock -->
+          <div onclick="window.shieldApp.setMode(24)" class="game-card card-chess">
+            <div>
+              <div class="game-card-icon">♟️</div>
+              <h4 class="game-card-title">Chess Clock</h4>
+              <p class="game-card-desc">2-Player competitive timer with delay &amp; increment presets</p>
+            </div>
+            <span class="game-play-tag">Mode 24 • Play →</span>
+          </div>
+
+          <!-- Stopwatch -->
+          <div onclick="window.shieldApp.setMode(19)" class="game-card card-stopwatch">
+            <div>
+              <div class="game-card-icon">⏱️</div>
+              <h4 class="game-card-title">Precision Stopwatch</h4>
+              <p class="game-card-desc">Lap timing system with automatic Best &amp; Average lap tracking</p>
+            </div>
+            <span class="game-play-tag">Mode 19 • Play →</span>
+          </div>
+
         </div>
-        <div id="mode-selector" class="grid grid-cols-2 gap-1.5 max-h-72 overflow-y-auto pr-1">
-          <!-- Dynamically populated -->
+      </section>
+
+      <!-- 📋 24-Mode Library -->
+      <section class="modes-library-card">
+        <h3 class="modes-library-title">
+          <i data-lucide="list" style="width:14px; height:14px;"></i>
+          <span>All 24 Firmware Operating Modes</span>
+        </h3>
+        <div id="mode-selector">
+          <!-- Dynamically populated by shield_simulator.js -->
         </div>
+      </section>
+
+      <!-- 3D Print Enclosure Spec -->
+      <div class="case-note-card">
+        <div class="case-note-title">
+          <i data-lucide="box" style="width:15px; height:15px; color:#f59e0b;"></i>
+          <span>Parametric 3D Enclosure:</span>
+        </div>
+        <p>This firmware runs on real physical hardware inside a custom 3D-printed snap-fit enclosure with living-hinge buttons, optimized for the <strong>Bambu Lab A1 Mini</strong> 3D printer.</p>
       </div>
 
-      <!-- 3D Print Enclosure Note -->
-      <div class="bg-slate-800/40 border border-slate-700/40 rounded-xl p-4 text-xs text-slate-400 space-y-1.5">
-        <p class="font-semibold text-slate-200 flex items-center gap-1.5">
-          <i data-lucide="box" class="w-4 h-4 text-amber-400"></i>
-          Parametric 3D Enclosure:
-        </p>
-        <p>This firmware runs on physical hardware inside the custom 3D-printed snap-fit enclosure with living-hinge buttons, optimized for the <strong>Bambu Lab A1 Mini</strong>.</p>
-      </div>
-
-    </div><!-- /right column -->
+    </div><!-- /controls-column -->
 
   </main>
 
-  <!-- ═══════════════════════════════════════════════════════════
-       Footer
-  ════════════════════════════════════════════════════════════ -->
-  <footer class="footer-pcb bg-slate-950 border-t border-slate-800 px-6 py-4 text-center text-xs text-slate-500">
-    <span class="mr-1">🔌</span>
+  <!-- Footer -->
+  <footer class="app-footer">
     Shivansh Timer v9.0 Simulator • Open-Source Hardware &amp; Firmware by
-    <a href="https://github.com/tumesh007" target="_blank" class="text-slate-400 hover:text-white underline transition-colors">Tumesh007</a>
-    &nbsp;•&nbsp; Built with ❤️ &amp; <span title="Arduino">⚡</span>
+    <a href="https://github.com/tumesh007" target="_blank">Tumesh007</a>
+    • Built with Arduino Uno + HW-262 Shield
   </footer>
 
   <!-- Application Script -->

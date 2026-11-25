@@ -1,213 +1,347 @@
-/* Shivansh Timer v9.0 — Arduino Multi-Function Shield Simulator Styles */
+/* ==========================================================================
+   Shivansh Timer v9.0 — Arduino Uno + HW-262 Shield Hardware Simulator
+   Realistic Workbench Theme (100% Self-Contained CSS, Zero CDN Dependency)
+   ========================================================================== */
 
 :root {
-  --pcb-green: #0a5c3c;
-  --pcb-dark: #072a1c;
-  --pcb-silk: #e2f5e8;
-  --led-off: #2a0f0f;
-  --led-on: #ff1e1e;
-  --led-glow: rgba(255, 30, 30, 0.75);
-  /* Per-LED on colors */
-  --led-on-d1: #ff1e1e;
-  --led-on-d2: #facc15;
-  --led-on-d3: #22c55e;
-  --led-on-d4: #3b82f6;
-  /* Segment colors */
-  --seg-off: #2a0808;
-  --seg-on: #ff3b1a;
-  --seg-glow: rgba(255, 59, 26, 0.85);
+  --workbench-bg: #0b0f19;
+  --panel-bg: #111827;
+  --panel-border: #1f2937;
+  --text-main: #f9fafb;
+  --text-muted: #9ca3af;
+  --pcb-blue: #0b1e33;
+  --pcb-border: #06111d;
+  --seg-off: #200606;
+  --seg-on: #ff2222;
+  --seg-glow: rgba(255, 34, 34, 0.85);
+}
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
 }
 
 body {
   font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+  background-color: var(--workbench-bg);
+  background-image:
+    radial-gradient(ellipse at 35% 20%, rgba(30, 58, 138, 0.15) 0%, transparent 60%),
+    radial-gradient(ellipse at 80% 80%, rgba(88, 28, 135, 0.1) 0%, transparent 60%);
+  color: var(--text-main);
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
   user-select: none;
 }
 
-/* ─── Keyframe Animations ─────────────────────────────────────── */
-@keyframes pulse-green {
-  0%, 100% { opacity: 1; box-shadow: 0 0 0 0 rgba(34,197,94,0.6); }
-  50%       { opacity: 0.7; box-shadow: 0 0 0 5px rgba(34,197,94,0); }
-}
+/* ── Custom Scrollbars ───────────────────────────────────────── */
+::-webkit-scrollbar { width: 6px; height: 6px; }
+::-webkit-scrollbar-track { background: #0f172a; }
+::-webkit-scrollbar-thumb { background: #334155; border-radius: 4px; }
+::-webkit-scrollbar-thumb:hover { background: #475569; }
 
-@keyframes amber-glow {
-  0%, 100% { box-shadow: 0 0 10px 2px rgba(251,191,36,0.6), 0 0 25px 4px rgba(251,191,36,0.3); }
-  50%       { box-shadow: 0 0 18px 5px rgba(251,191,36,0.9), 0 0 40px 10px rgba(251,191,36,0.4); }
-}
-
-@keyframes seg-flicker {
-  0%, 90%, 100% { opacity: 1; }
-  92%           { opacity: 0.88; }
-  96%           { opacity: 0.95; }
-}
-
-@keyframes dot-pulse {
-  0%, 100% { opacity: 1; transform: scale(1); }
-  50%       { opacity: 0.4; transform: scale(0.8); }
-}
-
-@keyframes running-pulse {
-  0%, 100% { box-shadow: 0 0 0 0 rgba(34,197,94,0.5); }
-  50%       { box-shadow: 0 0 0 4px rgba(34,197,94,0); }
-}
-
-@keyframes sparkle-border {
-  0%   { border-color: rgba(167,139,250,0.5); }
-  33%  { border-color: rgba(251,191,36,0.7); }
-  66%  { border-color: rgba(99,102,241,0.6); }
-  100% { border-color: rgba(167,139,250,0.5); }
-}
-
-@keyframes card-shine {
-  0%   { background-position: -200% center; }
-  100% { background-position: 200% center; }
-}
-
-/* ─── Header Logo Glow ────────────────────────────────────────── */
-.logo-pill {
-  animation: amber-glow 2.5s ease-in-out infinite;
-}
-
-/* Running status badge */
-.running-badge {
-  display: inline-flex;
+/* ── Top Header ──────────────────────────────────────────────── */
+header.app-header {
+  background: rgba(10, 15, 29, 0.88);
+  backdrop-filter: blur(12px);
+  border-bottom: 1px solid #1e293b;
+  padding: 12px 28px;
+  display: flex;
   align-items: center;
-  gap: 5px;
-  font-size: 10px;
-  font-weight: 700;
-  letter-spacing: 0.08em;
-  background: rgba(21,128,61,0.25);
-  color: #4ade80;
-  border: 1px solid rgba(74,222,128,0.4);
-  padding: 2px 8px;
-  border-radius: 9999px;
+  justify-content: space-between;
+  flex-shrink: 0;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.4);
+  z-index: 20;
 }
-.running-badge .dot {
-  width: 7px;
-  height: 7px;
-  border-radius: 9999px;
-  background: #22c55e;
-  animation: running-pulse 1.4s ease-in-out infinite;
+
+.header-brand {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+}
+
+.header-logo-badge {
+  width: 42px;
+  height: 42px;
+  background: linear-gradient(135deg, #f59e0b 0%, #d97706 100%);
+  color: #0b0f19;
+  border-radius: 12px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 20px;
+  font-weight: 900;
+  box-shadow: 0 0 16px rgba(245, 158, 11, 0.4);
   flex-shrink: 0;
 }
 
-/* ─── PCB Board ───────────────────────────────────────────────── */
+.header-text-wrap {
+  display: flex;
+  flex-direction: column;
+}
+
+.header-title-row {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.header-title {
+  font-size: 17px;
+  font-weight: 800;
+  color: #ffffff;
+  letter-spacing: -0.01em;
+}
+
+.running-pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  background: rgba(34, 197, 94, 0.15);
+  color: #4ade80;
+  border: 1px solid rgba(74, 222, 128, 0.4);
+  padding: 2px 8px;
+  border-radius: 9999px;
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 0.05em;
+}
+
+.running-dot {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: #22c55e;
+  box-shadow: 0 0 8px #22c55e;
+  animation: pulse-dot 1.6s infinite ease-in-out;
+}
+@keyframes pulse-dot {
+  0%, 100% { opacity: 1; transform: scale(1); }
+  50% { opacity: 0.4; transform: scale(0.85); }
+}
+
+.hardware-pill {
+  background: rgba(245, 158, 11, 0.15);
+  color: #fbbf24;
+  border: 1px solid rgba(245, 158, 11, 0.3);
+  padding: 2px 8px;
+  border-radius: 9999px;
+  font-size: 11px;
+  font-weight: 600;
+}
+
+.header-subtitle {
+  font-size: 12px;
+  color: #94a3b8;
+  margin-top: 2px;
+}
+
+.header-actions {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.btn-audio {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  background: #1e293b;
+  color: #e2e8f0;
+  border: 1px solid #334155;
+  padding: 7px 14px;
+  border-radius: 8px;
+  font-size: 12px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.15s ease;
+}
+.btn-audio:hover {
+  background: #334155;
+  border-color: #475569;
+}
+
+.btn-github {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  background: #2563eb;
+  color: #ffffff;
+  border: 1px solid #2563eb;
+  padding: 7px 14px;
+  border-radius: 8px;
+  font-size: 12px;
+  font-weight: 600;
+  text-decoration: none;
+  cursor: pointer;
+  box-shadow: 0 2px 6px rgba(37, 99, 235, 0.3);
+  transition: all 0.15s ease;
+}
+.btn-github:hover {
+  background: #1d4ed8;
+  box-shadow: 0 4px 10px rgba(37, 99, 235, 0.4);
+}
+
+/* ── Main Layout Grid ────────────────────────────────────────── */
+main.simulator-layout {
+  flex: 1;
+  max-width: 1320px;
+  width: 100%;
+  margin: 0 auto;
+  padding: 28px 24px;
+  display: grid;
+  grid-template-columns: 560px 1fr;
+  gap: 32px;
+  align-items: start;
+}
+
+@media (max-width: 1024px) {
+  main.simulator-layout {
+    grid-template-columns: 1fr;
+    max-width: 600px;
+  }
+}
+
+/* ── Hardware Device Column ──────────────────────────────────── */
+.hardware-column {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+/* ── The Physical PCB Board Frame ────────────────────────────── */
 .pcb-board {
-  background-color: #0a5c3c;
+  width: 100%;
+  max-width: 530px;
+  background-color: var(--pcb-blue);
   background-image:
-    /* FR4 glass-fiber weave texture */
+    /* Diagonal circuit trace accent lines */
+    repeating-linear-gradient(
+      135deg,
+      rgba(212, 175, 55, 0.04) 0px, rgba(212, 175, 55, 0.04) 1px,
+      transparent 1px, transparent 40px
+    ),
+    /* FR4 woven glass-fiber texture */
     repeating-linear-gradient(
       0deg,
-      rgba(255,255,255,0.025) 0px, rgba(255,255,255,0.025) 1px,
-      transparent 1px, transparent 18px
+      rgba(255, 255, 255, 0.018) 0px, rgba(255, 255, 255, 0.018) 1px,
+      transparent 1px, transparent 16px
     ),
     repeating-linear-gradient(
       90deg,
-      rgba(255,255,255,0.025) 0px, rgba(255,255,255,0.025) 1px,
-      transparent 1px, transparent 18px
+      rgba(255, 255, 255, 0.018) 0px, rgba(255, 255, 255, 0.018) 1px,
+      transparent 1px, transparent 16px
     ),
-    /* PCB trace lines (diagonal accent) */
-    repeating-linear-gradient(
-      135deg,
-      rgba(255,215,0,0.04) 0px, rgba(255,215,0,0.04) 1px,
-      transparent 1px, transparent 40px
-    ),
-    /* Radial vignette for depth */
-    radial-gradient(ellipse at 50% 20%, rgba(16,100,70,0.6) 0%, rgba(7,42,28,0.95) 100%);
-  border: 4px solid #094d33;
+    /* Radial board vignette */
+    radial-gradient(ellipse at 50% 15%, rgba(18, 52, 86, 0.7) 0%, rgba(7, 18, 30, 0.98) 100%);
+  border: 4px solid var(--pcb-border);
+  border-radius: 24px;
+  padding: 24px 28px;
   box-shadow:
-    0 30px 60px -12px rgba(0,0,0,0.6),
-    0 0 0 1px rgba(255,255,255,0.05),
-    inset 0 2px 6px rgba(255,255,255,0.08),
-    inset 0 -2px 6px rgba(0,0,0,0.4);
+    0 25px 60px -10px rgba(0, 0, 0, 0.8),
+    0 0 0 1px rgba(255, 255, 255, 0.08),
+    inset 0 2px 6px rgba(255, 255, 255, 0.12),
+    inset 0 -2px 6px rgba(0, 0, 0, 0.6);
   position: relative;
 }
 
-/* GPIO header strip at top of PCB */
-.gpio-header {
+/* Four Gold Screw Holes */
+.mount-hole {
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  background: radial-gradient(circle, #08101a 42%, #b48c26 44%, #eab308 58%, #856314 62%);
+  box-shadow: inset 0 2px 4px rgba(0,0,0,0.9), 0 0 0 2px rgba(234, 179, 8, 0.25);
+  position: absolute;
+}
+.mount-hole.tl { top: 14px; left: 14px; }
+.mount-hole.tr { top: 14px; right: 14px; }
+.mount-hole.bl { bottom: 14px; left: 14px; }
+.mount-hole.br { bottom: 14px; right: 14px; }
+
+/* Arduino Header Strip (Top Gold Header Pins) */
+.header-pins-row {
   display: flex;
   justify-content: center;
   gap: 3px;
-  margin-bottom: 10px;
-  padding: 4px 0;
+  margin-bottom: 12px;
+  padding: 2px 0;
 }
-.gpio-pin {
-  width: 6px;
-  height: 10px;
-  background: linear-gradient(to bottom, #d4af37, #a07c20);
+.pin-socket {
+  width: 7px;
+  height: 11px;
+  background: linear-gradient(to bottom, #d4af37, #997316);
   border-radius: 1px;
-  box-shadow: 0 1px 2px rgba(0,0,0,0.5), inset 0 1px 0 rgba(255,255,255,0.3);
+  box-shadow: 0 1px 2px rgba(0,0,0,0.6);
 }
 
-/* Mount Holes — gold ring + dark center */
-.mount-hole {
-  width: 18px;
-  height: 18px;
-  border-radius: 9999px;
-  background: radial-gradient(circle, #0f172a 40%, #a07c20 42%, #d4af37 55%, #a07c20 60%);
-  box-shadow:
-    inset 0 2px 4px rgba(0,0,0,0.9),
-    0 0 0 2px rgba(212,175,55,0.3),
-    0 2px 4px rgba(0,0,0,0.5);
+/* Silkscreen Board Branding */
+.board-silkscreen {
+  text-align: center;
+  margin-bottom: 18px;
 }
-
-/* PCB silk-screen accent lines */
-.pcb-silk-line {
+.board-silk-title {
+  font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+  font-size: 10px;
+  font-weight: 800;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: rgba(226, 245, 232, 0.65);
+}
+.board-silk-divider {
+  width: 220px;
   height: 1px;
-  background: linear-gradient(to right, transparent, rgba(226,245,232,0.4), transparent);
+  background: linear-gradient(to right, transparent, rgba(226, 245, 232, 0.4), transparent);
+  margin: 4px auto;
+}
+.board-pin-labels {
+  display: flex;
+  justify-content: space-between;
+  padding: 0 24px;
+  font-family: monospace;
+  font-size: 8px;
+  color: rgba(226, 245, 232, 0.35);
 }
 
-/* ─── 7-Segment Bezel & Enforced Display Dimensions ───────────── */
+/* ── 7-Segment Display Module Bezel ──────────────────────────── */
 .seven-seg-bezel {
   display: flex !important;
   flex-direction: row !important;
   align-items: center !important;
   justify-content: center !important;
-  gap: 8px !important;
-  max-width: 320px !important;
+  gap: 10px !important;
+  max-width: 340px !important;
   width: 100% !important;
-  margin: 0 auto 1.5rem auto !important;
-  padding: 1rem !important;
+  margin: 0 auto 20px auto !important;
+  padding: 16px 14px !important;
   box-sizing: border-box !important;
-  background: #05050a;
-  border: 3px solid #18181b;
-  border-radius: 1rem;
+  background: #040406;
+  border: 3px solid #1a1a24;
+  border-radius: 16px;
   box-shadow:
-    inset 0 6px 16px rgba(0,0,0,0.95),
-    inset 0 0 0 1px rgba(255,255,255,0.03),
-    0 4px 12px rgba(0,0,0,0.5),
-    /* ambient red glow when display is active */
-    0 0 30px 2px rgba(200,30,10,0.12);
-  /* Smoked glass tint */
-  backdrop-filter: blur(1px);
+    inset 0 8px 20px rgba(0, 0, 0, 0.98),
+    inset 0 0 0 1px rgba(255, 255, 255, 0.04),
+    0 6px 16px rgba(0, 0, 0, 0.6),
+    0 0 35px rgba(255, 34, 34, 0.12);
+  position: relative;
 }
 
-/* 7-Segment SVG Digits — Strictly Enforced Fixed Dimensions */
+/* Individual 7-Segment Digits */
 .seven-seg-bezel svg,
 .seven-seg-digit,
-#digit-0,
-#digit-1,
-#digit-2,
-#digit-3 {
-  width: 56px !important;
-  height: 80px !important;
-  max-width: 56px !important;
-  max-height: 80px !important;
-  min-width: 44px !important;
+#digit-0, #digit-1, #digit-2, #digit-3 {
+  width: 58px !important;
+  height: 84px !important;
+  max-width: 58px !important;
+  max-height: 84px !important;
+  min-width: 48px !important;
   flex-shrink: 0 !important;
   display: block !important;
 }
 
-/* Colon container & dots */
-.colon-container {
-  display: flex !important;
-  flex-direction: column !important;
-  justify-content: space-around !important;
-  height: 52px !important;
-  padding: 6px 2px !important;
-  flex-shrink: 0 !important;
-}
-
-/* 7-Segment SVG Segment Styles */
+/* 7-Segment Polygon Geometry & Glow */
 .segment {
   fill: var(--seg-off);
   transition: fill 0.04s ease, filter 0.04s ease;
@@ -215,14 +349,23 @@ body {
 
 .segment.active {
   fill: var(--seg-on);
-  filter: drop-shadow(0 0 5px var(--seg-glow)) drop-shadow(0 0 10px rgba(255,100,30,0.5));
-  animation: seg-flicker 8s ease-in-out infinite;
+  filter: drop-shadow(0 0 6px var(--seg-glow)) drop-shadow(0 0 12px rgba(255, 40, 40, 0.5));
+}
+
+/* Blinking Colon */
+.colon-container {
+  display: flex !important;
+  flex-direction: column !important;
+  justify-content: space-around !important;
+  height: 54px !important;
+  padding: 4px 2px !important;
+  flex-shrink: 0 !important;
 }
 
 .colon-dot {
   width: 8px !important;
   height: 8px !important;
-  border-radius: 9999px !important;
+  border-radius: 50% !important;
   background-color: var(--seg-off);
   display: block !important;
   flex-shrink: 0 !important;
@@ -231,142 +374,144 @@ body {
 
 .colon-dot.active {
   background-color: var(--seg-on) !important;
-  box-shadow: 0 0 8px 3px rgba(255, 59, 26, 0.75) !important;
+  box-shadow: 0 0 8px 3px rgba(255, 34, 34, 0.8) !important;
 }
 
-/* ─── SMD Status LEDs ─────────────────────────────────────────── */
-.smd-led {
-  width: 14px;
-  height: 9px;
-  background: radial-gradient(circle at 40% 35%, #3a1515, #1a0808);
-  border-radius: 3px;
-  border: 1px solid #1c1917;
-  transition: background-color 0.1s ease, box-shadow 0.1s ease;
-  position: relative;
-  overflow: hidden;
+/* ── SMD Status LEDs Row (D1..D4) ────────────────────────────── */
+.smd-led-dock {
+  background: rgba(3, 8, 16, 0.7);
+  border: 1px solid rgba(255, 255, 255, 0.06);
+  border-radius: 12px;
+  padding: 10px 24px;
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+  margin-bottom: 20px;
 }
 
-/* Inactive LED base colors */
-#led-d1 { background: radial-gradient(circle at 40% 35%, #3a1515, #1a0808); }
-#led-d2 { background: radial-gradient(circle at 40% 35%, #2d2500, #1a1500); }
-#led-d3 { background: radial-gradient(circle at 40% 35%, #0d2a15, #061409); }
-#led-d4 { background: radial-gradient(circle at 40% 35%, #0a1f3a, #060f1f); }
-
-/* Per-LED active states with individual glow colors */
-#led-d1.active {
-  background: radial-gradient(circle at 35% 30%, #ff6b6b, #ff1e1e 60%, #cc0000);
-  box-shadow: 0 0 10px 3px rgba(255,30,30,0.8), 0 0 20px 6px rgba(255,30,30,0.3);
-}
-#led-d2.active {
-  background: radial-gradient(circle at 35% 30%, #fff176, #facc15 60%, #ca8a04);
-  box-shadow: 0 0 10px 3px rgba(250,204,21,0.8), 0 0 20px 6px rgba(250,204,21,0.3);
-}
-#led-d3.active {
-  background: radial-gradient(circle at 35% 30%, #86efac, #22c55e 60%, #15803d);
-  box-shadow: 0 0 10px 3px rgba(34,197,94,0.8), 0 0 20px 6px rgba(34,197,94,0.3);
-}
-#led-d4.active {
-  background: radial-gradient(circle at 35% 30%, #93c5fd, #3b82f6 60%, #1d4ed8);
-  box-shadow: 0 0 10px 3px rgba(59,130,246,0.8), 0 0 20px 6px rgba(59,130,246,0.3);
-}
-
-/* Bright center highlight on LED */
-.smd-led::after {
-  content: '';
-  position: absolute;
-  top: 1px;
-  left: 2px;
-  width: 5px;
-  height: 3px;
-  border-radius: 50%;
-  background: rgba(255,255,255,0.15);
-  pointer-events: none;
-}
-
-.smd-led.active::after {
-  background: rgba(255,255,255,0.55);
-}
-
-/* ─── Tactile Buttons ─────────────────────────────────────────── */
-/* PCB pad beneath each button */
-.btn-pad {
-  width: 68px;
-  height: 68px;
-  border-radius: 50%;
-  background: radial-gradient(circle, rgba(212,175,55,0.15) 0%, rgba(212,175,55,0.05) 50%, transparent 70%);
-  border: 1px solid rgba(212,175,55,0.2);
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  pointer-events: none;
-  z-index: 0;
-}
-
-.tactile-btn {
-  width: 60px;
-  height: 60px;
-  background: radial-gradient(circle at 35% 30%, #64748b, #334155 50%, #1e293b);
-  border: 3px solid #475569;
-  border-top-color: #94a3b8;
-  border-left-color: #7c8fa3;
-  border-radius: 10px;
-  box-shadow:
-    0 7px 0 #0f172a,
-    0 12px 20px -4px rgba(0,0,0,0.5),
-    inset 0 1px 0 rgba(255,255,255,0.15);
-  transition: transform 0.07s ease, box-shadow 0.07s ease;
-  position: relative;
+.led-slot {
   display: flex;
   flex-direction: column;
   align-items: center;
+  gap: 4px;
+}
+
+.smd-led {
+  width: 14px;
+  height: 9px;
+  border-radius: 3px;
+  border: 1px solid #1c1917;
+  transition: all 0.1s ease;
+}
+
+.led-label {
+  font-family: ui-monospace, monospace;
+  font-size: 10px;
+  font-weight: 700;
+  color: #64748b;
+}
+
+/* Inactive LEDs */
+#led-d1 { background: #330b0b; }
+#led-d2 { background: #261f00; }
+#led-d3 { background: #072412; }
+#led-d4 { background: #06182c; }
+
+/* Active LEDs with Multi-Color Realistic Bloom */
+#led-d1.active {
+  background: #ff2222;
+  box-shadow: 0 0 12px 3px rgba(255, 34, 34, 0.9), 0 0 24px 6px rgba(255, 34, 34, 0.4);
+}
+#led-d2.active {
+  background: #facc15;
+  box-shadow: 0 0 12px 3px rgba(250, 204, 21, 0.9), 0 0 24px 6px rgba(250, 204, 21, 0.4);
+}
+#led-d3.active {
+  background: #22c55e;
+  box-shadow: 0 0 12px 3px rgba(34, 197, 94, 0.9), 0 0 24px 6px rgba(34, 197, 94, 0.4);
+}
+#led-d4.active {
+  background: #38bdf8;
+  box-shadow: 0 0 12px 3px rgba(56, 189, 248, 0.9), 0 0 24px 6px rgba(56, 189, 248, 0.4);
+}
+
+/* ── 3 Tactile Buttons + Reset Button ────────────────────────── */
+.tactile-buttons-dock {
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+  padding: 6px 12px 10px 12px;
+}
+
+.button-unit {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.btn-bracket {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* Circular solder pad underneath button */
+.btn-solder-pad {
+  position: absolute;
+  width: 66px;
+  height: 66px;
+  border-radius: 50%;
+  border: 1px dashed rgba(212, 175, 55, 0.3);
+  pointer-events: none;
+}
+
+/* Metal Button Body */
+.tactile-btn {
+  width: 60px;
+  height: 60px;
+  background: radial-gradient(circle at 35% 35%, #475569 0%, #1e293b 80%, #0f172a 100%);
+  border: 3px solid #334155;
+  border-radius: 14px;
+  box-shadow:
+    0 6px 0 #070d18,
+    0 10px 20px rgba(0, 0, 0, 0.6),
+    inset 0 1px 2px rgba(255, 255, 255, 0.2);
+  display: flex;
+  align-items: center;
   justify-content: center;
   cursor: pointer;
-  z-index: 1;
-}
-
-.tactile-btn:active,
-.tactile-btn.pressed {
-  transform: translateY(5px);
-  box-shadow:
-    0 2px 0 #0f172a,
-    0 4px 8px -2px rgba(0,0,0,0.5),
-    inset 0 2px 4px rgba(0,0,0,0.3);
-  border-top-color: #475569;
-  border-left-color: #475569;
-}
-
-.tactile-btn .cap {
-  width: 34px;
-  height: 34px;
-  border-radius: 9999px;
-  box-shadow:
-    inset 0 -2px 4px rgba(0,0,0,0.4),
-    inset 0 2px 5px rgba(255,255,255,0.35),
-    0 2px 4px rgba(0,0,0,0.5);
   position: relative;
-  z-index: 1;
+  transition: transform 0.08s ease, box-shadow 0.08s ease;
 }
 
-/* Top-left bevel highlight on cap */
-.tactile-btn .cap::before {
-  content: '';
-  position: absolute;
-  top: 4px;
-  left: 4px;
-  width: 10px;
-  height: 10px;
+.tactile-btn:hover {
+  filter: brightness(1.08);
+}
+
+.tactile-btn:active, .tactile-btn.pressed {
+  transform: translateY(4px);
+  box-shadow:
+    0 2px 0 #070d18,
+    0 4px 10px rgba(0, 0, 0, 0.5);
+}
+
+/* Colored Actuator Caps */
+.tactile-btn .cap {
+  width: 32px;
+  height: 32px;
   border-radius: 50%;
-  background: rgba(255,255,255,0.4);
-  filter: blur(2px);
+  box-shadow:
+    inset 0 2px 5px rgba(255, 255, 255, 0.4),
+    0 2px 6px rgba(0, 0, 0, 0.5);
 }
 
-.btn-b1 .cap { background: radial-gradient(circle at 35% 35%, #60a5fa, #3b82f6, #1d4ed8); }
-.btn-b2 .cap { background: radial-gradient(circle at 35% 35%, #4ade80, #22c55e, #15803d); }
-.btn-b3 .cap { background: radial-gradient(circle at 35% 35%, #f87171, #ef4444, #b91c1c); }
-.btn-rst .cap { background: radial-gradient(circle at 35% 35%, #f1f5f9, #cbd5e1, #94a3b8); }
+.btn-b1 .cap { background: radial-gradient(circle at 35% 30%, #60a5fa, #2563eb 60%, #1d4ed8); }
+.btn-b2 .cap { background: radial-gradient(circle at 35% 30%, #4ade80, #16a34a 60%, #15803d); }
+.btn-b3 .cap { background: radial-gradient(circle at 35% 30%, #f87171, #dc2626 60%, #b91c1c); }
+.btn-rst .cap { background: radial-gradient(circle at 35% 30%, #f1f5f9, #94a3b8 60%, #64748b); width: 26px; height: 26px; }
 
-/* Hold Progress Ring on Buttons */
+/* SVG Hold Ring */
 .hold-ring {
   position: absolute;
   top: -4px;
@@ -377,154 +522,323 @@ body {
   opacity: 0;
   transition: opacity 0.15s ease;
 }
-
 .tactile-btn.holding .hold-ring {
   opacity: 1;
 }
 
-/* ─── Mode Pills / Selector ───────────────────────────────────── */
-.mode-card {
-  display: block;
-  width: 100%;
-  text-align: left;
-  border-radius: 9999px;
-  font-size: 11px;
-  font-weight: 500;
-  padding: 5px 12px;
-  border: 1px solid transparent;
-  background: rgba(30,41,59,0.6);
-  color: #94a3b8;
-  transition: background 0.15s ease, color 0.15s ease, border-color 0.15s ease, box-shadow 0.15s ease;
-  cursor: pointer;
-  white-space: nowrap;
-  overflow: hidden;
-  text-overflow: ellipsis;
-}
-
-.mode-card:hover {
-  background: rgba(51,65,85,0.8);
-  color: #e2e8f0;
-  border-color: rgba(99,102,241,0.3);
-}
-
-.mode-card.active-mode {
-  background: linear-gradient(135deg, rgba(59,130,246,0.25), rgba(99,102,241,0.2));
-  border-color: #3b82f6;
-  color: #93c5fd;
+.btn-name {
+  font-family: ui-monospace, monospace;
+  font-size: 12px;
   font-weight: 700;
-  box-shadow: 0 0 10px 1px rgba(59,130,246,0.25), inset 0 0 8px rgba(59,130,246,0.1);
+  color: #e2e8f0;
+  margin-top: 8px;
 }
 
-/* ─── Custom Scrollbars ───────────────────────────────────────── */
-::-webkit-scrollbar { width: 5px; height: 5px; }
-::-webkit-scrollbar-track { background: rgba(15,23,42,0.5); border-radius: 3px; }
-::-webkit-scrollbar-thumb { background: #334155; border-radius: 3px; }
-::-webkit-scrollbar-thumb:hover { background: #475569; }
-
-/* ─── Active Mode Title Glow ──────────────────────────────────── */
-.active-mode-title-glow {
-  text-shadow: 0 0 10px rgba(251,191,36,0.6), 0 0 20px rgba(251,191,36,0.3);
+.btn-key-badge {
+  font-family: ui-monospace, monospace;
+  font-size: 10px;
+  background: #1e293b;
+  color: #94a3b8;
+  border: 1px solid #334155;
+  padding: 1px 6px;
+  border-radius: 4px;
+  margin-top: 2px;
 }
 
-/* Active mode pulsing dot */
-.active-badge-dot {
-  display: inline-block;
-  width: 7px;
-  height: 7px;
-  border-radius: 9999px;
-  background: #22c55e;
-  margin-right: 5px;
-  animation: dot-pulse 1.6s ease-in-out infinite;
+.press-hint {
+  text-align: center;
+  font-family: monospace;
+  font-size: 10px;
+  color: rgba(226, 245, 232, 0.4);
+  margin-top: 14px;
 }
 
-/* ─── Hint Action Cards ───────────────────────────────────────── */
-.hint-b1-card {
-  background: rgba(23,37,84,0.7);
-  border-color: rgba(59,130,246,0.3) !important;
-}
-.hint-b2-card {
-  background: rgba(5,46,22,0.7);
-  border-color: rgba(34,197,94,0.3) !important;
-}
-.hint-b3-card {
-  background: rgba(69,10,10,0.7);
-  border-color: rgba(239,68,68,0.3) !important;
+/* ── Current Mode Guide HUD (Underneath the Board) ───────────── */
+.mode-hud-card {
+  width: 100%;
+  max-width: 530px;
+  background: #111827;
+  border: 1px solid #1f2937;
+  border-radius: 16px;
+  padding: 18px 20px;
+  margin-top: 20px;
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.3);
 }
 
-/* ─── Kids Games Cards ────────────────────────────────────────── */
-.kids-section-wrapper {
-  border: 2px solid rgba(167,139,250,0.5);
-  animation: sparkle-border 4s linear infinite;
-  border-radius: 1rem;
+.mode-hud-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 6px;
 }
 
-.game-card-simon {
-  background: linear-gradient(135deg, #4c1d95, #6d28d9, #7c3aed);
-  border-color: rgba(167,139,250,0.5) !important;
-}
-.game-card-simon:hover {
-  background: linear-gradient(135deg, #5b21b6, #7c3aed, #8b5cf6);
-  border-color: rgba(167,139,250,0.9) !important;
-  box-shadow: 0 0 20px 4px rgba(139,92,246,0.4);
+#current-mode-title {
+  font-size: 14px;
+  font-weight: 700;
+  color: #fbbf24;
+  letter-spacing: -0.01em;
 }
 
-.game-card-reaction {
-  background: linear-gradient(135deg, #7c2d12, #c2410c, #ea580c);
-  border-color: rgba(251,146,60,0.5) !important;
-}
-.game-card-reaction:hover {
-  background: linear-gradient(135deg, #9a3412, #d97706, #f97316);
-  border-color: rgba(251,146,60,0.9) !important;
-  box-shadow: 0 0 20px 4px rgba(249,115,22,0.4);
-}
-
-.game-card-chess {
-  background: linear-gradient(135deg, #1e1b4b, #3730a3, #4338ca);
-  border-color: rgba(129,140,248,0.5) !important;
-}
-.game-card-chess:hover {
-  background: linear-gradient(135deg, #312e81, #4338ca, #6366f1);
-  border-color: rgba(129,140,248,0.9) !important;
-  box-shadow: 0 0 20px 4px rgba(99,102,241,0.4);
+.active-mode-badge {
+  font-family: monospace;
+  font-size: 11px;
+  background: #1f2937;
+  color: #94a3b8;
+  padding: 2px 8px;
+  border-radius: 6px;
 }
 
-.game-card-stopwatch {
-  background: linear-gradient(135deg, #042f2e, #0f766e, #0d9488);
-  border-color: rgba(45,212,191,0.5) !important;
-}
-.game-card-stopwatch:hover {
-  background: linear-gradient(135deg, #134e4a, #0d9488, #14b8a6);
-  border-color: rgba(45,212,191,0.9) !important;
-  box-shadow: 0 0 20px 4px rgba(20,184,166,0.4);
+#current-mode-desc {
+  font-size: 12px;
+  color: #cbd5e1;
+  margin-bottom: 14px;
 }
 
-/* Common game card styles */
-.game-card-simon,
-.game-card-reaction,
-.game-card-chess,
-.game-card-stopwatch {
-  transition: transform 0.18s ease, box-shadow 0.18s ease, background 0.18s ease, border-color 0.18s ease;
+.hud-actions-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 8px;
+}
+
+.hud-action-box {
+  background: #0f172a;
+  border: 1px solid #1e293b;
+  border-radius: 10px;
+  padding: 8px 10px;
+}
+.hud-action-box.b1 { border-left: 3px solid #3b82f6; }
+.hud-action-box.b2 { border-left: 3px solid #22c55e; }
+.hud-action-box.b3 { border-left: 3px solid #ef4444; }
+
+.hud-box-label {
+  font-family: monospace;
+  font-size: 11px;
+  font-weight: 700;
+  display: block;
+  margin-bottom: 3px;
+}
+.hud-box-label.b1 { color: #60a5fa; }
+.hud-box-label.b2 { color: #4ade80; }
+.hud-box-label.b3 { color: #f87171; }
+
+.hud-box-val {
+  font-size: 11px;
+  color: #e2e8f0;
+  line-height: 1.3;
+}
+
+/* ── Right Column: Arcade & Mode Selector ────────────────────── */
+.controls-column {
+  display: flex;
+  flex-direction: column;
+  gap: 22px;
+}
+
+/* 🎮 Kids Arcade Section */
+.arcade-section {
+  background: linear-gradient(135deg, #1e1b4b 0%, #111827 60%, #0f172a 100%);
+  border: 1px solid #3730a3;
+  border-radius: 20px;
+  padding: 20px;
+  box-shadow: 0 10px 30px -5px rgba(55, 48, 163, 0.25);
+}
+
+.arcade-header {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-bottom: 4px;
+}
+
+.arcade-title {
+  font-size: 15px;
+  font-weight: 800;
+  color: #ffffff;
+}
+
+.arcade-subtitle {
+  font-size: 12px;
+  color: #a5b4fc;
+  margin-bottom: 16px;
+}
+
+.arcade-cards-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 12px;
+}
+
+.game-card {
+  padding: 14px;
+  border-radius: 14px;
+  text-align: left;
   border: 1px solid;
+  cursor: pointer;
+  transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+.game-card:hover {
+  transform: translateY(-3px) scale(1.02);
 }
 
-.game-card-simon:hover,
-.game-card-reaction:hover,
-.game-card-chess:hover,
-.game-card-stopwatch:hover {
-  transform: scale(1.03) translateY(-2px);
+.game-card-icon {
+  font-size: 28px;
+  margin-bottom: 8px;
+}
+.game-card-title {
+  font-size: 13px;
+  font-weight: 700;
+  color: #ffffff;
+  margin-bottom: 2px;
+}
+.game-card-desc {
+  font-size: 11px;
+  line-height: 1.35;
+  margin-bottom: 8px;
+}
+.game-play-tag {
+  font-size: 10px;
+  font-weight: 700;
+  padding: 2px 8px;
+  border-radius: 9999px;
+  display: inline-block;
+  align-self: flex-start;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
 }
 
-/* ─── Footer PCB trace ────────────────────────────────────────── */
-.footer-pcb {
-  background-image:
-    repeating-linear-gradient(
-      90deg,
-      rgba(255,215,0,0.06) 0px, rgba(255,215,0,0.06) 1px,
-      transparent 1px, transparent 60px
-    ),
-    repeating-linear-gradient(
-      0deg,
-      rgba(255,215,0,0.04) 0px, rgba(255,215,0,0.04) 1px,
-      transparent 1px, transparent 20px
-    );
+/* Individual Game Card Themes */
+.card-simon {
+  background: linear-gradient(135deg, #2e1065, #4c1d95);
+  border-color: #6d28d9;
 }
+.card-simon .game-card-desc { color: #ddd6fe; }
+.card-simon .game-play-tag { background: rgba(255,255,255,0.2); color: #ede9fe; }
+.card-simon:hover { box-shadow: 0 8px 24px rgba(109, 40, 217, 0.45); }
+
+.card-reaction {
+  background: linear-gradient(135deg, #7c2d12, #c2410c);
+  border-color: #ea580c;
+}
+.card-reaction .game-card-desc { color: #ffedd5; }
+.card-reaction .game-play-tag { background: rgba(255,255,255,0.2); color: #fff7ed; }
+.card-reaction:hover { box-shadow: 0 8px 24px rgba(234, 88, 12, 0.45); }
+
+.card-chess {
+  background: linear-gradient(135deg, #1e1b4b, #3730a3);
+  border-color: #4f46e5;
+}
+.card-chess .game-card-desc { color: #c7d2fe; }
+.card-chess .game-play-tag { background: rgba(255,255,255,0.2); color: #e0e7ff; }
+.card-chess:hover { box-shadow: 0 8px 24px rgba(79, 70, 229, 0.45); }
+
+.card-stopwatch {
+  background: linear-gradient(135deg, #064e3b, #047857);
+  border-color: #059669;
+}
+.card-stopwatch .game-card-desc { color: #d1fae5; }
+.card-stopwatch .game-play-tag { background: rgba(255,255,255,0.2); color: #ecfdf5; }
+.card-stopwatch:hover { box-shadow: 0 8px 24px rgba(5, 150, 105, 0.45); }
+
+/* 📋 24-Mode Selector Library */
+.modes-library-card {
+  background: #111827;
+  border: 1px solid #1f2937;
+  border-radius: 20px;
+  padding: 20px;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.25);
+}
+
+.modes-library-title {
+  font-size: 12px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: #94a3b8;
+  margin-bottom: 12px;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+#mode-selector {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 7px;
+  max-height: 280px;
+  overflow-y: auto;
+  padding-right: 4px;
+}
+
+/* Individual Mode Chip (Injected & Styled) */
+.mode-card {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 8px 12px;
+  border-radius: 8px;
+  border: 1px solid #1f2937;
+  background: #0f172a;
+  color: #cbd5e1;
+  font-size: 11px;
+  cursor: pointer;
+  transition: all 0.15s ease;
+}
+.mode-card:hover {
+  background: #1e293b;
+  border-color: #3b82f6;
+  color: #ffffff;
+}
+.mode-card.active-mode {
+  background: #1e3a8a !important;
+  border-color: #3b82f6 !important;
+  color: #ffffff !important;
+  font-weight: 700;
+  box-shadow: 0 0 10px rgba(59, 130, 246, 0.35);
+}
+
+/* Hardware Case Note */
+.case-note-card {
+  background: rgba(17, 24, 39, 0.6);
+  border: 1px solid #1f2937;
+  border-radius: 14px;
+  padding: 14px 16px;
+  font-size: 11px;
+  color: #94a3b8;
+  line-height: 1.45;
+}
+.case-note-title {
+  font-weight: 700;
+  color: #f1f5f9;
+  margin-bottom: 4px;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+/* ── Footer ──────────────────────────────────────────────────── */
+footer.app-footer {
+  background: #080c14;
+  border-top: 1px solid #1e293b;
+  padding: 14px 24px;
+  text-align: center;
+  font-size: 12px;
+  color: #64748b;
+}
+footer.app-footer a {
+  color: #94a3b8;
+  text-decoration: underline;
+  transition: color 0.15s ease;
+}
+footer.app-footer a:hover {
+  color: #ffffff;
+}
+
+/* Utility Fallbacks */
+.hidden { display: none !important; }
+
+/* Audio state helpers */
+.bg-red-50 { background-color: rgba(239, 68, 68, 0.2) !important; border-color: rgba(239, 68, 68, 0.5) !important; }
+.text-red-600 { color: #f87171 !important; }

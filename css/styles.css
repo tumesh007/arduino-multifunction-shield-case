@@ -156,10 +156,21 @@ body {
   background: linear-gradient(to right, transparent, rgba(226,245,232,0.4), transparent);
 }
 
-/* ─── 7-Segment Bezel ─────────────────────────────────────────── */
+/* ─── 7-Segment Bezel & Enforced Display Dimensions ───────────── */
 .seven-seg-bezel {
+  display: flex !important;
+  flex-direction: row !important;
+  align-items: center !important;
+  justify-content: center !important;
+  gap: 8px !important;
+  max-width: 320px !important;
+  width: 100% !important;
+  margin: 0 auto 1.5rem auto !important;
+  padding: 1rem !important;
+  box-sizing: border-box !important;
   background: #05050a;
   border: 3px solid #18181b;
+  border-radius: 1rem;
   box-shadow:
     inset 0 6px 16px rgba(0,0,0,0.95),
     inset 0 0 0 1px rgba(255,255,255,0.03),
@@ -168,6 +179,32 @@ body {
     0 0 30px 2px rgba(200,30,10,0.12);
   /* Smoked glass tint */
   backdrop-filter: blur(1px);
+}
+
+/* 7-Segment SVG Digits — Strictly Enforced Fixed Dimensions */
+.seven-seg-bezel svg,
+.seven-seg-digit,
+#digit-0,
+#digit-1,
+#digit-2,
+#digit-3 {
+  width: 56px !important;
+  height: 80px !important;
+  max-width: 56px !important;
+  max-height: 80px !important;
+  min-width: 44px !important;
+  flex-shrink: 0 !important;
+  display: block !important;
+}
+
+/* Colon container & dots */
+.colon-container {
+  display: flex !important;
+  flex-direction: column !important;
+  justify-content: space-around !important;
+  height: 52px !important;
+  padding: 6px 2px !important;
+  flex-shrink: 0 !important;
 }
 
 /* 7-Segment SVG Segment Styles */
@@ -183,14 +220,18 @@ body {
 }
 
 .colon-dot {
+  width: 8px !important;
+  height: 8px !important;
+  border-radius: 9999px !important;
   background-color: var(--seg-off);
-  border-radius: 9999px;
+  display: block !important;
+  flex-shrink: 0 !important;
   transition: background-color 0.05s ease, box-shadow 0.05s ease;
 }
 
 .colon-dot.active {
-  background-color: var(--seg-on);
-  box-shadow: 0 0 8px 3px rgba(255, 59, 26, 0.75);
+  background-color: var(--seg-on) !important;
+  box-shadow: 0 0 8px 3px rgba(255, 59, 26, 0.75) !important;
 }
 
 /* ─── SMD Status LEDs ─────────────────────────────────────────── */

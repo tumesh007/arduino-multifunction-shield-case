@@ -1,12 +1,21 @@
 /* Shivansh Timer v9.0 — Arduino Multi-Function Shield Simulator Styles */
 
 :root {
-  --pcb-blue: #0f3460;
-  --pcb-dark: #16213e;
-  --pcb-silk: #e2e8f0;
-  --led-off: #3a1515;
+  --pcb-green: #0a5c3c;
+  --pcb-dark: #072a1c;
+  --pcb-silk: #e2f5e8;
+  --led-off: #2a0f0f;
   --led-on: #ff1e1e;
   --led-glow: rgba(255, 30, 30, 0.75);
+  /* Per-LED on colors */
+  --led-on-d1: #ff1e1e;
+  --led-on-d2: #facc15;
+  --led-on-d3: #22c55e;
+  --led-on-d4: #3b82f6;
+  /* Segment colors */
+  --seg-off: #2a0808;
+  --seg-on: #ff3b1a;
+  --seg-glow: rgba(255, 59, 26, 0.85);
 }
 
 body {
@@ -14,108 +23,315 @@ body {
   user-select: none;
 }
 
-/* PCB Board Styling */
+/* ─── Keyframe Animations ─────────────────────────────────────── */
+@keyframes pulse-green {
+  0%, 100% { opacity: 1; box-shadow: 0 0 0 0 rgba(34,197,94,0.6); }
+  50%       { opacity: 0.7; box-shadow: 0 0 0 5px rgba(34,197,94,0); }
+}
+
+@keyframes amber-glow {
+  0%, 100% { box-shadow: 0 0 10px 2px rgba(251,191,36,0.6), 0 0 25px 4px rgba(251,191,36,0.3); }
+  50%       { box-shadow: 0 0 18px 5px rgba(251,191,36,0.9), 0 0 40px 10px rgba(251,191,36,0.4); }
+}
+
+@keyframes seg-flicker {
+  0%, 90%, 100% { opacity: 1; }
+  92%           { opacity: 0.88; }
+  96%           { opacity: 0.95; }
+}
+
+@keyframes dot-pulse {
+  0%, 100% { opacity: 1; transform: scale(1); }
+  50%       { opacity: 0.4; transform: scale(0.8); }
+}
+
+@keyframes running-pulse {
+  0%, 100% { box-shadow: 0 0 0 0 rgba(34,197,94,0.5); }
+  50%       { box-shadow: 0 0 0 4px rgba(34,197,94,0); }
+}
+
+@keyframes sparkle-border {
+  0%   { border-color: rgba(167,139,250,0.5); }
+  33%  { border-color: rgba(251,191,36,0.7); }
+  66%  { border-color: rgba(99,102,241,0.6); }
+  100% { border-color: rgba(167,139,250,0.5); }
+}
+
+@keyframes card-shine {
+  0%   { background-position: -200% center; }
+  100% { background-position: 200% center; }
+}
+
+/* ─── Header Logo Glow ────────────────────────────────────────── */
+.logo-pill {
+  animation: amber-glow 2.5s ease-in-out infinite;
+}
+
+/* Running status badge */
+.running-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  background: rgba(21,128,61,0.25);
+  color: #4ade80;
+  border: 1px solid rgba(74,222,128,0.4);
+  padding: 2px 8px;
+  border-radius: 9999px;
+}
+.running-badge .dot {
+  width: 7px;
+  height: 7px;
+  border-radius: 9999px;
+  background: #22c55e;
+  animation: running-pulse 1.4s ease-in-out infinite;
+  flex-shrink: 0;
+}
+
+/* ─── PCB Board ───────────────────────────────────────────────── */
 .pcb-board {
-  background: radial-gradient(circle at 50% 30%, #1e3a8a, #0f172a);
-  border: 4px solid #1e293b;
-  box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.45), inset 0 2px 4px rgba(255, 255, 255, 0.1);
+  background-color: #0a5c3c;
+  background-image:
+    /* FR4 glass-fiber weave texture */
+    repeating-linear-gradient(
+      0deg,
+      rgba(255,255,255,0.025) 0px, rgba(255,255,255,0.025) 1px,
+      transparent 1px, transparent 18px
+    ),
+    repeating-linear-gradient(
+      90deg,
+      rgba(255,255,255,0.025) 0px, rgba(255,255,255,0.025) 1px,
+      transparent 1px, transparent 18px
+    ),
+    /* PCB trace lines (diagonal accent) */
+    repeating-linear-gradient(
+      135deg,
+      rgba(255,215,0,0.04) 0px, rgba(255,215,0,0.04) 1px,
+      transparent 1px, transparent 40px
+    ),
+    /* Radial vignette for depth */
+    radial-gradient(ellipse at 50% 20%, rgba(16,100,70,0.6) 0%, rgba(7,42,28,0.95) 100%);
+  border: 4px solid #094d33;
+  box-shadow:
+    0 30px 60px -12px rgba(0,0,0,0.6),
+    0 0 0 1px rgba(255,255,255,0.05),
+    inset 0 2px 6px rgba(255,255,255,0.08),
+    inset 0 -2px 6px rgba(0,0,0,0.4);
   position: relative;
 }
 
-/* Gold PCB contacts and mount holes */
-.mount-hole {
-  width: 14px;
-  height: 14px;
-  border-radius: 9999px;
-  background-color: #0f172a;
-  border: 2px solid #ca8a04;
-  box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.8);
+/* GPIO header strip at top of PCB */
+.gpio-header {
+  display: flex;
+  justify-content: center;
+  gap: 3px;
+  margin-bottom: 10px;
+  padding: 4px 0;
+}
+.gpio-pin {
+  width: 6px;
+  height: 10px;
+  background: linear-gradient(to bottom, #d4af37, #a07c20);
+  border-radius: 1px;
+  box-shadow: 0 1px 2px rgba(0,0,0,0.5), inset 0 1px 0 rgba(255,255,255,0.3);
 }
 
-/* 7-Segment Bezel & Glass */
+/* Mount Holes — gold ring + dark center */
+.mount-hole {
+  width: 18px;
+  height: 18px;
+  border-radius: 9999px;
+  background: radial-gradient(circle, #0f172a 40%, #a07c20 42%, #d4af37 55%, #a07c20 60%);
+  box-shadow:
+    inset 0 2px 4px rgba(0,0,0,0.9),
+    0 0 0 2px rgba(212,175,55,0.3),
+    0 2px 4px rgba(0,0,0,0.5);
+}
+
+/* PCB silk-screen accent lines */
+.pcb-silk-line {
+  height: 1px;
+  background: linear-gradient(to right, transparent, rgba(226,245,232,0.4), transparent);
+}
+
+/* ─── 7-Segment Bezel ─────────────────────────────────────────── */
 .seven-seg-bezel {
-  background: #09090b;
-  border: 3px solid #27272a;
-  box-shadow: inset 0 4px 10px rgba(0, 0, 0, 0.9), 0 4px 6px -1px rgba(0, 0, 0, 0.3);
+  background: #05050a;
+  border: 3px solid #18181b;
+  box-shadow:
+    inset 0 6px 16px rgba(0,0,0,0.95),
+    inset 0 0 0 1px rgba(255,255,255,0.03),
+    0 4px 12px rgba(0,0,0,0.5),
+    /* ambient red glow when display is active */
+    0 0 30px 2px rgba(200,30,10,0.12);
+  /* Smoked glass tint */
+  backdrop-filter: blur(1px);
 }
 
 /* 7-Segment SVG Segment Styles */
 .segment {
-  fill: var(--led-off);
-  transition: fill 0.05s ease, filter 0.05s ease;
+  fill: var(--seg-off);
+  transition: fill 0.04s ease, filter 0.04s ease;
 }
 
 .segment.active {
-  fill: var(--led-on);
-  filter: drop-shadow(0 0 4px var(--led-glow));
+  fill: var(--seg-on);
+  filter: drop-shadow(0 0 5px var(--seg-glow)) drop-shadow(0 0 10px rgba(255,100,30,0.5));
+  animation: seg-flicker 8s ease-in-out infinite;
 }
 
 .colon-dot {
-  fill: var(--led-off);
-  transition: fill 0.05s ease;
+  background-color: var(--seg-off);
+  border-radius: 9999px;
+  transition: background-color 0.05s ease, box-shadow 0.05s ease;
 }
 
 .colon-dot.active {
-  fill: var(--led-on);
-  filter: drop-shadow(0 0 3px var(--led-glow));
+  background-color: var(--seg-on);
+  box-shadow: 0 0 8px 3px rgba(255, 59, 26, 0.75);
 }
 
-/* SMD Status LEDs */
+/* ─── SMD Status LEDs ─────────────────────────────────────────── */
 .smd-led {
-  width: 12px;
-  height: 8px;
-  background-color: var(--led-off);
-  border-radius: 2px;
+  width: 14px;
+  height: 9px;
+  background: radial-gradient(circle at 40% 35%, #3a1515, #1a0808);
+  border-radius: 3px;
   border: 1px solid #1c1917;
   transition: background-color 0.1s ease, box-shadow 0.1s ease;
+  position: relative;
+  overflow: hidden;
 }
 
-.smd-led.active {
-  background-color: var(--led-on);
-  box-shadow: 0 0 10px 2px var(--led-glow);
+/* Inactive LED base colors */
+#led-d1 { background: radial-gradient(circle at 40% 35%, #3a1515, #1a0808); }
+#led-d2 { background: radial-gradient(circle at 40% 35%, #2d2500, #1a1500); }
+#led-d3 { background: radial-gradient(circle at 40% 35%, #0d2a15, #061409); }
+#led-d4 { background: radial-gradient(circle at 40% 35%, #0a1f3a, #060f1f); }
+
+/* Per-LED active states with individual glow colors */
+#led-d1.active {
+  background: radial-gradient(circle at 35% 30%, #ff6b6b, #ff1e1e 60%, #cc0000);
+  box-shadow: 0 0 10px 3px rgba(255,30,30,0.8), 0 0 20px 6px rgba(255,30,30,0.3);
+}
+#led-d2.active {
+  background: radial-gradient(circle at 35% 30%, #fff176, #facc15 60%, #ca8a04);
+  box-shadow: 0 0 10px 3px rgba(250,204,21,0.8), 0 0 20px 6px rgba(250,204,21,0.3);
+}
+#led-d3.active {
+  background: radial-gradient(circle at 35% 30%, #86efac, #22c55e 60%, #15803d);
+  box-shadow: 0 0 10px 3px rgba(34,197,94,0.8), 0 0 20px 6px rgba(34,197,94,0.3);
+}
+#led-d4.active {
+  background: radial-gradient(circle at 35% 30%, #93c5fd, #3b82f6 60%, #1d4ed8);
+  box-shadow: 0 0 10px 3px rgba(59,130,246,0.8), 0 0 20px 6px rgba(59,130,246,0.3);
 }
 
-/* Tactile Buttons */
+/* Bright center highlight on LED */
+.smd-led::after {
+  content: '';
+  position: absolute;
+  top: 1px;
+  left: 2px;
+  width: 5px;
+  height: 3px;
+  border-radius: 50%;
+  background: rgba(255,255,255,0.15);
+  pointer-events: none;
+}
+
+.smd-led.active::after {
+  background: rgba(255,255,255,0.55);
+}
+
+/* ─── Tactile Buttons ─────────────────────────────────────────── */
+/* PCB pad beneath each button */
+.btn-pad {
+  width: 68px;
+  height: 68px;
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(212,175,55,0.15) 0%, rgba(212,175,55,0.05) 50%, transparent 70%);
+  border: 1px solid rgba(212,175,55,0.2);
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  pointer-events: none;
+  z-index: 0;
+}
+
 .tactile-btn {
-  width: 58px;
-  height: 58px;
-  background: radial-gradient(circle at 40% 40%, #475569, #1e293b);
-  border: 3px solid #334155;
-  border-radius: 12px;
-  box-shadow: 0 6px 0 #0f172a, 0 10px 15px -3px rgba(0, 0, 0, 0.4);
-  transition: transform 0.08s ease, box-shadow 0.08s ease;
+  width: 60px;
+  height: 60px;
+  background: radial-gradient(circle at 35% 30%, #64748b, #334155 50%, #1e293b);
+  border: 3px solid #475569;
+  border-top-color: #94a3b8;
+  border-left-color: #7c8fa3;
+  border-radius: 10px;
+  box-shadow:
+    0 7px 0 #0f172a,
+    0 12px 20px -4px rgba(0,0,0,0.5),
+    inset 0 1px 0 rgba(255,255,255,0.15);
+  transition: transform 0.07s ease, box-shadow 0.07s ease;
   position: relative;
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
   cursor: pointer;
+  z-index: 1;
 }
 
-.tactile-btn:active, .tactile-btn.pressed {
-  transform: translateY(4px);
-  box-shadow: 0 2px 0 #0f172a, 0 4px 6px -1px rgba(0, 0, 0, 0.4);
+.tactile-btn:active,
+.tactile-btn.pressed {
+  transform: translateY(5px);
+  box-shadow:
+    0 2px 0 #0f172a,
+    0 4px 8px -2px rgba(0,0,0,0.5),
+    inset 0 2px 4px rgba(0,0,0,0.3);
+  border-top-color: #475569;
+  border-left-color: #475569;
 }
 
 .tactile-btn .cap {
-  width: 32px;
-  height: 32px;
+  width: 34px;
+  height: 34px;
   border-radius: 9999px;
-  box-shadow: inset 0 2px 4px rgba(255, 255, 255, 0.3), 0 2px 4px rgba(0, 0, 0, 0.4);
+  box-shadow:
+    inset 0 -2px 4px rgba(0,0,0,0.4),
+    inset 0 2px 5px rgba(255,255,255,0.35),
+    0 2px 4px rgba(0,0,0,0.5);
+  position: relative;
+  z-index: 1;
 }
 
-.btn-b1 .cap { background: radial-gradient(circle at 35% 35%, #3b82f6, #1d4ed8); }
-.btn-b2 .cap { background: radial-gradient(circle at 35% 35%, #22c55e, #15803d); }
-.btn-b3 .cap { background: radial-gradient(circle at 35% 35%, #ef4444, #b91c1c); }
-.btn-rst .cap { background: radial-gradient(circle at 35% 35%, #e2e8f0, #94a3b8); }
+/* Top-left bevel highlight on cap */
+.tactile-btn .cap::before {
+  content: '';
+  position: absolute;
+  top: 4px;
+  left: 4px;
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  background: rgba(255,255,255,0.4);
+  filter: blur(2px);
+}
+
+.btn-b1 .cap { background: radial-gradient(circle at 35% 35%, #60a5fa, #3b82f6, #1d4ed8); }
+.btn-b2 .cap { background: radial-gradient(circle at 35% 35%, #4ade80, #22c55e, #15803d); }
+.btn-b3 .cap { background: radial-gradient(circle at 35% 35%, #f87171, #ef4444, #b91c1c); }
+.btn-rst .cap { background: radial-gradient(circle at 35% 35%, #f1f5f9, #cbd5e1, #94a3b8); }
 
 /* Hold Progress Ring on Buttons */
 .hold-ring {
   position: absolute;
   top: -4px;
   left: -4px;
-  width: 66px;
-  height: 66px;
+  width: 68px;
+  height: 68px;
   pointer-events: none;
   opacity: 0;
   transition: opacity 0.15s ease;
@@ -125,25 +341,149 @@ body {
   opacity: 1;
 }
 
-/* Mode pill hover and active */
-.mode-card.active-mode {
-  border-color: #3b82f6;
-  background-color: #eff6ff;
-  color: #1e40af;
+/* ─── Mode Pills / Selector ───────────────────────────────────── */
+.mode-card {
+  display: block;
+  width: 100%;
+  text-align: left;
+  border-radius: 9999px;
+  font-size: 11px;
+  font-weight: 500;
+  padding: 5px 12px;
+  border: 1px solid transparent;
+  background: rgba(30,41,59,0.6);
+  color: #94a3b8;
+  transition: background 0.15s ease, color 0.15s ease, border-color 0.15s ease, box-shadow 0.15s ease;
+  cursor: pointer;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 
-/* Custom scrollbars */
-::-webkit-scrollbar {
-  width: 6px;
-  height: 6px;
+.mode-card:hover {
+  background: rgba(51,65,85,0.8);
+  color: #e2e8f0;
+  border-color: rgba(99,102,241,0.3);
 }
-::-webkit-scrollbar-track {
-  background: #f1f5f9;
+
+.mode-card.active-mode {
+  background: linear-gradient(135deg, rgba(59,130,246,0.25), rgba(99,102,241,0.2));
+  border-color: #3b82f6;
+  color: #93c5fd;
+  font-weight: 700;
+  box-shadow: 0 0 10px 1px rgba(59,130,246,0.25), inset 0 0 8px rgba(59,130,246,0.1);
 }
-::-webkit-scrollbar-thumb {
-  background: #cbd5e1;
-  border-radius: 3px;
+
+/* ─── Custom Scrollbars ───────────────────────────────────────── */
+::-webkit-scrollbar { width: 5px; height: 5px; }
+::-webkit-scrollbar-track { background: rgba(15,23,42,0.5); border-radius: 3px; }
+::-webkit-scrollbar-thumb { background: #334155; border-radius: 3px; }
+::-webkit-scrollbar-thumb:hover { background: #475569; }
+
+/* ─── Active Mode Title Glow ──────────────────────────────────── */
+.active-mode-title-glow {
+  text-shadow: 0 0 10px rgba(251,191,36,0.6), 0 0 20px rgba(251,191,36,0.3);
 }
-::-webkit-scrollbar-thumb:hover {
-  background: #94a3b8;
+
+/* Active mode pulsing dot */
+.active-badge-dot {
+  display: inline-block;
+  width: 7px;
+  height: 7px;
+  border-radius: 9999px;
+  background: #22c55e;
+  margin-right: 5px;
+  animation: dot-pulse 1.6s ease-in-out infinite;
+}
+
+/* ─── Hint Action Cards ───────────────────────────────────────── */
+.hint-b1-card {
+  background: rgba(23,37,84,0.7);
+  border-color: rgba(59,130,246,0.3) !important;
+}
+.hint-b2-card {
+  background: rgba(5,46,22,0.7);
+  border-color: rgba(34,197,94,0.3) !important;
+}
+.hint-b3-card {
+  background: rgba(69,10,10,0.7);
+  border-color: rgba(239,68,68,0.3) !important;
+}
+
+/* ─── Kids Games Cards ────────────────────────────────────────── */
+.kids-section-wrapper {
+  border: 2px solid rgba(167,139,250,0.5);
+  animation: sparkle-border 4s linear infinite;
+  border-radius: 1rem;
+}
+
+.game-card-simon {
+  background: linear-gradient(135deg, #4c1d95, #6d28d9, #7c3aed);
+  border-color: rgba(167,139,250,0.5) !important;
+}
+.game-card-simon:hover {
+  background: linear-gradient(135deg, #5b21b6, #7c3aed, #8b5cf6);
+  border-color: rgba(167,139,250,0.9) !important;
+  box-shadow: 0 0 20px 4px rgba(139,92,246,0.4);
+}
+
+.game-card-reaction {
+  background: linear-gradient(135deg, #7c2d12, #c2410c, #ea580c);
+  border-color: rgba(251,146,60,0.5) !important;
+}
+.game-card-reaction:hover {
+  background: linear-gradient(135deg, #9a3412, #d97706, #f97316);
+  border-color: rgba(251,146,60,0.9) !important;
+  box-shadow: 0 0 20px 4px rgba(249,115,22,0.4);
+}
+
+.game-card-chess {
+  background: linear-gradient(135deg, #1e1b4b, #3730a3, #4338ca);
+  border-color: rgba(129,140,248,0.5) !important;
+}
+.game-card-chess:hover {
+  background: linear-gradient(135deg, #312e81, #4338ca, #6366f1);
+  border-color: rgba(129,140,248,0.9) !important;
+  box-shadow: 0 0 20px 4px rgba(99,102,241,0.4);
+}
+
+.game-card-stopwatch {
+  background: linear-gradient(135deg, #042f2e, #0f766e, #0d9488);
+  border-color: rgba(45,212,191,0.5) !important;
+}
+.game-card-stopwatch:hover {
+  background: linear-gradient(135deg, #134e4a, #0d9488, #14b8a6);
+  border-color: rgba(45,212,191,0.9) !important;
+  box-shadow: 0 0 20px 4px rgba(20,184,166,0.4);
+}
+
+/* Common game card styles */
+.game-card-simon,
+.game-card-reaction,
+.game-card-chess,
+.game-card-stopwatch {
+  transition: transform 0.18s ease, box-shadow 0.18s ease, background 0.18s ease, border-color 0.18s ease;
+  border: 1px solid;
+}
+
+.game-card-simon:hover,
+.game-card-reaction:hover,
+.game-card-chess:hover,
+.game-card-stopwatch:hover {
+  transform: scale(1.03) translateY(-2px);
+}
+
+/* ─── Footer PCB trace ────────────────────────────────────────── */
+.footer-pcb {
+  background-image:
+    repeating-linear-gradient(
+      90deg,
+      rgba(255,215,0,0.06) 0px, rgba(255,215,0,0.06) 1px,
+      transparent 1px, transparent 60px
+    ),
+    repeating-linear-gradient(
+      0deg,
+      rgba(255,215,0,0.04) 0px, rgba(255,215,0,0.04) 1px,
+      transparent 1px, transparent 20px
+    );
 }

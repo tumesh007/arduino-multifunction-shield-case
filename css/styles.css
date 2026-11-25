@@ -44,10 +44,10 @@ body {
 
 /* ── Top Header ──────────────────────────────────────────────── */
 header.app-header {
-  background: rgba(10, 15, 29, 0.88);
+  background: rgba(10, 15, 29, 0.92);
   backdrop-filter: blur(12px);
   border-bottom: 1px solid #1e293b;
-  padding: 12px 28px;
+  padding: 12px 24px;
   display: flex;
   align-items: center;
   justify-content: space-between;
@@ -59,19 +59,19 @@ header.app-header {
 .header-brand {
   display: flex;
   align-items: center;
-  gap: 14px;
+  gap: 12px;
 }
 
 .header-logo-badge {
-  width: 42px;
-  height: 42px;
+  width: 40px;
+  height: 40px;
   background: linear-gradient(135deg, #f59e0b 0%, #d97706 100%);
   color: #0b0f19;
-  border-radius: 12px;
+  border-radius: 10px;
   display: flex;
   align-items: center;
   justify-content: center;
-  font-size: 20px;
+  font-size: 18px;
   font-weight: 900;
   box-shadow: 0 0 16px rgba(245, 158, 11, 0.4);
   flex-shrink: 0;
@@ -85,11 +85,12 @@ header.app-header {
 .header-title-row {
   display: flex;
   align-items: center;
-  gap: 10px;
+  gap: 8px;
+  flex-wrap: wrap;
 }
 
 .header-title {
-  font-size: 17px;
+  font-size: 16px;
   font-weight: 800;
   color: #ffffff;
   letter-spacing: -0.01em;
@@ -102,7 +103,7 @@ header.app-header {
   background: rgba(34, 197, 94, 0.15);
   color: #4ade80;
   border: 1px solid rgba(74, 222, 128, 0.4);
-  padding: 2px 8px;
+  padding: 2px 7px;
   border-radius: 9999px;
   font-size: 10px;
   font-weight: 700;
@@ -157,6 +158,7 @@ header.app-header {
   font-weight: 600;
   cursor: pointer;
   transition: all 0.15s ease;
+  white-space: nowrap;
 }
 .btn-audio:hover {
   background: #334155;
@@ -178,29 +180,72 @@ header.app-header {
   cursor: pointer;
   box-shadow: 0 2px 6px rgba(37, 99, 235, 0.3);
   transition: all 0.15s ease;
+  white-space: nowrap;
 }
 .btn-github:hover {
   background: #1d4ed8;
   box-shadow: 0 4px 10px rgba(37, 99, 235, 0.4);
 }
 
+@media (max-width: 768px) {
+  header.app-header {
+    padding: 10px 14px;
+    gap: 10px;
+  }
+  .header-brand {
+    gap: 10px;
+  }
+  .header-logo-badge {
+    width: 34px;
+    height: 34px;
+    font-size: 16px;
+    border-radius: 8px;
+  }
+  .header-title {
+    font-size: 15px;
+  }
+  .hardware-pill,
+  .header-subtitle {
+    display: none;
+  }
+  .header-actions {
+    margin-left: auto;
+    gap: 8px;
+  }
+  .btn-audio, .btn-github {
+    padding: 6px 10px;
+    font-size: 11px;
+  }
+}
+
+@media (max-width: 420px) {
+  .btn-github span {
+    display: none;
+  }
+  .btn-github {
+    padding: 6px 9px;
+  }
+}
+
 /* ── Main Layout Grid ────────────────────────────────────────── */
 main.simulator-layout {
   flex: 1;
-  max-width: 1320px;
+  max-width: 1200px;
   width: 100%;
   margin: 0 auto;
-  padding: 28px 24px;
+  padding: 24px 20px;
   display: grid;
-  grid-template-columns: 560px 1fr;
-  gap: 32px;
+  grid-template-columns: 460px 1fr;
+  gap: 28px;
   align-items: start;
 }
 
-@media (max-width: 1024px) {
+@media (max-width: 960px) {
   main.simulator-layout {
     grid-template-columns: 1fr;
-    max-width: 600px;
+    max-width: 480px;
+    padding: 14px 12px;
+    gap: 16px;
   }
 }
 
@@ -209,139 +254,99 @@ main.simulator-layout {
   display: flex;
   flex-direction: column;
   align-items: center;
+  width: 100%;
 }
 
-/* ── The Physical PCB Board Frame ────────────────────────────── */
+/* ── Sleek Hardware Console (No Oversized Frame) ─────────────── */
 .pcb-board {
   width: 100%;
-  max-width: 530px;
-  background-color: var(--pcb-blue);
+  max-width: 460px;
+  background: #0d1522;
   background-image:
-    /* Diagonal circuit trace accent lines */
-    repeating-linear-gradient(
-      135deg,
-      rgba(212, 175, 55, 0.04) 0px, rgba(212, 175, 55, 0.04) 1px,
-      transparent 1px, transparent 40px
-    ),
-    /* FR4 woven glass-fiber texture */
-    repeating-linear-gradient(
-      0deg,
-      rgba(255, 255, 255, 0.018) 0px, rgba(255, 255, 255, 0.018) 1px,
-      transparent 1px, transparent 16px
-    ),
-    repeating-linear-gradient(
-      90deg,
-      rgba(255, 255, 255, 0.018) 0px, rgba(255, 255, 255, 0.018) 1px,
-      transparent 1px, transparent 16px
-    ),
-    /* Radial board vignette */
-    radial-gradient(ellipse at 50% 15%, rgba(18, 52, 86, 0.7) 0%, rgba(7, 18, 30, 0.98) 100%);
-  border: 4px solid var(--pcb-border);
-  border-radius: 24px;
-  padding: 24px 28px;
+    radial-gradient(ellipse at 50% 0%, rgba(30, 58, 138, 0.22) 0%, transparent 75%),
+    linear-gradient(180deg, #0e1726 0%, #080d17 100%);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 18px;
+  padding: 14px 14px 16px 14px;
   box-shadow:
-    0 25px 60px -10px rgba(0, 0, 0, 0.8),
-    0 0 0 1px rgba(255, 255, 255, 0.08),
-    inset 0 2px 6px rgba(255, 255, 255, 0.12),
-    inset 0 -2px 6px rgba(0, 0, 0, 0.6);
+    0 12px 36px -4px rgba(0, 0, 0, 0.7),
+    inset 0 1px 0 rgba(255, 255, 255, 0.08);
   position: relative;
+  box-sizing: border-box;
 }
 
-/* Four Gold Screw Holes */
-.mount-hole {
-  width: 20px;
-  height: 20px;
-  border-radius: 50%;
-  background: radial-gradient(circle, #08101a 42%, #b48c26 44%, #eab308 58%, #856314 62%);
-  box-shadow: inset 0 2px 4px rgba(0,0,0,0.9), 0 0 0 2px rgba(234, 179, 8, 0.25);
-  position: absolute;
-}
-.mount-hole.tl { top: 14px; left: 14px; }
-.mount-hole.tr { top: 14px; right: 14px; }
-.mount-hole.bl { bottom: 14px; left: 14px; }
-.mount-hole.br { bottom: 14px; right: 14px; }
-
-/* Arduino Header Strip (Top Gold Header Pins) */
-.header-pins-row {
+/* Slim Device Top Status Strip */
+.device-header-strip {
   display: flex;
-  justify-content: center;
-  gap: 3px;
+  align-items: center;
+  justify-content: space-between;
   margin-bottom: 12px;
-  padding: 2px 0;
-}
-.pin-socket {
-  width: 7px;
-  height: 11px;
-  background: linear-gradient(to bottom, #d4af37, #997316);
-  border-radius: 1px;
-  box-shadow: 0 1px 2px rgba(0,0,0,0.6);
+  padding: 2px 4px;
 }
 
-/* Silkscreen Board Branding */
-.board-silkscreen {
-  text-align: center;
-  margin-bottom: 18px;
-}
-.board-silk-title {
+.device-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
   font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
   font-size: 10px;
-  font-weight: 800;
-  letter-spacing: 0.14em;
-  text-transform: uppercase;
-  color: rgba(226, 245, 232, 0.65);
-}
-.board-silk-divider {
-  width: 220px;
-  height: 1px;
-  background: linear-gradient(to right, transparent, rgba(226, 245, 232, 0.4), transparent);
-  margin: 4px auto;
-}
-.board-pin-labels {
-  display: flex;
-  justify-content: space-between;
-  padding: 0 24px;
-  font-family: monospace;
-  font-size: 8px;
-  color: rgba(226, 245, 232, 0.35);
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  color: #38bdf8;
+  background: rgba(56, 189, 248, 0.12);
+  border: 1px solid rgba(56, 189, 248, 0.25);
+  padding: 2px 8px;
+  border-radius: 6px;
 }
 
-/* ── 7-Segment Display Module Bezel ──────────────────────────── */
+.device-dot {
+  width: 5px;
+  height: 5px;
+  border-radius: 50%;
+  background: #38bdf8;
+  box-shadow: 0 0 6px #38bdf8;
+}
+
+.device-chip-id {
+  font-family: ui-monospace, monospace;
+  font-size: 10px;
+  color: #64748b;
+  letter-spacing: 0.06em;
+}
+
+/* ── 7-Segment Display Module Screen (Hero Display) ──────────── */
 .seven-seg-bezel {
   display: flex !important;
   flex-direction: row !important;
   align-items: center !important;
   justify-content: center !important;
-  gap: 10px !important;
-  max-width: 340px !important;
+  gap: clamp(6px, 2.2vw, 12px) !important;
   width: 100% !important;
-  margin: 0 auto 20px auto !important;
-  padding: 16px 14px !important;
+  margin: 0 0 14px 0 !important;
+  padding: 12px 10px !important;
   box-sizing: border-box !important;
-  background: #040406;
-  border: 3px solid #1a1a24;
-  border-radius: 16px;
+  background: #020408 !important;
+  border: 1px solid rgba(255, 255, 255, 0.08) !important;
+  border-radius: 12px !important;
   box-shadow:
-    inset 0 8px 20px rgba(0, 0, 0, 0.98),
-    inset 0 0 0 1px rgba(255, 255, 255, 0.04),
-    0 6px 16px rgba(0, 0, 0, 0.6),
-    0 0 35px rgba(255, 34, 34, 0.12);
-  position: relative;
+    inset 0 4px 16px rgba(0, 0, 0, 0.95),
+    0 4px 20px rgba(0, 0, 0, 0.5),
+    0 0 25px rgba(255, 34, 34, 0.08) !important;
+  position: relative !important;
 }
 
-/* Individual 7-Segment Digits */
+/* Individual 7-Segment Digits — Scalable via viewBox */
 .seven-seg-bezel svg,
 .seven-seg-digit,
 #digit-0, #digit-1, #digit-2, #digit-3 {
-  width: 58px !important;
-  height: 84px !important;
-  max-width: 58px !important;
-  max-height: 84px !important;
-  min-width: 48px !important;
-  flex-shrink: 0 !important;
+  height: clamp(54px, 16vw, 84px) !important;
+  width: auto !important;
+  max-width: 22% !important;
+  flex: 1 1 0 !important;
   display: block !important;
 }
 
-/* 7-Segment Polygon Geometry & Glow */
+/* 7-Segment Polygon Geometry & Phosphor Glow */
 .segment {
   fill: var(--seg-off);
   transition: fill 0.04s ease, filter 0.04s ease;
@@ -356,15 +361,16 @@ main.simulator-layout {
 .colon-container {
   display: flex !important;
   flex-direction: column !important;
-  justify-content: space-around !important;
-  height: 54px !important;
-  padding: 4px 2px !important;
+  justify-content: center !important;
+  gap: clamp(10px, 3vw, 18px) !important;
+  height: clamp(54px, 16vw, 84px) !important;
+  padding: 0 2px !important;
   flex-shrink: 0 !important;
 }
 
 .colon-dot {
-  width: 8px !important;
-  height: 8px !important;
+  width: clamp(5px, 1.8vw, 7px) !important;
+  height: clamp(5px, 1.8vw, 7px) !important;
   border-radius: 50% !important;
   background-color: var(--seg-off);
   display: block !important;
@@ -379,27 +385,27 @@ main.simulator-layout {
 
 /* ── SMD Status LEDs Row (D1..D4) ────────────────────────────── */
 .smd-led-dock {
-  background: rgba(3, 8, 16, 0.7);
+  background: rgba(3, 7, 18, 0.65);
   border: 1px solid rgba(255, 255, 255, 0.06);
-  border-radius: 12px;
-  padding: 10px 24px;
+  border-radius: 10px;
+  padding: 8px 14px;
   display: flex;
   align-items: center;
   justify-content: space-around;
-  margin-bottom: 20px;
+  margin-bottom: 14px;
 }
 
 .led-slot {
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 4px;
+  gap: 3px;
 }
 
 .smd-led {
   width: 14px;
   height: 9px;
-  border-radius: 3px;
+  border-radius: 2px;
   border: 1px solid #1c1917;
   transition: all 0.1s ease;
 }
@@ -435,53 +441,48 @@ main.simulator-layout {
   box-shadow: 0 0 12px 3px rgba(56, 189, 248, 0.9), 0 0 24px 6px rgba(56, 189, 248, 0.4);
 }
 
-/* ── 3 Tactile Buttons + Reset Button ────────────────────────── */
+/* ── 3 Tactile Buttons + Reset Button (Responsive Touch Targets) ── */
 .tactile-buttons-dock {
-  display: flex;
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 6px;
+  padding: 4px 0 6px 0;
+  justify-items: center;
   align-items: center;
-  justify-content: space-around;
-  padding: 6px 12px 10px 12px;
 }
 
 .button-unit {
   display: flex;
   flex-direction: column;
   align-items: center;
+  width: 100%;
 }
 
 .btn-bracket {
   position: relative;
-  display: flex;
+  display: inline-flex;
   align-items: center;
   justify-content: center;
 }
 
-/* Circular solder pad underneath button */
-.btn-solder-pad {
-  position: absolute;
-  width: 66px;
-  height: 66px;
-  border-radius: 50%;
-  border: 1px dashed rgba(212, 175, 55, 0.3);
-  pointer-events: none;
-}
-
 /* Metal Button Body */
 .tactile-btn {
-  width: 60px;
-  height: 60px;
+  width: clamp(48px, 13vw, 56px);
+  height: clamp(48px, 13vw, 56px);
   background: radial-gradient(circle at 35% 35%, #475569 0%, #1e293b 80%, #0f172a 100%);
-  border: 3px solid #334155;
-  border-radius: 14px;
+  border: 2px solid #334155;
+  border-radius: 12px;
   box-shadow:
-    0 6px 0 #070d18,
-    0 10px 20px rgba(0, 0, 0, 0.6),
+    0 5px 0 #070d18,
+    0 8px 16px rgba(0, 0, 0, 0.6),
     inset 0 1px 2px rgba(255, 255, 255, 0.2);
   display: flex;
   align-items: center;
   justify-content: center;
   cursor: pointer;
   position: relative;
+  touch-action: manipulation;
+  -webkit-tap-highlight-color: transparent;
   transition: transform 0.08s ease, box-shadow 0.08s ease;
 }
 
@@ -490,34 +491,35 @@ main.simulator-layout {
 }
 
 .tactile-btn:active, .tactile-btn.pressed {
-  transform: translateY(4px);
+  transform: translateY(3px);
   box-shadow:
     0 2px 0 #070d18,
-    0 4px 10px rgba(0, 0, 0, 0.5);
+    0 4px 8px rgba(0, 0, 0, 0.5);
 }
 
 /* Colored Actuator Caps */
 .tactile-btn .cap {
-  width: 32px;
-  height: 32px;
+  width: clamp(24px, 6.5vw, 30px);
+  height: clamp(24px, 6.5vw, 30px);
   border-radius: 50%;
   box-shadow:
-    inset 0 2px 5px rgba(255, 255, 255, 0.4),
-    0 2px 6px rgba(0, 0, 0, 0.5);
+    inset 0 2px 4px rgba(255, 255, 255, 0.4),
+    0 2px 5px rgba(0, 0, 0, 0.5);
 }
 
 .btn-b1 .cap { background: radial-gradient(circle at 35% 30%, #60a5fa, #2563eb 60%, #1d4ed8); }
 .btn-b2 .cap { background: radial-gradient(circle at 35% 30%, #4ade80, #16a34a 60%, #15803d); }
 .btn-b3 .cap { background: radial-gradient(circle at 35% 30%, #f87171, #dc2626 60%, #b91c1c); }
-.btn-rst .cap { background: radial-gradient(circle at 35% 30%, #f1f5f9, #94a3b8 60%, #64748b); width: 26px; height: 26px; }
+.btn-rst .cap { background: radial-gradient(circle at 35% 30%, #f1f5f9, #94a3b8 60%, #64748b); width: clamp(20px, 5.5vw, 24px); height: clamp(20px, 5.5vw, 24px); }
 
-/* SVG Hold Ring */
+/* SVG Hold Ring — Dynamically Fitted */
 .hold-ring {
   position: absolute;
-  top: -4px;
-  left: -4px;
-  width: 68px;
-  height: 68px;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: calc(100% + 8px);
+  height: calc(100% + 8px);
   pointer-events: none;
   opacity: 0;
   transition: opacity 0.15s ease;
@@ -528,41 +530,49 @@ main.simulator-layout {
 
 .btn-name {
   font-family: ui-monospace, monospace;
-  font-size: 12px;
+  font-size: 11px;
   font-weight: 700;
   color: #e2e8f0;
-  margin-top: 8px;
+  margin-top: 6px;
+  text-align: center;
 }
 
 .btn-key-badge {
   font-family: ui-monospace, monospace;
-  font-size: 10px;
+  font-size: 9px;
   background: #1e293b;
   color: #94a3b8;
   border: 1px solid #334155;
-  padding: 1px 6px;
+  padding: 1px 5px;
   border-radius: 4px;
   margin-top: 2px;
+}
+
+@media (max-width: 520px) {
+  .btn-key-badge {
+    display: none;
+  }
 }
 
 .press-hint {
   text-align: center;
   font-family: monospace;
   font-size: 10px;
-  color: rgba(226, 245, 232, 0.4);
-  margin-top: 14px;
+  color: rgba(226, 245, 232, 0.45);
+  margin-top: 10px;
 }
 
 /* ── Current Mode Guide HUD (Underneath the Board) ───────────── */
 .mode-hud-card {
   width: 100%;
-  max-width: 530px;
+  max-width: 460px;
   background: #111827;
   border: 1px solid #1f2937;
-  border-radius: 16px;
-  padding: 18px 20px;
-  margin-top: 20px;
+  border-radius: 14px;
+  padding: 14px 16px;
+  margin-top: 14px;
   box-shadow: 0 4px 16px rgba(0, 0, 0, 0.3);
+  box-sizing: border-box;
 }
 
 .mode-hud-header {
@@ -842,3 +852,47 @@ footer.app-footer a:hover {
 /* Audio state helpers */
 .bg-red-50 { background-color: rgba(239, 68, 68, 0.2) !important; border-color: rgba(239, 68, 68, 0.5) !important; }
 .text-red-600 { color: #f87171 !important; }
+
+/* ── Mobile-Friendly Responsive Optimizations ───────────────── */
+@media (max-width: 640px) {
+  .arcade-section {
+    padding: 14px;
+    border-radius: 16px;
+  }
+  .arcade-cards-grid {
+    grid-template-columns: 1fr;
+    gap: 10px;
+  }
+  .modes-library-card {
+    padding: 14px;
+    border-radius: 16px;
+  }
+  #mode-selector {
+    grid-template-columns: 1fr;
+    max-height: 240px;
+  }
+  .case-note-card {
+    padding: 12px 14px;
+    border-radius: 12px;
+  }
+  footer.app-footer {
+    padding: 12px 16px;
+    font-size: 11px;
+  }
+}
+
+@media (max-width: 420px) {
+  .hud-actions-grid {
+    grid-template-columns: 1fr;
+    gap: 5px;
+  }
+  .hud-action-box {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 6px 10px;
+  }
+  .hud-box-label {
+    margin-bottom: 0;
+  }
+}

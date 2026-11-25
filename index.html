@@ -56,45 +56,20 @@
       <!-- Physical PCB Board Enclosure -->
       <div class="pcb-board">
 
-        <!-- 4 Gold Mounting Screw Holes -->
-        <div class="mount-hole tl"></div>
-        <div class="mount-hole tr"></div>
-        <div class="mount-hole bl"></div>
-        <div class="mount-hole br"></div>
-
-        <!-- Top Header Gold Pins -->
-        <div class="header-pins-row">
-          <div class="pin-socket"></div><div class="pin-socket"></div><div class="pin-socket"></div>
-          <div class="pin-socket"></div><div class="pin-socket"></div><div class="pin-socket"></div>
-          <div class="pin-socket"></div><div class="pin-socket"></div><div class="pin-socket"></div>
-          <div class="pin-socket"></div><div class="pin-socket"></div><div class="pin-socket"></div>
-          <div class="pin-socket"></div><div class="pin-socket"></div><div class="pin-socket"></div>
-          <div class="pin-socket"></div><div class="pin-socket"></div><div class="pin-socket"></div>
-          <div class="pin-socket"></div><div class="pin-socket"></div>
-        </div>
-
-        <!-- Board Silkscreen Header -->
-        <div class="board-silkscreen">
-          <p class="board-silk-title">HW-262 MULTI-FUNCTION SHIELD • ARDUINO UNO R3</p>
-          <div class="board-silk-divider"></div>
-          <div class="board-pin-labels">
-            <span>POT A0</span>
-            <span>BUZZER</span>
-            <span>D13</span>
-            <span>D12</span>
-            <span>D11</span>
-            <span>D10</span>
-            <span>D9</span>
-            <span>5V</span>
-            <span>GND</span>
+        <!-- Slim Device Header Strip -->
+        <div class="device-header-strip">
+          <div class="device-badge">
+            <span class="device-dot"></span>
+            <span>HW-262 MULTI-FUNCTION SHIELD</span>
           </div>
+          <span class="device-chip-id">ARDUINO UNO R3</span>
         </div>
 
         <!-- 4-Digit 7-Segment LED Display Module -->
         <div class="seven-seg-bezel">
 
           <!-- Digit 0 -->
-          <svg id="digit-0" class="seven-seg-digit" width="58" height="84" viewBox="0 0 57 80">
+          <svg id="digit-0" class="seven-seg-digit" viewBox="0 0 57 80">
             <!-- a --> <polygon class="segment seg-a" points="10,6 47,6 42,12 15,12" />
             <!-- b --> <polygon class="segment seg-b" points="48,7 48,39 42,35 42,13" />
             <!-- c --> <polygon class="segment seg-c" points="48,42 48,73 42,67 42,45" />
@@ -105,7 +80,7 @@
           </svg>
 
           <!-- Digit 1 -->
-          <svg id="digit-1" class="seven-seg-digit" width="58" height="84" viewBox="0 0 57 80">
+          <svg id="digit-1" class="seven-seg-digit" viewBox="0 0 57 80">
             <!-- a --> <polygon class="segment seg-a" points="10,6 47,6 42,12 15,12" />
             <!-- b --> <polygon class="segment seg-b" points="48,7 48,39 42,35 42,13" />
             <!-- c --> <polygon class="segment seg-c" points="48,42 48,73 42,67 42,45" />
@@ -117,12 +92,12 @@
 
           <!-- Blinking Colon -->
           <div class="colon-container">
-            <span id="colon-dots" class="colon-dot" style="margin-bottom:12px;"></span>
+            <span id="colon-dots" class="colon-dot"></span>
             <span class="colon-dot"></span>
           </div>
 
           <!-- Digit 2 -->
-          <svg id="digit-2" class="seven-seg-digit" width="58" height="84" viewBox="0 0 57 80">
+          <svg id="digit-2" class="seven-seg-digit" viewBox="0 0 57 80">
             <!-- a --> <polygon class="segment seg-a" points="10,6 47,6 42,12 15,12" />
             <!-- b --> <polygon class="segment seg-b" points="48,7 48,39 42,35 42,13" />
             <!-- c --> <polygon class="segment seg-c" points="48,42 48,73 42,67 42,45" />
@@ -133,7 +108,7 @@
           </svg>
 
           <!-- Digit 3 -->
-          <svg id="digit-3" class="seven-seg-digit" width="58" height="84" viewBox="0 0 57 80">
+          <svg id="digit-3" class="seven-seg-digit" viewBox="0 0 57 80">
             <!-- a --> <polygon class="segment seg-a" points="10,6 47,6 42,12 15,12" />
             <!-- b --> <polygon class="segment seg-b" points="48,7 48,39 42,35 42,13" />
             <!-- c --> <polygon class="segment seg-c" points="48,42 48,73 42,67 42,45" />
@@ -171,10 +146,9 @@
           <!-- B1 Button -->
           <div class="button-unit">
             <div class="btn-bracket">
-              <div class="btn-solder-pad"></div>
               <button id="btn-b1" class="tactile-btn btn-b1" title="Left Button (B1 / S1) • Key [1]">
                 <div class="cap"></div>
-                <svg class="hold-ring" width="68" height="68" viewBox="0 0 66 66">
+                <svg class="hold-ring" viewBox="0 0 66 66">
                   <circle cx="33" cy="33" r="30" stroke="#3b82f6" stroke-width="3.5" fill="none" stroke-dasharray="188" stroke-dashoffset="50" />
                 </svg>
               </button>
@@ -186,10 +160,9 @@
           <!-- B2 Button -->
           <div class="button-unit">
             <div class="btn-bracket">
-              <div class="btn-solder-pad"></div>
               <button id="btn-b2" class="tactile-btn btn-b2" title="Middle Button (B2 / S2) • Key [Space]">
                 <div class="cap"></div>
-                <svg class="hold-ring" width="68" height="68" viewBox="0 0 66 66">
+                <svg class="hold-ring" viewBox="0 0 66 66">
                   <circle cx="33" cy="33" r="30" stroke="#22c55e" stroke-width="3.5" fill="none" stroke-dasharray="188" stroke-dashoffset="50" />
                 </svg>
               </button>
@@ -201,10 +174,9 @@
           <!-- B3 Button -->
           <div class="button-unit">
             <div class="btn-bracket">
-              <div class="btn-solder-pad"></div>
               <button id="btn-b3" class="tactile-btn btn-b3" title="Right Button (B3 / S3) • Key [3]">
                 <div class="cap"></div>
-                <svg class="hold-ring" width="68" height="68" viewBox="0 0 66 66">
+                <svg class="hold-ring" viewBox="0 0 66 66">
                   <circle cx="33" cy="33" r="30" stroke="#ef4444" stroke-width="3.5" fill="none" stroke-dasharray="188" stroke-dashoffset="50" />
                 </svg>
               </button>
@@ -216,7 +188,6 @@
           <!-- Reset Button -->
           <div class="button-unit">
             <div class="btn-bracket">
-              <div class="btn-solder-pad"></div>
               <button id="btn-rst" class="tactile-btn btn-rst" title="Reset Button • Key [R]">
                 <div class="cap"></div>
               </button>

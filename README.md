@@ -4,6 +4,20 @@
 [![OpenSCAD](https://img.shields.io/badge/CAD-OpenSCAD_2021.01-blue.svg)](https://openscad.org)
 [![Version](https://img.shields.io/badge/Release-v4.6_Production-brightgreen.svg)]()
 [![License: CC BY-NC-SA 4.0](https://img.shields.io/badge/License-CC_BY--NC--SA_4.0-lightgrey.svg)](LICENSE)
+[![Live Web Simulator](https://img.shields.io/badge/Live_Simulator-Play_Online-orange?logo=arduino)](https://tumesh007.github.io/arduino-multifunction-shield-case/)
+
+## ⚡ Interactive Web Simulator (Kids & Makers Learning Mode)
+
+Try the **Shivansh Timer v9.0** firmware and the hardware shield right inside your browser without uploading code to an Arduino!
+
+👉 **[https://tumesh007.github.io/arduino-multifunction-shield-case/](https://tumesh007.github.io/arduino-multifunction-shield-case/)**
+
+- **🧠 Simon Says (Mode 23):** Musical memory sequence game for kids with Web Audio tones.
+- **⚡ Reaction Reflex Tester (Mode 21):** Measures reaction time in milliseconds from `GO` signal.
+- **♟️ 2-Player Chess Clock (Mode 24):** Complete chess clock with customizable delays and increments.
+- **⏱️ Stopwatch & Lap Stats (Mode 19):** High-precision timer with Best and Average lap views.
+- **🔢 Tally Counter (Mode 20):** Up/down event counter.
+- **🕒 Clock & 17 Countdown Timers (Modes 1–18):** 12H/24H clock and timers from 1 min to 3 hours with blinking alarm buzzer.
 
 A compact, fully integrated, FDM-optimized two-piece enclosure housing an **Arduino Uno R3**, standard **HW-262 Multifunction Shield (MFS)**, and an **onboard battery pack**, engineered specifically for the 180 × 180 × 180 mm build plate of the **Bambu Lab A1 Mini** with **WOL3D Gold Textured PEI Plate**.
 

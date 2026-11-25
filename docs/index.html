@@ -1,0 +1,301 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Shivansh Timer v9.0 — Arduino Multi-Function Shield Interactive Web Simulator</title>
+  <meta name="description" content="Interactive web simulator of the Arduino Uno + HW-262 Multi-Function Shield running Shivansh Timer v9.0 firmware with 24 modes, games, and Web Audio." />
+
+  <!-- Tailwind CSS & Lucide Icons -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script src="https://unpkg.com/lucide@latest"></script>
+
+  <!-- Custom Styles -->
+  <link rel="stylesheet" href="css/styles.css" />
+</head>
+<body class="bg-slate-900 text-slate-100 min-h-screen flex flex-col justify-between">
+
+  <!-- Top Navigation Header -->
+  <header class="bg-slate-950/80 backdrop-blur border-b border-slate-800 px-6 py-3 flex items-center justify-between shadow-lg flex-shrink-0">
+    <div class="flex items-center space-x-3">
+      <div class="w-10 h-10 bg-amber-500 rounded-xl flex items-center justify-center text-slate-950 shadow-md font-black text-xl">
+        ⚡
+      </div>
+      <div>
+        <h1 class="text-base font-bold leading-tight flex items-center gap-2 text-white">
+          Shivansh Timer v9.0 Simulator
+          <span class="text-xs font-medium bg-amber-400/20 text-amber-300 border border-amber-400/30 px-2 py-0.5 rounded-full">
+            Arduino Uno + HW-262 Shield
+          </span>
+        </h1>
+        <p class="text-xs text-slate-400">Interactive hardware & games simulator for kids, students & makers</p>
+      </div>
+    </div>
+
+    <!-- Quick Audio & Help Buttons -->
+    <div class="flex items-center space-x-3">
+      <button id="btn-mute-toggle" class="bg-slate-800 hover:bg-slate-700 text-slate-200 border border-slate-700 px-3.5 py-1.5 rounded-lg text-xs font-semibold flex items-center gap-2 transition-colors">
+        🔊 Sound ON
+      </button>
+      <a href="https://github.com/tumesh007/arduino-multifunction-shield-case" target="_blank" class="bg-blue-600 hover:bg-blue-500 text-white font-semibold px-3.5 py-1.5 rounded-lg text-xs flex items-center gap-1.5 shadow-sm transition-colors">
+        <i data-lucide="github" class="w-3.5 h-3.5"></i>
+        <span>GitHub Repo</span>
+      </a>
+    </div>
+  </header>
+
+  <!-- Main Simulator Area -->
+  <main class="flex-1 max-w-7xl w-full mx-auto p-6 grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
+
+    <!-- Left / Center: Interactive HW-262 Shield PCB Board -->
+    <div class="lg:col-span-7 flex flex-col items-center justify-center">
+
+      <!-- PCB Enclosure Frame -->
+      <div class="pcb-board rounded-3xl p-6 w-full max-w-lg shadow-2xl relative">
+        <!-- Four Gold Mount Holes -->
+        <div class="mount-hole absolute top-4 left-4"></div>
+        <div class="mount-hole absolute top-4 right-4"></div>
+        <div class="mount-hole absolute bottom-4 left-4"></div>
+        <div class="mount-hole absolute bottom-4 right-4"></div>
+
+        <!-- PCB Silk-Screen Header -->
+        <div class="text-center mb-5">
+          <p class="text-[10px] tracking-widest text-slate-400 font-mono font-bold uppercase">
+            HW-262 Multi-Function Shield • Arduino Uno R3
+          </p>
+          <div class="h-0.5 w-48 mx-auto bg-slate-700/50 mt-1"></div>
+        </div>
+
+        <!-- 4-Digit 7-Segment Display Glass Bezel -->
+        <div class="seven-seg-bezel rounded-2xl p-5 mb-6 mx-auto flex items-center justify-center gap-2 shadow-inner border border-slate-700/60 max-w-sm">
+          
+          <!-- Digit 0 -->
+          <svg id="digit-0" class="w-14 h-24" viewBox="0 0 57 80">
+            <!-- a --> <polygon class="segment seg-a" points="10,6 47,6 42,12 15,12" />
+            <!-- b --> <polygon class="segment seg-b" points="48,7 48,39 42,35 42,13" />
+            <!-- c --> <polygon class="segment seg-c" points="48,42 48,73 42,67 42,45" />
+            <!-- d --> <polygon class="segment seg-d" points="10,74 47,74 42,68 15,68" />
+            <!-- e --> <polygon class="segment seg-e" points="9,42 15,45 15,67 9,73" />
+            <!-- f --> <polygon class="segment seg-f" points="9,7 15,13 15,35 9,39" />
+            <!-- g --> <polygon class="segment seg-g" points="15,37 42,37 45,40 42,43 15,43 12,40" />
+          </svg>
+
+          <!-- Digit 1 -->
+          <svg id="digit-1" class="w-14 h-24" viewBox="0 0 57 80">
+            <!-- a --> <polygon class="segment seg-a" points="10,6 47,6 42,12 15,12" />
+            <!-- b --> <polygon class="segment seg-b" points="48,7 48,39 42,35 42,13" />
+            <!-- c --> <polygon class="segment seg-c" points="48,42 48,73 42,67 42,45" />
+            <!-- d --> <polygon class="segment seg-d" points="10,74 47,74 42,68 15,68" />
+            <!-- e --> <polygon class="segment seg-e" points="9,42 15,45 15,67 9,73" />
+            <!-- f --> <polygon class="segment seg-f" points="9,7 15,13 15,35 9,39" />
+            <!-- g --> <polygon class="segment seg-g" points="15,37 42,37 45,40 42,43 15,43 12,40" />
+          </svg>
+
+          <!-- Blinking Colon -->
+          <div class="flex flex-col justify-around h-16 py-3 px-1">
+            <span id="colon-dots" class="colon-dot w-2 h-2 rounded-full mb-3"></span>
+            <span class="colon-dot w-2 h-2 rounded-full"></span>
+          </div>
+
+          <!-- Digit 2 -->
+          <svg id="digit-2" class="w-14 h-24" viewBox="0 0 57 80">
+            <!-- a --> <polygon class="segment seg-a" points="10,6 47,6 42,12 15,12" />
+            <!-- b --> <polygon class="segment seg-b" points="48,7 48,39 42,35 42,13" />
+            <!-- c --> <polygon class="segment seg-c" points="48,42 48,73 42,67 42,45" />
+            <!-- d --> <polygon class="segment seg-d" points="10,74 47,74 42,68 15,68" />
+            <!-- e --> <polygon class="segment seg-e" points="9,42 15,45 15,67 9,73" />
+            <!-- f --> <polygon class="segment seg-f" points="9,7 15,13 15,35 9,39" />
+            <!-- g --> <polygon class="segment seg-g" points="15,37 42,37 45,40 42,43 15,43 12,40" />
+          </svg>
+
+          <!-- Digit 3 -->
+          <svg id="digit-3" class="w-14 h-24" viewBox="0 0 57 80">
+            <!-- a --> <polygon class="segment seg-a" points="10,6 47,6 42,12 15,12" />
+            <!-- b --> <polygon class="segment seg-b" points="48,7 48,39 42,35 42,13" />
+            <!-- c --> <polygon class="segment seg-c" points="48,42 48,73 42,67 42,45" />
+            <!-- d --> <polygon class="segment seg-d" points="10,74 47,74 42,68 15,68" />
+            <!-- e --> <polygon class="segment seg-e" points="9,42 15,45 15,67 9,73" />
+            <!-- f --> <polygon class="segment seg-f" points="9,7 15,13 15,35 9,39" />
+            <!-- g --> <polygon class="segment seg-g" points="15,37 42,37 45,40 42,43 15,43 12,40" />
+          </svg>
+
+        </div>
+
+        <!-- 4 SMD Status LEDs (D1..D4) -->
+        <div class="flex items-center justify-around px-8 mb-6 bg-slate-900/60 py-2.5 rounded-xl border border-slate-700/40">
+          <div class="flex flex-col items-center">
+            <div id="led-d1" class="smd-led mb-1"></div>
+            <span class="text-[10px] font-mono font-bold text-slate-400">D1</span>
+          </div>
+          <div class="flex flex-col items-center">
+            <div id="led-d2" class="smd-led mb-1"></div>
+            <span class="text-[10px] font-mono font-bold text-slate-400">D2</span>
+          </div>
+          <div class="flex flex-col items-center">
+            <div id="led-d3" class="smd-led mb-1"></div>
+            <span class="text-[10px] font-mono font-bold text-slate-400">D3</span>
+          </div>
+          <div class="flex flex-col items-center">
+            <div id="led-d4" class="smd-led mb-1"></div>
+            <span class="text-[10px] font-mono font-bold text-slate-400">D4</span>
+          </div>
+        </div>
+
+        <!-- 3 Tactile Buttons + Reset Button -->
+        <div class="flex items-center justify-around px-4 pt-2">
+          
+          <!-- B1 Button -->
+          <div class="flex flex-col items-center">
+            <button id="btn-b1" class="tactile-btn btn-b1" title="Left Button (B1 / S1)">
+              <div class="cap"></div>
+              <svg class="hold-ring" viewBox="0 0 66 66">
+                <circle cx="33" cy="33" r="30" stroke="#3b82f6" stroke-width="3" fill="none" stroke-dasharray="188" stroke-dashoffset="50" />
+              </svg>
+            </button>
+            <span class="text-xs font-mono font-bold text-slate-300 mt-2">B1 (S1)</span>
+            <span class="text-[10px] text-slate-500 font-mono">Key '1'</span>
+          </div>
+
+          <!-- B2 Button -->
+          <div class="flex flex-col items-center">
+            <button id="btn-b2" class="tactile-btn btn-b2" title="Middle Button (B2 / S2)">
+              <div class="cap"></div>
+              <svg class="hold-ring" viewBox="0 0 66 66">
+                <circle cx="33" cy="33" r="30" stroke="#22c55e" stroke-width="3" fill="none" stroke-dasharray="188" stroke-dashoffset="50" />
+              </svg>
+            </button>
+            <span class="text-xs font-mono font-bold text-slate-300 mt-2">B2 (S2)</span>
+            <span class="text-[10px] text-slate-500 font-mono">Space / '2'</span>
+          </div>
+
+          <!-- B3 Button -->
+          <div class="flex flex-col items-center">
+            <button id="btn-b3" class="tactile-btn btn-b3" title="Right Button (B3 / S3)">
+              <div class="cap"></div>
+              <svg class="hold-ring" viewBox="0 0 66 66">
+                <circle cx="33" cy="33" r="30" stroke="#ef4444" stroke-width="3" fill="none" stroke-dasharray="188" stroke-dashoffset="50" />
+              </svg>
+            </button>
+            <span class="text-xs font-mono font-bold text-slate-300 mt-2">B3 (S3)</span>
+            <span class="text-[10px] text-slate-500 font-mono">Key '3'</span>
+          </div>
+
+          <!-- RST Button -->
+          <div class="flex flex-col items-center">
+            <button id="btn-rst" class="tactile-btn btn-rst" title="Reset Button">
+              <div class="cap"></div>
+            </button>
+            <span class="text-xs font-mono font-bold text-slate-400 mt-2">RESET</span>
+            <span class="text-[10px] text-slate-500 font-mono">Key 'R'</span>
+          </div>
+
+        </div>
+
+        <p class="text-[11px] text-center text-slate-500 mt-5 font-mono">
+          * Click for Short Press • Click & Hold (750ms) for Long Press
+        </p>
+
+      </div>
+
+      <!-- Current Mode Guide Card -->
+      <div class="bg-slate-800/80 border border-slate-700 rounded-2xl p-5 mt-6 w-full max-w-lg shadow-md">
+        <div class="flex items-center justify-between mb-2">
+          <h2 id="current-mode-title" class="text-sm font-bold text-amber-400 flex items-center gap-2">
+            Mode 1: Clock
+          </h2>
+          <span class="text-[11px] bg-slate-700 text-slate-300 px-2 py-0.5 rounded font-mono">Active Mode</span>
+        </div>
+        <p id="current-mode-desc" class="text-xs text-slate-300 mb-4">Digital Clock & Alarm (12H / 24H)</p>
+
+        <!-- Current Button Actions -->
+        <div class="grid grid-cols-3 gap-2 text-[11px]">
+          <div class="bg-slate-900/60 p-2.5 rounded-lg border border-slate-700/50">
+            <span class="text-blue-400 font-bold block mb-0.5 font-mono">B1 Action:</span>
+            <span id="hint-b1" class="text-slate-300">Next Mode</span>
+          </div>
+          <div class="bg-slate-900/60 p-2.5 rounded-lg border border-slate-700/50">
+            <span class="text-emerald-400 font-bold block mb-0.5 font-mono">B2 Action:</span>
+            <span id="hint-b2" class="text-slate-300">Toggle 12/24H</span>
+          </div>
+          <div class="bg-slate-900/60 p-2.5 rounded-lg border border-slate-700/50">
+            <span class="text-rose-400 font-bold block mb-0.5 font-mono">B3 Action:</span>
+            <span id="hint-b3" class="text-slate-300">Hold: Home</span>
+          </div>
+        </div>
+      </div>
+
+    </div>
+
+    <!-- Right: Kids Games & Mode Switcher -->
+    <div class="lg:col-span-5 space-y-6">
+
+      <!-- Kids Learning & Games Showcase Card -->
+      <div class="bg-gradient-to-br from-indigo-900/40 via-purple-900/20 to-slate-900 border border-indigo-500/30 rounded-2xl p-5 shadow-lg">
+        <h3 class="text-sm font-bold text-white flex items-center gap-2 mb-1">
+          <span>🎮</span> Kids Learning & Games
+        </h3>
+        <p class="text-xs text-indigo-200 mb-4">Click any game to launch directly in the shield simulator:</p>
+
+        <div class="grid grid-cols-2 gap-2.5">
+          <!-- Game 1: Simon Says -->
+          <button onclick="window.shieldApp.setMode(23)" class="p-3 rounded-xl bg-slate-800/80 hover:bg-slate-700/80 border border-slate-700 text-left transition-all group">
+            <div class="text-lg mb-1">🧠</div>
+            <div class="font-bold text-xs text-white group-hover:text-amber-400">Simon Says</div>
+            <p class="text-[11px] text-slate-400 leading-snug">Repeat the musical tones and LED sequence</p>
+          </button>
+
+          <!-- Game 2: Reaction Timer -->
+          <button onclick="window.shieldApp.setMode(21)" class="p-3 rounded-xl bg-slate-800/80 hover:bg-slate-700/80 border border-slate-700 text-left transition-all group">
+            <div class="text-lg mb-1">⚡</div>
+            <div class="font-bold text-xs text-white group-hover:text-amber-400">Reaction Reflex</div>
+            <p class="text-[11px] text-slate-400 leading-snug">Test how fast you can hit B2 on GO (in ms)</p>
+          </button>
+
+          <!-- Game 3: Chess Clock -->
+          <button onclick="window.shieldApp.setMode(24)" class="p-3 rounded-xl bg-slate-800/80 hover:bg-slate-700/80 border border-slate-700 text-left transition-all group">
+            <div class="text-lg mb-1">♟️</div>
+            <div class="font-bold text-xs text-white group-hover:text-amber-400">Chess Clock</div>
+            <p class="text-[11px] text-slate-400 leading-snug">2-Player chess clock with delays & increments</p>
+          </button>
+
+          <!-- Tool 4: Stopwatch & Laps -->
+          <button onclick="window.shieldApp.setMode(19)" class="p-3 rounded-xl bg-slate-800/80 hover:bg-slate-700/80 border border-slate-700 text-left transition-all group">
+            <div class="text-lg mb-1">⏱️</div>
+            <div class="font-bold text-xs text-white group-hover:text-amber-400">Stopwatch</div>
+            <p class="text-[11px] text-slate-400 leading-snug">Record lap times with Best & Average stats</p>
+          </button>
+        </div>
+      </div>
+
+      <!-- Complete 24-Mode Selector -->
+      <div class="bg-slate-800/60 border border-slate-700/60 rounded-2xl p-5 shadow-sm">
+        <h3 class="text-xs font-bold text-slate-400 uppercase tracking-wider mb-3">
+          All 24 Firmware Operating Modes
+        </h3>
+        <div id="mode-selector" class="grid grid-cols-2 gap-1.5 max-h-72 overflow-y-auto pr-1">
+          <!-- Dynamically populated -->
+        </div>
+      </div>
+
+      <!-- 3D Print Enclosure Note -->
+      <div class="bg-slate-800/40 border border-slate-700/40 rounded-xl p-4 text-xs text-slate-400 space-y-1.5">
+        <p class="font-semibold text-slate-200 flex items-center gap-1.5">
+          <i data-lucide="box" class="w-4 h-4 text-amber-400"></i>
+          Parametric 3D Enclosure:
+        </p>
+        <p>This firmware runs on physical hardware inside the custom 3D-printed snap-fit enclosure with living-hinge buttons, optimized for the <strong>Bambu Lab A1 Mini</strong>.</p>
+      </div>
+
+    </div>
+
+  </main>
+
+  <!-- Footer -->
+  <footer class="bg-slate-950 border-t border-slate-800 px-6 py-3 text-center text-xs text-slate-500">
+    Shivansh Timer v9.0 Simulator • Open-Source Hardware & Firmware by <a href="https://github.com/tumesh007" target="_blank" class="text-slate-400 hover:text-white underline">Tumesh007</a>
+  </footer>
+
+  <!-- Application Script -->
+  <script src="js/shield_simulator.js"></script>
+</body>
+</html>

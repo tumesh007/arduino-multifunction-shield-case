@@ -1,0 +1,149 @@
+/* Shivansh Timer v9.0 — Arduino Multi-Function Shield Simulator Styles */
+
+:root {
+  --pcb-blue: #0f3460;
+  --pcb-dark: #16213e;
+  --pcb-silk: #e2e8f0;
+  --led-off: #3a1515;
+  --led-on: #ff1e1e;
+  --led-glow: rgba(255, 30, 30, 0.75);
+}
+
+body {
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+  user-select: none;
+}
+
+/* PCB Board Styling */
+.pcb-board {
+  background: radial-gradient(circle at 50% 30%, #1e3a8a, #0f172a);
+  border: 4px solid #1e293b;
+  box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.45), inset 0 2px 4px rgba(255, 255, 255, 0.1);
+  position: relative;
+}
+
+/* Gold PCB contacts and mount holes */
+.mount-hole {
+  width: 14px;
+  height: 14px;
+  border-radius: 9999px;
+  background-color: #0f172a;
+  border: 2px solid #ca8a04;
+  box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.8);
+}
+
+/* 7-Segment Bezel & Glass */
+.seven-seg-bezel {
+  background: #09090b;
+  border: 3px solid #27272a;
+  box-shadow: inset 0 4px 10px rgba(0, 0, 0, 0.9), 0 4px 6px -1px rgba(0, 0, 0, 0.3);
+}
+
+/* 7-Segment SVG Segment Styles */
+.segment {
+  fill: var(--led-off);
+  transition: fill 0.05s ease, filter 0.05s ease;
+}
+
+.segment.active {
+  fill: var(--led-on);
+  filter: drop-shadow(0 0 4px var(--led-glow));
+}
+
+.colon-dot {
+  fill: var(--led-off);
+  transition: fill 0.05s ease;
+}
+
+.colon-dot.active {
+  fill: var(--led-on);
+  filter: drop-shadow(0 0 3px var(--led-glow));
+}
+
+/* SMD Status LEDs */
+.smd-led {
+  width: 12px;
+  height: 8px;
+  background-color: var(--led-off);
+  border-radius: 2px;
+  border: 1px solid #1c1917;
+  transition: background-color 0.1s ease, box-shadow 0.1s ease;
+}
+
+.smd-led.active {
+  background-color: var(--led-on);
+  box-shadow: 0 0 10px 2px var(--led-glow);
+}
+
+/* Tactile Buttons */
+.tactile-btn {
+  width: 58px;
+  height: 58px;
+  background: radial-gradient(circle at 40% 40%, #475569, #1e293b);
+  border: 3px solid #334155;
+  border-radius: 12px;
+  box-shadow: 0 6px 0 #0f172a, 0 10px 15px -3px rgba(0, 0, 0, 0.4);
+  transition: transform 0.08s ease, box-shadow 0.08s ease;
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+}
+
+.tactile-btn:active, .tactile-btn.pressed {
+  transform: translateY(4px);
+  box-shadow: 0 2px 0 #0f172a, 0 4px 6px -1px rgba(0, 0, 0, 0.4);
+}
+
+.tactile-btn .cap {
+  width: 32px;
+  height: 32px;
+  border-radius: 9999px;
+  box-shadow: inset 0 2px 4px rgba(255, 255, 255, 0.3), 0 2px 4px rgba(0, 0, 0, 0.4);
+}
+
+.btn-b1 .cap { background: radial-gradient(circle at 35% 35%, #3b82f6, #1d4ed8); }
+.btn-b2 .cap { background: radial-gradient(circle at 35% 35%, #22c55e, #15803d); }
+.btn-b3 .cap { background: radial-gradient(circle at 35% 35%, #ef4444, #b91c1c); }
+.btn-rst .cap { background: radial-gradient(circle at 35% 35%, #e2e8f0, #94a3b8); }
+
+/* Hold Progress Ring on Buttons */
+.hold-ring {
+  position: absolute;
+  top: -4px;
+  left: -4px;
+  width: 66px;
+  height: 66px;
+  pointer-events: none;
+  opacity: 0;
+  transition: opacity 0.15s ease;
+}
+
+.tactile-btn.holding .hold-ring {
+  opacity: 1;
+}
+
+/* Mode pill hover and active */
+.mode-card.active-mode {
+  border-color: #3b82f6;
+  background-color: #eff6ff;
+  color: #1e40af;
+}
+
+/* Custom scrollbars */
+::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+::-webkit-scrollbar-track {
+  background: #f1f5f9;
+}
+::-webkit-scrollbar-thumb {
+  background: #cbd5e1;
+  border-radius: 3px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: #94a3b8;
+}
